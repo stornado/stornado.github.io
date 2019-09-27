@@ -12,7 +12,7 @@ categories:
 
 ## 简介
 
-[Pipenv](https://pipenv.readthedocs.io/en/latest/)，它的项目简介为 Python Development Workflow for Humans，是 Python 著名的 requests 库作者 kennethreitz 写的一个包管理工具，它可以为我们的项目自动创建和管理虚拟环境并非常方便地管理 Python 包，现在它也已经是 Python 官方推荐的包管理工具。
+[Pipenv](https://pipenv.readthedocs.io/en/latest/)，它的项目简介为 Python Development Workflow for Humans，是 Python 著名的 requests 库作者 kennethreitz 写的一个包管理工具，它可以为我们的项目自动创建和管理虚拟环境并非常方便地管理 Python 包。
 
 [Pipenv](https://pipenv.readthedocs.io/en/latest/)我们可以简单理解为 pip 和 virtualenv 的集合体，它可以为我们的项目自动创建和管理一个虚拟环境。virtualenv 在使用时我们需要手动创建一个虚拟环境然后激活，Pipenv 会自动创建。
 
@@ -32,7 +32,7 @@ categories:
 
 ### 1. 创建环境
 
-`pipenv` 或者指定具体 python 版本 `pipenv --python 2.7`
+`pipenv` 或者指定具体 python 版本 `pipenv --python 3.7`
 
 ### 2. 安装依赖库
 
@@ -84,7 +84,7 @@ pipenv sync     # 或者
 ### 6. 其他命令
 
 ```shell
-pipenv shell             # 激活当前虚拟环境
+pipenv shell             # 激活当前虚拟环境，当项目根目录下有 .env 文件时，自动解析添加环境变量
 pipenv --where           # 查看当前工作目录
 pipenv --venv            # 查看当前虚拟环境路径
 pipenv --py              # 查看当前python解释器路径
@@ -95,7 +95,7 @@ pipenv --envs            # 查看可用环境变量
 
 ### 1. 创建虚拟环境指定 python 版本
 
-`pipenv --python 2.7`
+`pipenv --python 3.7`
 
 ### 2. 指定安装源加速安装
 
