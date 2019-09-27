@@ -2,6 +2,6 @@
 path = themes/next
 url = https://github.com/theme-next/hexo-theme-next.git
 
-[submodule "pjax"]
-path = themes/next/source/lib/pjax
-url = https://github.com/theme-next/theme-next-pjax.git
+# [submodule "pjax"]
+# path = themes/next/source/lib/pjax
+# url = https://github.com/theme-next/theme-next-pjax.git
