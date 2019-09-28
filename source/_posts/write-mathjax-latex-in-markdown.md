@@ -113,6 +113,12 @@ $$\begin{array}{c}{\oiint_{\mathrm{S}} E \cdot d s=\frac{Q}{\varepsilon_{0}}} \\
 
 使用 `\\` 换行， 使用 `\,\!` 取消换行
 
+```markdown
+$$f(x) \,\!
+= \sum_{n=0}^\infty a_n x^n \\
+= a_0+a_1x+a_2x^2+\cdots$$
+```
+
 > $$f(x) \,\!
 > = \sum_{n=0}^\infty a_n x^n \\
 > = a_0+a_1x+a_2x^2+\cdots$$
