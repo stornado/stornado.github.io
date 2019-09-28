@@ -1,6 +1,7 @@
 ---
 title: LaTeX Math Symbols
 date: 2019-09-28 16:56:48
+mathjax: true
 tags:
   - latex
   - markdown
