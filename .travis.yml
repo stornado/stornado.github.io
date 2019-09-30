@@ -7,11 +7,11 @@ branches:
   only:
     - develop # build develop branch only
 script:
-  - git submodule add --depth=1 https://github.com/theme-next/hexo-theme-next.git themes/next
-  - git submodule add --depth=1 https://github.com/theme-next/theme-next-pjax.git themes/next/source/lib/pjax
-  - git submodule add --depth=1 https://github.com/theme-next/theme-next-three.git themes/next/source/lib/three
-  - git submodule add --depth=1 https://github.com/theme-next/theme-next-reading-progress.git themes/next/source/lib/reading_progress
-  - git submodule add --depth=1 https://github.com/theme-next/theme-next-pace themes/next/source/lib/pace
+  - git clone --depth=1 https://github.com/theme-next/hexo-theme-next.git themes/next
+  - git clone --depth=1 https://github.com/theme-next/theme-next-pjax.git themes/next/source/lib/pjax
+  - git clone --depth=1 https://github.com/theme-next/theme-next-three.git themes/next/source/lib/three
+  - git clone --depth=1 https://github.com/theme-next/theme-next-reading-progress.git themes/next/source/lib/reading_progress
+  - git clone --depth=1 https://github.com/theme-next/theme-next-pace themes/next/source/lib/pace
   - hexo generate # generate static files
 deploy:
   provider: pages
