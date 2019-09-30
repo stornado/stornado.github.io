@@ -16,8 +16,8 @@ tags:
 - 每台机器 2 GB 或更多的 RAM (如果少于这个数字将会影响您应用的运行内存)
 - 2 CPU 核心或更多
 - 集群中的所有机器的网络彼此均能相互连接(公网和内网都可以)
-- 节点之中不可以有重复的主机名，MAC 地址，product_uuid。更多详细信息请参见[这里](http://localhost:1313/zh/docs/setup/independent/install-kubeadm/#verify-the-mac-address-and-product-uuid-are-unique-for-every-node) 。
-- 开启主机上的一些特定端口. 更多详细信息请参见[这里](http://localhost:1313/zh/docs/setup/independent/install-kubeadm/#check-required-ports)。
+- 节点之中不可以有重复的主机名，MAC 地址，product_uuid。更多详细信息请参见[这里](https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/#verify-the-mac-address-and-product-uuid-are-unique-for-every-node) 。
+- 开启主机上的一些特定端口. 更多详细信息请参见[这里](https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/#check-required-ports)。
 - 禁用 Swap 交换分区。为了保证 kubelet 正确运行，您 **必须** 禁用交换分区。
 
 ### 确保每个节点上 MAC 地址和 product_uuid 的唯一性。
@@ -50,7 +50,7 @@ tags:
 | TCP  | Inbound | 10250       | Kubelet API         | Self, Control plane |
 | TCP  | Inbound | 30000-32767 | NodePort Services** | All                 |
 
-`**` [NodePort 服务](http://localhost:1313/docs/concepts/services-networking/service/) 的默认端口范围。
+`**` [NodePort 服务](https://kubernetes.io/docs/concepts/services-networking/service/) 的默认端口范围。
 
 任何使用 `*` 标记的端口号都有可能被覆盖，所以您需要保证您的自定义端口的状态是开放的。
 
