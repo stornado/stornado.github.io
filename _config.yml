@@ -83,12 +83,13 @@ deploy:
   branch: master
 
 # Search
-
+# https://github.com/theme-next/hexo-generator-searchdb
 search:
   path: search.xml
   field: post
   format: html
   limit: 10000
+  content: true
 
 # Post wordcount display settings
 # Dependencies: https://github.com/theme-next/hexo-symbols-count-time
