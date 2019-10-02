@@ -15,6 +15,8 @@ categories:
 
 $$f(x)=\frac{1}{\sqrt{2 \pi \sigma x}} e^{-\frac{(x-\mu)^{2}}{2 \sigma^{2}}}$$
 
+<!-- more -->
+
 ## 语法介绍
 
 插入公式使用 `$LaTeX语法表达式$` 或 `$$LaTeX语法表达式$$`

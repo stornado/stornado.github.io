@@ -24,6 +24,8 @@ categories:
 - 可以更清晰地查看 Python 包及其关系，调用 pipenv graph 即可呈现，结果简单明了。
 - 可通过自动加载 .env 读取环境变量，简化开发流程。
 
+<!-- more -->
+
 ## 安装
 
 `pip install pipenv`
