@@ -207,3 +207,6 @@ fabric.properties
 # Hexo 
 .deploy_git
 db.json
+public
+
+.vscode
