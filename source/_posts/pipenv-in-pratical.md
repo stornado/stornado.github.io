@@ -2,7 +2,6 @@
 title: pipenv 使用入门及规范
 date: 2019-01-23 00:52:22
 tags:
-  - tutorial
   - pipenv
   - pip
   - virtualenv

@@ -2,7 +2,6 @@
 title: CentOS 安装 Kubernetes 集群
 date: 2019-08-02 20:33:54
 tags:
-  - tutorial
   - kubernetes
   - centos
   - k8s

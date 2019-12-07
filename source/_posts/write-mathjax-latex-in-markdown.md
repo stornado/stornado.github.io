@@ -6,7 +6,6 @@ tags:
   - markdown
   - mathjax
   - latex
-  - tutorial
 categories:
   - tutorial
 ---
