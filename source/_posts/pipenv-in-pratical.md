@@ -5,6 +5,7 @@ tags:
   - pipenv
   - pip
   - virtualenv
+  - python
 categories:
   - tutorial
 ---
