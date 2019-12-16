@@ -2,6 +2,11 @@
 title: MySQL 8.0 Supported Storage Engines
 date: 2019-12-16 15:07:42
 tags:
+  - mysql
+  - myisam
+  - innodb
+categories:
+  - [database, mysql]
 ---
 
 # MySQL 8.0 Supported Storage Engines
