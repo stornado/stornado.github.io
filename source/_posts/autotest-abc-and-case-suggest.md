@@ -5,7 +5,7 @@ tags:
   - testing
   - autotest
 categories:
-  - [testing, autotest]
+  - [tutorial, testing, autotest]
 ---
 
 
