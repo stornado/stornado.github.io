@@ -205,5 +205,5 @@ categories:
 
 **参考**
 
-> 1. [自动化测试](https://www.w3cschool.cn/position/pdk20m.html)
+> 1. [w3cschool自动化测试](https://www.w3cschool.cn/position/pdk20m.html)
 > 2. [美团接口自动化测试实践](https://tech.meituan.com/2018/01/09/lego-api-test.html)
