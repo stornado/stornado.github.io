@@ -49,6 +49,7 @@ $ adb shell monkey [options] <event-count>
 $ adb shell monkey -p your.package.name -v 500
 ```
 
+<!-- more -->
 
 
 ## 命令选项参考
