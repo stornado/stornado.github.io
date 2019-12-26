@@ -51,7 +51,7 @@ Each slave receives a copy of the entire contents of the binary log. It is the r
 
 Each slave keeps a record of the binary log coordinates: the file name and position within the file that it has read and processed from the master. This means that multiple slaves can be connected to the master and executing different parts of the same binary log. Because the slaves control this process, individual slaves can be connected and disconnected from the server without affecting the master's operation. Also, because each slave records the current position within the binary log, it is possible for slaves to be disconnected, reconnect and then resume processing.
 
-The master and each slave must be configured with a unique ID (using the [`server-id`](replication.html#option_mysqld_server-id) option). In addition, each slave must be configured with information about the master host name, log file name, and position within that file. These details can be controlled from within a MySQL session using the [`CHANGE MASTER TO`](sql-syntax.html#change-master-to) statement on the slave. The details are stored within the slave's master info repository.
+The master and each slave must be configured with a unique ID (using the `server-id` option). In addition, each slave must be configured with information about the master host name, log file name, and position within that file. These details can be controlled from within a MySQL session using the `CHANGE MASTER TO` statement on the slave. The details are stored within the slave's master info repository.
 
 
 
