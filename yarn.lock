@@ -888,6 +888,13 @@ decode-uri-component@^0.2.0:
   resolved "https://registry.npm.taobao.org/decode-uri-component/download/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
   integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
 
+deep-assign@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npm.taobao.org/deep-assign/download/deep-assign-2.0.0.tgz#ebe06b1f07f08dae597620e3dd1622f371a1c572"
+  integrity sha1-6+BrHwfwja5ZdiDj3RYi83GhxXI=
+  dependencies:
+    is-obj "^1.0.0"
+
 deepmerge@^4.2.2:
   version "4.2.2"
   resolved "https://registry.npm.taobao.org/deepmerge/download/deepmerge-4.2.2.tgz#44d2ea3679b8f4d4ffba33f03d865fc1e7bf4955"
@@ -1532,6 +1539,20 @@ hexo-filter-emoji@^2.0.2:
     random-ua "0.0.6"
     request "2.88.0"
 
+hexo-filter-flowchart@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.npm.taobao.org/hexo-filter-flowchart/download/hexo-filter-flowchart-1.0.4.tgz#5b213126a02771df260ed0d5c6e04613486f9ccf"
+  integrity sha1-WyExJqAncd8mDtDVxuBGE0hvnM8=
+  dependencies:
+    deep-assign "^2.0.0"
+
+hexo-filter-sequence@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/hexo-filter-sequence/download/hexo-filter-sequence-1.0.3.tgz#5a0cd2dd47a60a356599cdfa96fa8c4155344ce8"
+  integrity sha1-WgzS3UemCjVlmc36lvqMQVU0TOg=
+  dependencies:
+    deep-assign "^2.0.0"
+
 hexo-front-matter@^0.2.3:
   version "0.2.3"
   resolved "https://registry.npm.taobao.org/hexo-front-matter/download/hexo-front-matter-0.2.3.tgz#c7ca8ef420ea36bd85e8408a2e8c9bf49efa605e"
@@ -2023,6 +2044,11 @@ is-number@^7.0.0:
   version "7.0.0"
   resolved "https://registry.npm.taobao.org/is-number/download/is-number-7.0.0.tgz#7535345b896734d5f80c4d06c50955527a14f12b"
   integrity sha1-dTU0W4lnNNX4DE0GxQlVUnoU8Ss=
+
+is-obj@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/is-obj/download/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
+  integrity sha1-PkcprB9f3gJc19g6iW2rn09n2w8=
 
 is-plain-object@^2.0.1, is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
