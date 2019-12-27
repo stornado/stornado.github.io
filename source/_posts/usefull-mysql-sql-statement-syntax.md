@@ -959,7 +959,7 @@ UPDATE t1 SET c=c+1 WHERE a=1;
 
 If column `b` is also unique, the `INSERT` is equivalent to this `UPDATE` statement instead:
 
-```
+```mysql
 UPDATE t1 SET c=c+1 WHERE a=1 OR b=2 LIMIT 1;
 ```
 
