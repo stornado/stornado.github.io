@@ -28,7 +28,11 @@ The database name can be omitted from the first syntax, in which case the statem
 
 If you change the default character set or collation for a database, stored routines that use the database defaults must be dropped and recreated so that they use the new defaults. (In a stored routine, variables with character data types use the database defaults if the character set or collation are not specified explicitly.
 
+
+
 <!-- more -->
+
+
 
 ## CREATE DATABASE Syntax
 
@@ -52,6 +56,8 @@ An error occurs if the database exists and you did not specify `IF NOT EXISTS`.
 
 - The `CHARACTER SET` clause specifies the default database character set. The `COLLATE` clause specifies the default database collation.
 
+
+
 ## DROP DATABASE Syntax
 
 ```mysql
@@ -60,7 +66,7 @@ DROP {DATABASE | SCHEMA} [IF EXISTS] db_name
 
 `DROP DATABASE` drops all tables in the database and deletes the database. Be *very* careful with this statement! To use `DROP DATABASE`, you need the `DROP` privilege on the database. `DROP SCHEMA` is a synonym for `DROP DATABASE`.
 
-Important
+**Important**
 
 When a database is dropped, privileges granted specifically for the database are *not* automatically dropped. They must be dropped manually.
 
@@ -228,6 +234,8 @@ partition_options:
   ```
 
 - If a storage engine does not support an attempted `ALTER TABLE` operation, a warning may result. Such warnings can be displayed with `SHOW WARNINGS`.
+
+
 
 ## CREATE TABLE Syntax
 
@@ -448,6 +456,8 @@ Table options are used to optimize the behavior of the table. In most cases, you
 
   For engines that support the `AUTO_INCREMENT` table option in `CREATE TABLE` statements, you can also use `ALTER TABLE` tbl_name `AUTO_INCREMENT = N`  to reset the `AUTO_INCREMENT` value. The value cannot be set lower than the maximum value currently in the column.
 
+
+
 ## DROP TABLE Syntax
 
 ```mysql
@@ -462,6 +472,8 @@ DROP [TEMPORARY] TABLE [IF EXISTS]
 
 Dropping a table also drops any triggers for the table.
 
+
+
 ## RENAME TABLE Syntax
 
 ```mysql
@@ -471,6 +483,8 @@ RENAME TABLE
 ```
 
 `RENAME TABLE` renames one or more tables. You must have `ALTER` and `DROP` privileges for the original table, and `CREATE` and `INSERT` privileges for the new table.
+
+
 
 ## TRUNCATE TABLE Syntax
 
@@ -502,6 +516,8 @@ Although `TRUNCATE TABLE` is similar to `DELETE`, it is classified as a DDL stat
 In MySQL 5.7 and earlier, on a system with a large buffer pool and `innodb_adaptive_hash_index` enabled, a `TRUNCATE TABLE` operation could cause a temporary drop in system performance due to an LRU scan that occurred when removing the table's adaptive hash index entries (Bug #68184). The remapping of `TRUNCATE TABLE` to `DROP TABLE` and `CREATE TABLE` in MySQL 8.0 avoids the problematic LRU scan.
 
 `TRUNCATE TABLE` can be used with Performance Schema summary tables, but the effect is to reset the summary columns to 0 or `NULL`, not to remove rows.
+
+
 
 ## CREATE INDEX Syntax
 
@@ -539,7 +555,9 @@ An index specification of the form `(key_part1, key_part2, ...)` creates an inde
 
 A `key_part` specification can end with `ASC` or `DESC` to specify whether index values are stored in ascending or descending order. The default is ascending if no order specifier is given. `ASC` and `DESC` are not permitted for `HASH`indexes. `ASC` and `DESC` are also not supported for multi-valued indexes. As of MySQL 8.0.12, `ASC` and `DESC` are not permitted for `SPATIAL` indexes.
 
-### **InnoDB Storage Engine Index Characteristics**
+
+
+### InnoDB Storage Engine Index Characteristics**
 
 | Index Class | Index Type | Stores NULL VALUES | Permits Multiple NULL Values | IS NULL Scan Type | IS NOT NULL Scan Type |
 | ----------- | ---------- | ------------------ | ---------------------------- | ----------------- | --------------------- |
@@ -585,6 +603,8 @@ Table note:
 
 1. `USING HASH` prevents creation of an implicit ordered index.
 
+
+
 ## DROP INDEX Syntax
 
 ```mysql
@@ -606,11 +626,15 @@ To drop a primary key, the index name is always `PRIMARY`, which must be specifi
 DROP INDEX `PRIMARY` ON t;
 ```
 
+
+
 # DELETE Syntax
 
 `DELETE` is a DML statement that removes rows from a table.
 
 A `DELETE` statement can start with a `WITH` clause to define common table expressions accessible within the `DELETE`.
+
+
 
 ## Single-Table Syntax
 
@@ -624,6 +648,8 @@ DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name [[AS] tbl_alias]
 
 The `DELETE` statement deletes rows from *`tbl_name`* and returns the number of deleted rows. To check the number of deleted rows, call the `ROW_COUNT()` function.
 
+
+
 ## Main Clauses
 
 The conditions in the optional `WHERE` clause identify which rows to delete. With no `WHERE` clause, all rows are deleted.
@@ -631,6 +657,8 @@ The conditions in the optional `WHERE` clause identify which rows to delete. Wit
 *`where_condition`* is an expression that evaluates to true for each row to be deleted.
 
 If the `ORDER BY` clause is specified, the rows are deleted in the order that is specified. The `LIMIT` clause places a limit on the number of rows that can be deleted. These clauses apply to single-table deletes, but not multi-table deletes.
+
+
 
 ## Multiple-Table Syntax
 
@@ -646,9 +674,13 @@ DELETE [LOW_PRIORITY] [QUICK] [IGNORE]
     [WHERE where_condition]
 ```
 
+
+
 ## Privileges
 
 You need the `DELETE` privilege on a table to delete rows from it. You need only the `SELECT` privilege for any columns that are only read, such as those named in the `WHERE` clause.
+
+
 
 ## Performance
 
@@ -656,9 +688,13 @@ When you do not need to know the number of deleted rows, the `TRUNCATE TABLE` st
 
 To ensure that a given `DELETE` statement does not take too much time, the MySQL-specific `LIMIT *`row_count`*`clause for `DELETE` specifies the maximum number of rows to be deleted. If the number of rows to delete is larger than the limit, repeat the `DELETE` statement until the number of affected rows is less than the `LIMIT` value.
 
+
+
 ## Subqueries
 
 You cannot delete from a table and select from the same table in a subquery.
+
+
 
 ## Partitioned Table Support
 
@@ -668,11 +704,15 @@ You cannot delete from a table and select from the same table in a subquery.
 
 The `PARTITION` option can also be used in multiple-table `DELETE` statements. You can use up to one such option per table named in the `FROM` option.
 
+
+
 ## Auto-Increment Columns
 
 If you delete the row containing the maximum value for an `AUTO_INCREMENT` column, the value is not reused for a `MyISAM` or `InnoDB` table. If you delete all rows in the table with `DELETE FROM *`tbl_name`*` (without a `WHERE` clause) in`autocommit` mode, the sequence starts over for all storage engines except `InnoDB` and `MyISAM`.
 
 For `MyISAM` tables, you can specify an `AUTO_INCREMENT` secondary column in a multiple-column key. In this case, reuse of values deleted from the top of the sequence occurs even for `MyISAM` tables.
+
+
 
 ## Modifiers
 
@@ -689,6 +729,8 @@ The `DELETE` statement supports the following modifiers:
 - The `IGNORE` modifier causes MySQL to ignore errors during the process of deleting rows. (Errors encountered during the parsing stage are processed in the usual manner.) Errors that are ignored due to the use of `IGNORE` are returned as warnings. For more information, see Comparison of the IGNORE Keyword and Strict SQL Mode.
 
 
+
+
 ## Order of Deletion
 
 If the `DELETE` statement includes an `ORDER BY` clause, rows are deleted in the order specified by the clause. This is useful primarily in conjunction with `LIMIT`. For example, the following statement finds rows matching the `WHERE`clause, sorts them by `timestamp_column`, and deletes the first (oldest) one:
@@ -699,6 +741,8 @@ ORDER BY timestamp_column LIMIT 1;
 ```
 
 `ORDER BY` also helps to delete rows in an order required to avoid referential integrity violations.
+
+
 
 ## InnoDB Tables
 
@@ -724,6 +768,8 @@ If you are deleting many rows from a large table, you may exceed the lock table 
 
 No other sessions can access the tables involved while `RENAME TABLE` executes, so the rename operation is not subject to concurrency problems.
 
+
+
 ## MyISAM Tables
 
 In `MyISAM` tables, deleted rows are maintained in a linked list and subsequent `INSERT` operations reuse old row positions. To reclaim unused space and reduce file sizes, use the `OPTIMIZE TABLE` statement or the **myisamchk**utility to reorganize tables. `OPTIMIZE TABLE` is easier to use, but **myisamchk** is faster.
@@ -739,6 +785,8 @@ The `QUICK` modifier affects whether index leaves are merged for delete operatio
 In this scenario, the index blocks associated with the deleted index values become underfilled but are not merged with other index blocks due to the use of `QUICK`. They remain underfilled when new inserts occur, because new rows do not have index values in the deleted range. Furthermore, they remain underfilled even if you later use `DELETE`without `QUICK`, unless some of the deleted index values happen to lie in index blocks within or adjacent to the underfilled blocks. To reclaim unused index space under these circumstances, use `OPTIMIZE TABLE`.
 
 If you are going to delete many rows from a table, it might be faster to use `DELETE QUICK` followed by `OPTIMIZE TABLE`. This rebuilds the index rather than performing many index block merge operations.
+
+
 
 ## Multi-Table Deletes
 
@@ -802,6 +850,8 @@ WHERE a1.id=a2.id;
 
 Table aliases are also supported for single-table `DELETE` statements beginning with MySQL 8.0.16.
 
+
+
 # INSERT Syntax
 
 ```mysql
@@ -843,6 +893,8 @@ assignment_list:
 Inserting into a table requires the `INSERT` privilege for the table. If the `ON DUPLICATE KEY UPDATE` clause is used and a duplicate key causes an `UPDATE` to be performed instead, the statement requires the `UPDATE` privilege for the columns to be updated. For columns that are read but not modified you need only the `SELECT` privilege (such as for a column referenced only on the right hand side of an *`col_name`*=*`expr`* assignment in an `ON DUPLICATE KEY UPDATE` clause).
 
 When inserting into a partitioned table, you can control which partitions and subpartitions accept new rows. The`PARTITION` option takes a list of the comma-separated names of one or more partitions or subpartitions (or both) of the table. If any of the rows to be inserted by a given `INSERT` statement do not match one of the partitions listed, the`INSERT` statement fails with the error Found a row not matching the given partition set.
+
+
 
 ## INSERT ... SELECT Syntax
 
@@ -890,6 +942,8 @@ You can explicitly select which partitions or subpartitions (or both) of the sou
 
 The order in which a `SELECT` statement with no `ORDER BY` clause returns rows is nondeterministic. This means that, when using replication, there is no guarantee that such a `SELECT` returns rows in the same order on the master and the slave, which can lead to inconsistencies between them. To prevent this from occurring, always write `INSERT ... SELECT` statements that are to be replicated using an `ORDER BY` clause that produces the same row order on the master and the slave.
 
+
+
 ## INSERT ... ON DUPLICATE KEY UPDATE Syntax
 
 If you specify an `ON DUPLICATE KEY UPDATE` clause and a row to be inserted would cause a duplicate value in a `UNIQUE` index or `PRIMARY KEY`, an `UPDATE` of the old row occurs. For example, if column `a` is declared as `UNIQUE`and contains the value `1`, the following two statements have similar effect:
@@ -908,6 +962,8 @@ If column `b` is also unique, the `INSERT` is equivalent to this `UPDATE` statem
 ```
 UPDATE t1 SET c=c+1 WHERE a=1 OR b=2 LIMIT 1;
 ```
+
+
 
 ## LOAD DATA Syntax
 
@@ -936,6 +992,8 @@ LOAD DATA
 ```
 
 The `LOAD DATA` statement reads rows from a text file into a table at a very high speed. `LOAD DATA` is the complement of `SELECT ... INTO OUTFILE`. To write data from a table to a file, use `SELECT ... INTO OUTFILE`. To read the file back into a table, use `LOAD DATA`. The syntax of the `FIELDS` and `LINES` clauses is the same for both statements.
+
+
 
 ## REPLACE Syntax
 
@@ -973,6 +1031,8 @@ assignment_list:
 `REPLACE` works exactly like `INSERT`, except that if an old row in the table has the same value as a new row for a`PRIMARY KEY` or a `UNIQUE` index, the old row is deleted before the new row is inserted.
 
 You can also load data files by using the **mysqlimport** utility; **mysqlimport** operates by sending a `LOAD DATA` statement to the server.
+
+
 
 # SELECT Syntax
 
@@ -1041,6 +1101,8 @@ mysql> SELECT 1 + 1 FROM DUAL;
 
 In general, clauses used must be given in exactly the order shown in the syntax description. For example, a `HAVING`clause must come after any `GROUP BY` clause and before any `ORDER BY` clause. The exception is that the `INTO`clause can appear either as shown in the syntax description or immediately following the *`select_expr`* list.
 
+
+
 ## JOIN Syntax
 
 MySQL supports the following `JOIN` syntax for the *`table_references`* part of `SELECT` statements and multiple-table `DELETE` and `UPDATE` statements:
@@ -1092,6 +1154,8 @@ A table reference is also known as a join expression.
 
 A table reference (when it refers to a partitioned table) may contain a `PARTITION` option, including a list of comma-separated partitions, subpartitions, or both. This option follows the name of the table and precedes any alias declaration. The effect of this option is that rows are selected only from the listed partitions or subpartitions. Any partitions or subpartitions not named in the list are ignored.
 
+
+
 ## UNION Syntax
 
 ```mysql
@@ -1103,6 +1167,8 @@ UNION [ALL | DISTINCT] SELECT ...
 `UNION` is used to combine the result from multiple `SELECT` statements into a single result set.
 
 The column names from the first `SELECT` statement are used as the column names for the results returned. Selected columns listed in corresponding positions of each `SELECT` statement should have the same data type. (For example, the first column selected by the first statement should have the same type as the first column selected by the other statements.)
+
+
 
 # UPDATE Syntax
 
@@ -1147,9 +1213,13 @@ Note
 
 Unlike the case when using `PARTITION` with an `INSERT` or `REPLACE` statement, an otherwise valid `UPDATE ... PARTITION` statement is considered successful even if no rows in the listed partitions (or subpartitions) match the*`where_condition`*.
 
+
+
 # Transactional and Locking Statements
 
 MySQL supports local transactions (within a given client session) through statements such as `SET autocommit`,`START TRANSACTION`, `COMMIT`, and `ROLLBACK`.
+
+
 
 ## START TRANSACTION, COMMIT, and ROLLBACK Syntax
 
@@ -1189,11 +1259,15 @@ COMMIT;
 
 With `START TRANSACTION`, autocommit remains disabled until you end the transaction with `COMMIT` or `ROLLBACK`. The autocommit mode then reverts to its previous state.
 
+
+
 ## Statements That Cannot Be Rolled Back
 
 Some statements cannot be rolled back. In general, these include data definition language (DDL) statements, such as those that create or drop databases, those that create, drop, or alter tables or stored routines.
 
 You should design your transactions not to include such statements. If you issue a statement early in a transaction that cannot be rolled back, and then another statement later fails, the full effect of the transaction cannot be rolled back in such cases by issuing a `ROLLBACK` statement.
+
+
 
 ## Statements That Cause an Implicit Commit
 
@@ -1226,6 +1300,8 @@ Most of these statements also cause an implicit commit after executing. The inte
 - **Administrative statements.** `ANALYZE TABLE`, `CACHE INDEX`, `CHECK TABLE`, `FLUSH`, `LOAD INDEX INTO CACHE`, `OPTIMIZE TABLE`, `REPAIR TABLE`, `RESET` (but not `RESET PERSIST`).
 
 - **Replication control statements**. `START SLAVE`, `STOP SLAVE`, `RESET SLAVE`, `CHANGE MASTER TO`.
+
+
 
 # USER
 
@@ -1287,6 +1363,8 @@ Important
 
 Under some circumstances, `CREATE USER` may be recorded in server logs or on the client side in a history file such as `~/.mysql_history`, which means that cleartext passwords may be read by anyone having read access to that information. For information about the conditions under which this occurs for the server logs and how to control it. For similar information about client-side logging.
 
+
+
 ## DROP USER Syntax
 
 ```mysql
@@ -1294,6 +1372,8 @@ DROP USER [IF EXISTS] user [, user] ...
 ```
 
 The `DROP USER` statement removes one or more MySQL accounts and their privileges. It removes privilege rows for the account from all grant tables.
+
+
 
 ## GRANT Syntax
 
