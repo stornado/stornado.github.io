@@ -8,7 +8,9 @@ categories:
   - [database, mysql]
 ---
 
-# ALTER DATABASE Syntax
+# DATABASE
+
+## ALTER DATABASE Syntax
 
 ```mysql
 ALTER {DATABASE | SCHEMA} [db_name]
@@ -28,7 +30,70 @@ If you change the default character set or collation for a database, stored rout
 
 <!-- more -->
 
-# ALTER TABLE Syntax
+## CREATE DATABASE Syntax
+
+```mysql
+CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name
+    [create_specification] ...
+
+create_specification:
+    [DEFAULT] CHARACTER SET [=] charset_name
+  | [DEFAULT] COLLATE [=] collation_name
+  | DEFAULT ENCRYPTION [=] {'Y' | 'N'}
+```
+
+`CREATE DATABASE` creates a database with the given name. To use this statement, you need the `CREATE` privilege for the database. `CREATE SCHEMA` is a synonym for `CREATE DATABASE`.
+
+An error occurs if the database exists and you did not specify `IF NOT EXISTS`.
+
+`CREATE DATABASE` is not permitted within a session that has an active `LOCK TABLES` statement.
+
+*`create_specification`* options specify database characteristics. Database characteristics are stored in the data dictionary.
+
+- The `CHARACTER SET` clause specifies the default database character set. The `COLLATE` clause specifies the default database collation.
+
+## DROP DATABASE Syntax
+
+```mysql
+DROP {DATABASE | SCHEMA} [IF EXISTS] db_name
+```
+
+`DROP DATABASE` drops all tables in the database and deletes the database. Be *very* careful with this statement! To use `DROP DATABASE`, you need the `DROP` privilege on the database. `DROP SCHEMA` is a synonym for `DROP DATABASE`.
+
+Important
+
+When a database is dropped, privileges granted specifically for the database are *not* automatically dropped. They must be dropped manually.
+
+`IF EXISTS` is used to prevent an error from occurring if the database does not exist.
+
+If the default database is dropped, the default database is unset (the `DATABASE()` function returns `NULL`).
+
+If you use `DROP DATABASE` on a symbolically linked database, both the link and the original database are deleted.
+
+`DROP DATABASE` returns the number of tables that were removed.
+
+The `DROP DATABASE` statement removes from the given database directory those files and directories that MySQL itself may create during normal operation. This includes all files with the extensions shown in the following list:
+
+- `.BAK`
+- `.DAT`
+- `.HSH`
+- `.MRG`
+- `.MYD`
+- `.MYI`
+- `.cfg`
+- `.db`
+- `.ibd`
+- `.ndb`
+
+If other files or directories remain in the database directory after MySQL removes those just listed, the database directory cannot be removed. In this case, you must remove any remaining files or directories manually and issue the `DROP DATABASE` statement again.
+
+Dropping a database does not remove any `TEMPORARY` tables that were created in that database. `TEMPORARY` tables are automatically removed when the session that created them ends.
+
+You can also drop databases with **mysqladmin**. 
+
+# TABLE
+
+## ALTER TABLE Syntax
 
 ```mysql
 ALTER TABLE tbl_name
@@ -164,111 +229,7 @@ partition_options:
 
 - If a storage engine does not support an attempted `ALTER TABLE` operation, a warning may result. Such warnings can be displayed with `SHOW WARNINGS`.
 
-# CREATE DATABASE Syntax
-
-```mysql
-CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name
-    [create_specification] ...
-
-create_specification:
-    [DEFAULT] CHARACTER SET [=] charset_name
-  | [DEFAULT] COLLATE [=] collation_name
-  | DEFAULT ENCRYPTION [=] {'Y' | 'N'}
-```
-
-`CREATE DATABASE` creates a database with the given name. To use this statement, you need the `CREATE` privilege for the database. `CREATE SCHEMA` is a synonym for `CREATE DATABASE`.
-
-An error occurs if the database exists and you did not specify `IF NOT EXISTS`.
-
-`CREATE DATABASE` is not permitted within a session that has an active `LOCK TABLES` statement.
-
-*`create_specification`* options specify database characteristics. Database characteristics are stored in the data dictionary.
-
-- The `CHARACTER SET` clause specifies the default database character set. The `COLLATE` clause specifies the default database collation.
-
-# CREATE INDEX Syntax
-
-```mysql
-CREATE [UNIQUE | FULLTEXT | SPATIAL] INDEX index_name
-    [index_type]
-    ON tbl_name (key_part,...)
-    [index_option]
-    [algorithm_option | lock_option] ...
-
-key_part: {col_name [(length)] | (expr)} [ASC | DESC]
-
-index_option:
-    KEY_BLOCK_SIZE [=] value
-  | index_type
-  | WITH PARSER parser_name
-  | COMMENT 'string'
-  | {VISIBLE | INVISIBLE}
-
-index_type:
-    USING {BTREE | HASH}
-
-algorithm_option:
-    ALGORITHM [=] {DEFAULT | INPLACE | COPY}
-
-lock_option:
-    LOCK [=] {DEFAULT | NONE | SHARED | EXCLUSIVE}
-```
-
-Normally, you create all indexes on a table at the time the table itself is created with `CREATE TABLE`. This guideline is especially important for `InnoDB` tables, where the primary key determines the physical layout of rows in the data file. `CREATE INDEX` enables you to add indexes to existing tables.
-
-`CREATE INDEX` is mapped to an `ALTER TABLE` statement to create indexes. `CREATE INDEX` cannot be used to create a `PRIMARY KEY`; use `ALTER TABLE` instead.
-
-An index specification of the form `(key_part1, key_part2, ...)` creates an index with multiple key parts. Index key values are formed by concatenating the values of the given key parts. For example `(col1, col2, col3)`specifies a multiple-column index with index keys consisting of values from `col1`, `col2`, and `col3`.
-
-A `key_part` specification can end with `ASC` or `DESC` to specify whether index values are stored in ascending or descending order. The default is ascending if no order specifier is given. `ASC` and `DESC` are not permitted for `HASH`indexes. `ASC` and `DESC` are also not supported for multi-valued indexes. As of MySQL 8.0.12, `ASC` and `DESC` are not permitted for `SPATIAL` indexes.
-
-## **InnoDB Storage Engine Index Characteristics**
-
-| Index Class | Index Type | Stores NULL VALUES | Permits Multiple NULL Values | IS NULL Scan Type | IS NOT NULL Scan Type |
-| ----------- | ---------- | ------------------ | ---------------------------- | ----------------- | --------------------- |
-| Primary key | `BTREE`    | No                 | No                           | N/A               | N/A                   |
-| Unique      | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
-| Key         | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
-| `FULLTEXT`  | N/A        | Yes                | Yes                          | Table             | Table                 |
-| `SPATIAL`   | N/A        | No                 | No                           | N/A               | N/A                   |
-
-## **MyISAM Storage Engine Index Characteristics**
-
-| Index Class | Index Type | Stores NULL VALUES | Permits Multiple NULL Values | IS NULL Scan Type | IS NOT NULL Scan Type |
-| ----------- | ---------- | ------------------ | ---------------------------- | ----------------- | --------------------- |
-| Primary key | `BTREE`    | No                 | No                           | N/A               | N/A                   |
-| Unique      | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
-| Key         | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
-| `FULLTEXT`  | N/A        | Yes                | Yes                          | Table             | Table                 |
-| `SPATIAL`   | N/A        | No                 | No                           | N/A               | N/A                   |
-
-## **MEMORY Storage Engine Index Characteristics**
-
-| Index Class | Index Type | Stores NULL VALUES | Permits Multiple NULL Values | IS NULL Scan Type | IS NOT NULL Scan Type |
-| ----------- | ---------- | ------------------ | ---------------------------- | ----------------- | --------------------- |
-| Primary key | `BTREE`    | No                 | No                           | N/A               | N/A                   |
-| Unique      | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
-| Key         | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
-| Primary key | `HASH`     | No                 | No                           | N/A               | N/A                   |
-| Unique      | `HASH`     | Yes                | Yes                          | Index             | Index                 |
-| Key         | `HASH`     | Yes                | Yes                          | Index             | Index                 |
-
-## **NDB Storage Engine Index Characteristics**
-
-| Index Class | Index Type | Stores NULL VALUES | Permits Multiple NULL Values | IS NULL Scan Type  | IS NOT NULL Scan Type |
-| ----------- | ---------- | ------------------ | ---------------------------- | ------------------ | --------------------- |
-| Primary key | `BTREE`    | No                 | No                           | Index              | Index                 |
-| Unique      | `BTREE`    | Yes                | Yes                          | Index              | Index                 |
-| Key         | `BTREE`    | Yes                | Yes                          | Index              | Index                 |
-| Primary key | `HASH`     | No                 | No                           | Table (see note 1) | Table (see note 1)    |
-| Unique      | `HASH`     | Yes                | Yes                          | Table (see note 1) | Table (see note 1)    |
-| Key         | `HASH`     | Yes                | Yes                          | Table (see note 1) | Table (see note 1)    |
-
-Table note:
-
-1. `USING HASH` prevents creation of an implicit ordered index.
-
-# CREATE TABLE Syntax
+## CREATE TABLE Syntax
 
 ```mysql
 CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name
@@ -458,7 +419,7 @@ In MySQL, the name of a `PRIMARY KEY` is `PRIMARY`. For other indexes, if you do
 
 
 
-## Table Options
+### Table Options
 
 Table options are used to optimize the behavior of the table. In most cases, you do not have to specify any of them. These options apply to all storage engines unless otherwise indicated. Options that do not apply to a given storage engine may be accepted and remembered as part of the table definition. Such options then apply if you later use `ALTER TABLE` to convert the table to use a different storage engine.
 
@@ -487,69 +448,7 @@ Table options are used to optimize the behavior of the table. In most cases, you
 
   For engines that support the `AUTO_INCREMENT` table option in `CREATE TABLE` statements, you can also use `ALTER TABLE` tbl_name `AUTO_INCREMENT = N`  to reset the `AUTO_INCREMENT` value. The value cannot be set lower than the maximum value currently in the column.
 
-# DROP DATABASE Syntax
-
-```mysql
-DROP {DATABASE | SCHEMA} [IF EXISTS] db_name
-```
-
-`DROP DATABASE` drops all tables in the database and deletes the database. Be *very* careful with this statement! To use `DROP DATABASE`, you need the `DROP` privilege on the database. `DROP SCHEMA` is a synonym for `DROP DATABASE`.
-
-Important
-
-When a database is dropped, privileges granted specifically for the database are *not* automatically dropped. They must be dropped manually.
-
-`IF EXISTS` is used to prevent an error from occurring if the database does not exist.
-
-If the default database is dropped, the default database is unset (the `DATABASE()` function returns `NULL`).
-
-If you use `DROP DATABASE` on a symbolically linked database, both the link and the original database are deleted.
-
-`DROP DATABASE` returns the number of tables that were removed.
-
-The `DROP DATABASE` statement removes from the given database directory those files and directories that MySQL itself may create during normal operation. This includes all files with the extensions shown in the following list:
-
-- `.BAK`
-- `.DAT`
-- `.HSH`
-- `.MRG`
-- `.MYD`
-- `.MYI`
-- `.cfg`
-- `.db`
-- `.ibd`
-- `.ndb`
-
-If other files or directories remain in the database directory after MySQL removes those just listed, the database directory cannot be removed. In this case, you must remove any remaining files or directories manually and issue the `DROP DATABASE` statement again.
-
-Dropping a database does not remove any `TEMPORARY` tables that were created in that database. `TEMPORARY` tables are automatically removed when the session that created them ends.
-
-
-
-You can also drop databases with **mysqladmin**. 
-
-# DROP INDEX Syntax
-
-```mysql
-DROP INDEX index_name ON tbl_name
-    [algorithm_option | lock_option] ...
-
-algorithm_option:
-    ALGORITHM [=] {DEFAULT|INPLACE|COPY}
-
-lock_option:
-    LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}
-```
-
-`DROP INDEX` drops the index named *`index_name`* from the table *`tbl_name`*. This statement is mapped to an `ALTER TABLE` statement to drop the index.
-
-To drop a primary key, the index name is always `PRIMARY`, which must be specified as a quoted identifier because `PRIMARY` is a reserved word:
-
-```mysql
-DROP INDEX `PRIMARY` ON t;
-```
-
-# DROP TABLE Syntax
+## DROP TABLE Syntax
 
 ```mysql
 DROP [TEMPORARY] TABLE [IF EXISTS]
@@ -563,7 +462,7 @@ DROP [TEMPORARY] TABLE [IF EXISTS]
 
 Dropping a table also drops any triggers for the table.
 
-# RENAME TABLE Syntax
+## RENAME TABLE Syntax
 
 ```mysql
 RENAME TABLE
@@ -573,7 +472,7 @@ RENAME TABLE
 
 `RENAME TABLE` renames one or more tables. You must have `ALTER` and `DROP` privileges for the original table, and `CREATE` and `INSERT` privileges for the new table.
 
-# TRUNCATE TABLE Syntax
+## TRUNCATE TABLE Syntax
 
 ```mysql
 TRUNCATE [TABLE] tbl_name
@@ -604,13 +503,116 @@ In MySQL 5.7 and earlier, on a system with a large buffer pool and `innodb_adapt
 
 `TRUNCATE TABLE` can be used with Performance Schema summary tables, but the effect is to reset the summary columns to 0 or `NULL`, not to remove rows.
 
+## CREATE INDEX Syntax
+
+```mysql
+CREATE [UNIQUE | FULLTEXT | SPATIAL] INDEX index_name
+    [index_type]
+    ON tbl_name (key_part,...)
+    [index_option]
+    [algorithm_option | lock_option] ...
+
+key_part: {col_name [(length)] | (expr)} [ASC | DESC]
+
+index_option:
+    KEY_BLOCK_SIZE [=] value
+  | index_type
+  | WITH PARSER parser_name
+  | COMMENT 'string'
+  | {VISIBLE | INVISIBLE}
+
+index_type:
+    USING {BTREE | HASH}
+
+algorithm_option:
+    ALGORITHM [=] {DEFAULT | INPLACE | COPY}
+
+lock_option:
+    LOCK [=] {DEFAULT | NONE | SHARED | EXCLUSIVE}
+```
+
+Normally, you create all indexes on a table at the time the table itself is created with `CREATE TABLE`. This guideline is especially important for `InnoDB` tables, where the primary key determines the physical layout of rows in the data file. `CREATE INDEX` enables you to add indexes to existing tables.
+
+`CREATE INDEX` is mapped to an `ALTER TABLE` statement to create indexes. `CREATE INDEX` cannot be used to create a `PRIMARY KEY`; use `ALTER TABLE` instead.
+
+An index specification of the form `(key_part1, key_part2, ...)` creates an index with multiple key parts. Index key values are formed by concatenating the values of the given key parts. For example `(col1, col2, col3)`specifies a multiple-column index with index keys consisting of values from `col1`, `col2`, and `col3`.
+
+A `key_part` specification can end with `ASC` or `DESC` to specify whether index values are stored in ascending or descending order. The default is ascending if no order specifier is given. `ASC` and `DESC` are not permitted for `HASH`indexes. `ASC` and `DESC` are also not supported for multi-valued indexes. As of MySQL 8.0.12, `ASC` and `DESC` are not permitted for `SPATIAL` indexes.
+
+### **InnoDB Storage Engine Index Characteristics**
+
+| Index Class | Index Type | Stores NULL VALUES | Permits Multiple NULL Values | IS NULL Scan Type | IS NOT NULL Scan Type |
+| ----------- | ---------- | ------------------ | ---------------------------- | ----------------- | --------------------- |
+| Primary key | `BTREE`    | No                 | No                           | N/A               | N/A                   |
+| Unique      | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
+| Key         | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
+| `FULLTEXT`  | N/A        | Yes                | Yes                          | Table             | Table                 |
+| `SPATIAL`   | N/A        | No                 | No                           | N/A               | N/A                   |
+
+### **MyISAM Storage Engine Index Characteristics**
+
+| Index Class | Index Type | Stores NULL VALUES | Permits Multiple NULL Values | IS NULL Scan Type | IS NOT NULL Scan Type |
+| ----------- | ---------- | ------------------ | ---------------------------- | ----------------- | --------------------- |
+| Primary key | `BTREE`    | No                 | No                           | N/A               | N/A                   |
+| Unique      | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
+| Key         | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
+| `FULLTEXT`  | N/A        | Yes                | Yes                          | Table             | Table                 |
+| `SPATIAL`   | N/A        | No                 | No                           | N/A               | N/A                   |
+
+### **MEMORY Storage Engine Index Characteristics**
+
+| Index Class | Index Type | Stores NULL VALUES | Permits Multiple NULL Values | IS NULL Scan Type | IS NOT NULL Scan Type |
+| ----------- | ---------- | ------------------ | ---------------------------- | ----------------- | --------------------- |
+| Primary key | `BTREE`    | No                 | No                           | N/A               | N/A                   |
+| Unique      | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
+| Key         | `BTREE`    | Yes                | Yes                          | Index             | Index                 |
+| Primary key | `HASH`     | No                 | No                           | N/A               | N/A                   |
+| Unique      | `HASH`     | Yes                | Yes                          | Index             | Index                 |
+| Key         | `HASH`     | Yes                | Yes                          | Index             | Index                 |
+
+### **NDB Storage Engine Index Characteristics**
+
+| Index Class | Index Type | Stores NULL VALUES | Permits Multiple NULL Values | IS NULL Scan Type  | IS NOT NULL Scan Type |
+| ----------- | ---------- | ------------------ | ---------------------------- | ------------------ | --------------------- |
+| Primary key | `BTREE`    | No                 | No                           | Index              | Index                 |
+| Unique      | `BTREE`    | Yes                | Yes                          | Index              | Index                 |
+| Key         | `BTREE`    | Yes                | Yes                          | Index              | Index                 |
+| Primary key | `HASH`     | No                 | No                           | Table (see note 1) | Table (see note 1)    |
+| Unique      | `HASH`     | Yes                | Yes                          | Table (see note 1) | Table (see note 1)    |
+| Key         | `HASH`     | Yes                | Yes                          | Table (see note 1) | Table (see note 1)    |
+
+Table note:
+
+1. `USING HASH` prevents creation of an implicit ordered index.
+
+## DROP INDEX Syntax
+
+```mysql
+DROP INDEX index_name ON tbl_name
+    [algorithm_option | lock_option] ...
+
+algorithm_option:
+    ALGORITHM [=] {DEFAULT|INPLACE|COPY}
+
+lock_option:
+    LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}
+```
+
+`DROP INDEX` drops the index named *`index_name`* from the table *`tbl_name`*. This statement is mapped to an `ALTER TABLE` statement to drop the index.
+
+To drop a primary key, the index name is always `PRIMARY`, which must be specified as a quoted identifier because `PRIMARY` is a reserved word:
+
+```mysql
+DROP INDEX `PRIMARY` ON t;
+```
+
 # DELETE Syntax
 
 `DELETE` is a DML statement that removes rows from a table.
 
 A `DELETE` statement can start with a `WITH` clause to define common table expressions accessible within the `DELETE`.
 
-#### Single-Table Syntax
+## Single-Table Syntax
 
 ```mysql
 DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name [[AS] tbl_alias]
@@ -622,7 +624,7 @@ DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name [[AS] tbl_alias]
 
 The `DELETE` statement deletes rows from *`tbl_name`* and returns the number of deleted rows. To check the number of deleted rows, call the `ROW_COUNT()` function.
 
-#### Main Clauses
+## Main Clauses
 
 The conditions in the optional `WHERE` clause identify which rows to delete. With no `WHERE` clause, all rows are deleted.
 
@@ -630,7 +632,7 @@ The conditions in the optional `WHERE` clause identify which rows to delete. Wit
 
 If the `ORDER BY` clause is specified, the rows are deleted in the order that is specified. The `LIMIT` clause places a limit on the number of rows that can be deleted. These clauses apply to single-table deletes, but not multi-table deletes.
 
-#### Multiple-Table Syntax
+## Multiple-Table Syntax
 
 ```mysql
 DELETE [LOW_PRIORITY] [QUICK] [IGNORE]
@@ -644,21 +646,21 @@ DELETE [LOW_PRIORITY] [QUICK] [IGNORE]
     [WHERE where_condition]
 ```
 
-#### Privileges
+## Privileges
 
 You need the `DELETE` privilege on a table to delete rows from it. You need only the `SELECT` privilege for any columns that are only read, such as those named in the `WHERE` clause.
 
-#### Performance
+## Performance
 
 When you do not need to know the number of deleted rows, the `TRUNCATE TABLE` statement is a faster way to empty a table than a `DELETE` statement with no `WHERE` clause. Unlike `DELETE`, `TRUNCATE TABLE` cannot be used within a transaction or if you have a lock on the table.
 
 To ensure that a given `DELETE` statement does not take too much time, the MySQL-specific `LIMIT *`row_count`*`clause for `DELETE` specifies the maximum number of rows to be deleted. If the number of rows to delete is larger than the limit, repeat the `DELETE` statement until the number of affected rows is less than the `LIMIT` value.
 
-#### Subqueries
+## Subqueries
 
 You cannot delete from a table and select from the same table in a subquery.
 
-#### Partitioned Table Support
+## Partitioned Table Support
 
 `DELETE` supports explicit partition selection using the `PARTITION` option, which takes a list of the comma-separated names of one or more partitions or subpartitions (or both) from which to select rows to be dropped. Partitions not included in the list are ignored. Given a partitioned table `t` with a partition named `p0`, executing the statement `DELETE FROM t PARTITION (p0)` has the same effect on the table as executing `ALTER TABLE t TRUNCATE PARTITION (p0)`; in both cases, all rows in partition `p0` are dropped.
 
@@ -666,13 +668,13 @@ You cannot delete from a table and select from the same table in a subquery.
 
 The `PARTITION` option can also be used in multiple-table `DELETE` statements. You can use up to one such option per table named in the `FROM` option.
 
-#### Auto-Increment Columns
+## Auto-Increment Columns
 
 If you delete the row containing the maximum value for an `AUTO_INCREMENT` column, the value is not reused for a `MyISAM` or `InnoDB` table. If you delete all rows in the table with `DELETE FROM *`tbl_name`*` (without a `WHERE` clause) in`autocommit` mode, the sequence starts over for all storage engines except `InnoDB` and `MyISAM`.
 
 For `MyISAM` tables, you can specify an `AUTO_INCREMENT` secondary column in a multiple-column key. In this case, reuse of values deleted from the top of the sequence occurs even for `MyISAM` tables.
 
-#### Modifiers
+## Modifiers
 
 The `DELETE` statement supports the following modifiers:
 
@@ -686,9 +688,8 @@ The `DELETE` statement supports the following modifiers:
 
 - The `IGNORE` modifier causes MySQL to ignore errors during the process of deleting rows. (Errors encountered during the parsing stage are processed in the usual manner.) Errors that are ignored due to the use of `IGNORE` are returned as warnings. For more information, see Comparison of the IGNORE Keyword and Strict SQL Mode.
 
-  
 
-#### Order of Deletion
+## Order of Deletion
 
 If the `DELETE` statement includes an `ORDER BY` clause, rows are deleted in the order specified by the clause. This is useful primarily in conjunction with `LIMIT`. For example, the following statement finds rows matching the `WHERE`clause, sorts them by `timestamp_column`, and deletes the first (oldest) one:
 
@@ -699,7 +700,7 @@ ORDER BY timestamp_column LIMIT 1;
 
 `ORDER BY` also helps to delete rows in an order required to avoid referential integrity violations.
 
-#### InnoDB Tables
+## InnoDB Tables
 
 If you are deleting many rows from a large table, you may exceed the lock table size for an `InnoDB` table. To avoid this problem, or simply to minimize the time that the table remains locked, the following strategy (which does not use`DELETE` at all) might be helpful:
 
@@ -723,7 +724,7 @@ If you are deleting many rows from a large table, you may exceed the lock table 
 
 No other sessions can access the tables involved while `RENAME TABLE` executes, so the rename operation is not subject to concurrency problems.
 
-#### MyISAM Tables
+## MyISAM Tables
 
 In `MyISAM` tables, deleted rows are maintained in a linked list and subsequent `INSERT` operations reuse old row positions. To reclaim unused space and reduce file sizes, use the `OPTIMIZE TABLE` statement or the **myisamchk**utility to reorganize tables. `OPTIMIZE TABLE` is easier to use, but **myisamchk** is faster.
 
@@ -739,7 +740,7 @@ In this scenario, the index blocks associated with the deleted index values beco
 
 If you are going to delete many rows from a table, it might be faster to use `DELETE QUICK` followed by `OPTIMIZE TABLE`. This rebuilds the index rather than performing many index block merge operations.
 
-#### Multi-Table Deletes
+## Multi-Table Deletes
 
 You can specify multiple tables in a `DELETE` statement to delete rows from one or more tables depending on the condition in the `WHERE` clause. You cannot use `ORDER BY` or `LIMIT` in a multiple-table `DELETE`. The*`table_references`* clause lists the tables involved in the join.
 
@@ -908,7 +909,7 @@ If column `b` is also unique, the `INSERT` is equivalent to this `UPDATE` statem
 UPDATE t1 SET c=c+1 WHERE a=1 OR b=2 LIMIT 1;
 ```
 
-# LOAD DATA Syntax
+## LOAD DATA Syntax
 
 ```mysql
 LOAD DATA
@@ -936,7 +937,7 @@ LOAD DATA
 
 The `LOAD DATA` statement reads rows from a text file into a table at a very high speed. `LOAD DATA` is the complement of `SELECT ... INTO OUTFILE`. To write data from a table to a file, use `SELECT ... INTO OUTFILE`. To read the file back into a table, use `LOAD DATA`. The syntax of the `FIELDS` and `LINES` clauses is the same for both statements.
 
-# REPLACE Syntax
+## REPLACE Syntax
 
 ```mysql
 REPLACE [LOW_PRIORITY | DELAYED]
@@ -1040,7 +1041,7 @@ mysql> SELECT 1 + 1 FROM DUAL;
 
 In general, clauses used must be given in exactly the order shown in the syntax description. For example, a `HAVING`clause must come after any `GROUP BY` clause and before any `ORDER BY` clause. The exception is that the `INTO`clause can appear either as shown in the syntax description or immediately following the *`select_expr`* list.
 
-# JOIN Syntax
+## JOIN Syntax
 
 MySQL supports the following `JOIN` syntax for the *`table_references`* part of `SELECT` statements and multiple-table `DELETE` and `UPDATE` statements:
 
@@ -1091,7 +1092,7 @@ A table reference is also known as a join expression.
 
 A table reference (when it refers to a partitioned table) may contain a `PARTITION` option, including a list of comma-separated partitions, subpartitions, or both. This option follows the name of the table and precedes any alias declaration. The effect of this option is that rows are selected only from the listed partitions or subpartitions. Any partitions or subpartitions not named in the list are ignored.
 
-# UNION Syntax
+## UNION Syntax
 
 ```mysql
 SELECT ...
@@ -1226,7 +1227,9 @@ Most of these statements also cause an implicit commit after executing. The inte
 
 - **Replication control statements**. `START SLAVE`, `STOP SLAVE`, `RESET SLAVE`, `CHANGE MASTER TO`.
 
-# CREATE USER Syntax
+# USER
+
+## CREATE USER Syntax
 
 ```mysql
 CREATE USER [IF NOT EXISTS]
@@ -1284,7 +1287,7 @@ Important
 
 Under some circumstances, `CREATE USER` may be recorded in server logs or on the client side in a history file such as `~/.mysql_history`, which means that cleartext passwords may be read by anyone having read access to that information. For information about the conditions under which this occurs for the server logs and how to control it. For similar information about client-side logging.
 
-# DROP USER Syntax
+## DROP USER Syntax
 
 ```mysql
 DROP USER [IF EXISTS] user [, user] ...
@@ -1292,7 +1295,7 @@ DROP USER [IF EXISTS] user [, user] ...
 
 The `DROP USER` statement removes one or more MySQL accounts and their privileges. It removes privilege rows for the account from all grant tables.
 
-# GRANT Syntax
+## GRANT Syntax
 
 ```mysql
 GRANT
