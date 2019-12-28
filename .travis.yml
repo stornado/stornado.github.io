@@ -7,6 +7,8 @@ branches:
   only:
     - develop # build develop branch only
 script:
+  - npm install yarn
+  - yarn upgrade
   - git clone --depth=1 https://github.com/theme-next/hexo-theme-next.git themes/next
   - git clone --depth=1 https://github.com/theme-next/theme-next-pjax.git themes/next/source/lib/pjax
   - git clone --depth=1 https://github.com/theme-next/theme-next-three.git themes/next/source/lib/three
