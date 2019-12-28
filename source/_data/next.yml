@@ -1,0 +1,164 @@
+favicon:
+  small: /images/favicon-16x16.png
+  medium: /images/favicon-32x32.png
+  apple_touch_icon: /images/apple-touch-icon.png
+  safari_pinned_tab: /images/safari-pinned-tab.svg
+  android_manifest: /images/site.webmanifest
+  ms_browserconfig: /images/mstile-150x150.png
+
+footer:
+  icon:
+    name: heart
+    animated: true
+
+creative_commons:
+  license: by-nc-sa
+  sidebar: true
+  post: true
+  language: deed.zh
+
+scheme: Gemini
+
+menu:
+  home: / || home
+  tags: /tags/ || tags
+  categories: /categories/ || th
+  archives: /archives/ || archive
+
+menu_settings:
+  icons: true
+  badges: true
+
+avatar:
+  url: /images/avatar.jpg
+  rounded: true
+  rotated: true
+
+site_state: true
+
+social:
+  GitHub: https://github.com/stornado || github
+  E-Mail: mailto:ryan@zxytech.com || envelope
+  Twitter: https://twitter.com/ryanstornado || twitter
+  RSS: /atom.xml || rss
+
+social_icons:
+  enable: true
+  icons_only: true
+  transition: false
+
+tag_icon: true
+
+reward_settings:
+  enable: true
+  animation: false
+
+reward:
+  wechatpay: /images/wechatpay.png
+  alipay: /images/alipay.jpg
+
+related_posts:
+  enable: true
+  title: # Custom header, leave empty to use the default one
+  display_in_home: true
+  params:
+    maxCount: 5
+
+post_edit:
+  enable: true
+  url: https://github.com/stornado/stornado.github.io/tree/develop/source/ # Link for view source
+
+mobile_layout_economy: true
+
+android_chrome_color: "#222"
+
+safari_rainbow: true
+
+custom_logo: #/uploads/custom-logo.jpg
+
+codeblock:
+  highlight_theme: night eighties
+  copy_button:
+    enable: true
+
+    show_result: true
+
+back2top:
+  enable: true
+
+  sidebar: true
+
+  scrollpercent: true
+
+reading_progress:
+  enable: true
+  position: top
+
+bookmark:
+  enable: true
+  save: auto
+
+github_banner:
+  enable: true
+  permalink: https://github.com/stornado
+  title: Follow me on GitHub
+
+google_site_verification: Vb0EkkfGHD4yjSK3hHo9zSszfnkbr8wPpPDCVVtvxDg
+
+bing_site_verification: BB5484EDD5B0CB57C647B2184772CBDC
+
+baidu_site_verification: aYgTqx38cK
+
+math:
+  per_page: true
+
+  mathjax:
+    enable: true
+    mhchem: true
+
+pjax: true
+
+lazyload: true
+
+pangu: true
+
+comments:
+  style: tabs
+  active: gitalk
+  storage: true
+  lazyload: true
+
+gitalk:
+  enable: true
+  github_id: stornado # GitHub repo owner
+  repo: stornado.github.io # Repository name to store issues
+  client_id: debe3bf900ab05b9ae3b # GitHub Application Client ID
+  client_secret: 3593904f48e12175e52c39855bcc80018f0831f8 # GitHub Application Client Secret
+  admin_user: stornado # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
+  distraction_free_mode: true # Facebook-like distraction free mode
+  language: zh-CN
+
+baidu_analytics: e1d846feb2f251f98b0482d1f5fd6a4e
+
+growingio_analytics: # <project_id>
+
+cnzz_siteid: 1254452804
+
+local_search:
+  enable: true
+  trigger: auto
+  top_n_per_article: 3
+
+motion:
+  enable: true
+  async: true
+  transition:
+    post_block: fadeIn
+    post_header: slideDownIn
+    post_body: slideDownIn
+    coll_header: slideLeftIn
+    sidebar: slideUpIn
+
+pace:
+  enable: true
+  theme: minimal
