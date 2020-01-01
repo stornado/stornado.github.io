@@ -10,17 +10,17 @@ categories:
 
 # 黑盒测试用例设计方法
 
-黑盒测试用例设计方法包括等价类划分法、边界值分析法、错误推测法、因果图法、判定表驱动法、正交试验设计法、功能图法、场景图法等。
+黑盒测试用例设计方法包括等价类划分法、边界值分析法、错误推导法、因果图法、判定表驱动法、正交试验设计法、功能图法、场景图法等。
 
 ## （一）等价类划分法
 
-定义：等价类划分法是把所有可能输入的数据，即程序的输入域划分策划国内若干部分（子集），然后从每一个子集中选取少数具有代表性的数据作为测试用例。方法是一种重要的、常用的黑盒测试用例设计方法。
+定义：等价类划分法是把所有可能输入的数据，即程序的输入域划分为若干部分（子集），然后从每一个子集中选取少数具有代表性的数据作为测试用例。等价类方法是一种重要的、常用的黑盒测试用例设计方法。
 
 等价类是指某个输入域的子集合。在该子集合中，各个输入数据对于揭露程序中的错误都是等效的，并合理地假定：测试某等价类的代表值就等于对这一类其他值的测试，因此，可以把全部输入数据合理划分为若干等价类，在每一个等价类中取一个数据作为测试的输入条件就可以用少量代表性的测试数据取得较好的测试结果。等价类划分有两种不同的情况：有效等价类和无效等价类。
 
 有效等价类，是指对于程序的规格说明来说是合理的、有意义的输入数据构成的集合。利用有效等价类可检验程序是否实现了规格说明所规定的功能和性能。
 
-无效等价类 指对程序的规格说明是不合理的或无意义的输入数据所构成的集合。对于具体的问题，无效等价类至少应有一个，也可能多个。
+无效等价类，指对程序的规格说明是不合理的或无意义的输入数据所构成的集合。对于具体的问题，无效等价类至少应有一个，也可能多个。
 
 ### 划分标准：
 
@@ -84,13 +84,15 @@ categories:
 
 ##### 列出等价类表并编号
 
-![img](http://www.uml.org.cn/Test/images/201906181.png)
+{% asset_img a11ae05ff369cf3b43bce5841d97e849.png UML.ORG.CN %}
+
 
 覆盖有效等价类的测试用例：
 
 a b c覆盖等价类号码
 
-![img](http://www.uml.org.cn/Test/images/201906182.png)
+{% asset_img 568dc7f67124852f7a22e30487202f45.png UML.ORG.CN %}
+
 
 覆盖无效等价类的测试用例：
 
@@ -98,11 +100,13 @@ a b c覆盖等价类号码
 
 a b c覆盖等价类号码
 
-![img](http://www.uml.org.cn/Test/images/201906183.png)
+{% asset_img 40c0c8cc10cf751b4271fc886a0ee49e.png UML.ORG.CN %}
+
 
 覆盖无效等价类的测试用例：
 
-![img](http://www.uml.org.cn/Test/images/201906184.png)
+{% asset_img 377b37d533f66f43a2d8bdb34a9302d0.png UML.ORG.CN %}
+
 
 #### 实例2，NextDate
 
@@ -142,7 +146,8 @@ Y3=｛年份：年>2012｝
 
 弱一般等价类测试用例
 
-![img](http://www.uml.org.cn/Test/images/201906185.png)
+{% asset_img 3432a5a013695bce3596b328e4841d90.png UML.ORG.CN %}
+
 
 强一般等价类测试用例同弱一般等价类测试用例
 
@@ -150,11 +155,13 @@ Y3=｛年份：年>2012｝
 
 （一）弱健壮等价类测试
 
-![img](http://www.uml.org.cn/Test/images/201906186.png)
+{% asset_img 40432772d39dbe80f96a385bb78bc3d8.png UML.ORG.CN %}
+
 
 （二）强健壮等价类测试
 
-![img](http://www.uml.org.cn/Test/images/201906187.png)
+{% asset_img 075e28f34313debcd418d02d556a77f4.png UML.ORG.CN %}
+
 
 ## （二）边界值分析法
 
@@ -228,7 +235,8 @@ E、输入｛最大正实数｝
 
 6）利用边界值作为测试数据
 
-![img](http://www.uml.org.cn/Test/images/201906188.png)
+{% asset_img 7fc184a09ddedd0cc7db7cc355cb4f88.png UML.ORG.CN %}
+
 
 7）内部边界值分析
 
@@ -238,15 +246,18 @@ E、输入｛最大正实数｝
 
 1）数值的边界值检验：计算机是基于二进制进行工作的，因此，软件的任何数值运算都有一定的范围限制。
 
-![img](http://www.uml.org.cn/Test/images/201906189.png)
+{% asset_img 9e46388818bc7abea32919fce02adda3.png UML.ORG.CN %}
+
 
 2）字符的边界值检验：在计算机软件中，字符也是很重要的表示元素，其中ASCII和Unicode是常见的编码方式。下表中列出了一些常用字符对应的ASCII码值。
 
-![img](http://www.uml.org.cn/Test/images/2019061810.png)
+{% asset_img 808e913430e3e55669b19685e8521984.png UML.ORG.CN %}
+
 
 3）其它边界值检验：在不同的行业应用领域，依据硬件和软件的标准不同而具有各自特定的边界值。如下列出部分手机相关的边界值：
 
-![img](http://www.uml.org.cn/Test/images/2019061811.png)
+{% asset_img 88d7ed61d82c0462e6bc68b1d76f56c9.png UML.ORG.CN %}
+
 
 ### 转化为测试用例：
 
@@ -274,7 +285,8 @@ E、输入｛最大正实数｝
 
 现有一个学生标准化考试批阅试卷,产生成绩报告的程序。其规格说明如下:程序的输入文件由一些有80个字符的记录组成,如右图所示，所有记录分为3组：
 
-![img](http://www.uml.org.cn/Test/images/2019061812.png)
+{% asset_img 17452c197ccb831fd92639ca5fc10872.png UML.ORG.CN %}
+
 
 1) 标题：这一组只有一个记录，其内容为输出成绩报告的名字。
 
@@ -296,23 +308,26 @@ d)试题分析报告。按试题号排序，列出各题学生答对的百分比
 
 解答：分别考虑输入条件和输出条件，以及边界条件。给出下表所示的输入条件及相应的测试用例。
 
-![img](http://www.uml.org.cn/Test/images/2019061813.png)
+{% asset_img f8b0bc6412dcbcfe96e5bb046fb819a8.png UML.ORG.CN %}
+
 
 输出条件及相应的测试用例表。
 
-![img](http://www.uml.org.cn/Test/images/2019061814.png)
+{% asset_img c087759d450190733e5a483c4aa34927.png UML.ORG.CN %}
+
 
 #### 实例2，三角形的边界问题分析测试用例
 
 在三角形问题描述中，除了要求边长是整数外，没有给出其它的限制条件。在此，我们将三角形每边边长的取范围值设值为[1, 100]。
 
-![img](http://www.uml.org.cn/Test/images/2019061815.png)
+{% asset_img 7c422c7615a5cfc2997a50a5eff74a8d.png UML.ORG.CN %}
+
 
 实例3，NextDate函数边界值分析测试用例
 
 在NextDate函数中，隐含规定了变量mouth和变量day的取值范围为1≤mouth≤12和1≤day≤31，并设定变量year的取值范围为1912≤year≤2050。
 
-## （三）错误推测法
+## （三）错误推导法
 
 定义：基于经验和直觉推测程序中所有可能存在的各种错误，从而有针对性的设计测试用例的方法。
 
@@ -320,7 +335,7 @@ d)试题分析报告。按试题号排序，列出各题学生答对的百分比
 
 1. 例如,输入数据和输出数据为0的情况；输入表格为空格或输入表格只有一行。这些都是容易发生错误的情况。可选择这些情况下的例子作为测试用例。
 
-2. 例如，前面例子中成绩报告的程序，采用错误推测法还可补充设计一些测试用例：
+2. 例如，前面例子中成绩报告的程序，采用错误推导法还可补充设计一些测试用例：
 
 1) 程序是否把空格作为回答
 
@@ -370,7 +385,8 @@ d)试题分析报告。按试题号排序，列出各题学生答对的百分比
 
 1) 4种符号分别表示了规格说明中向4种因果关系。
 
-![img](http://www.uml.org.cn/Test/images/2019061816.png)
+{% asset_img 6e958f0e0e498afb17bfe70c18015056.png UML.ORG.CN %}
+
 
 2) 因果图中使用了简单的逻辑符号，以直线联接左右结点。左结点表示输入状态（或称原因），右结点表示输出状态（或称结果）。
 
@@ -392,7 +408,8 @@ d)试题分析报告。按试题号排序，列出各题学生答对的百分比
 
 输入状态相互之间还可能存在某些依赖关系，称为约束。例如,某些输入条件本身不可能同时出现。输出状态之间也往往存在约束。在因果图中,用特定的符号标明这些约束。
 
-![img](http://www.uml.org.cn/Test/images/2019061817.png)
+{% asset_img ef299dd6f80aa2616a31a7e8857fa978.png UML.ORG.CN %}
+
 
 输入条件的约束有以下4类：
 
@@ -448,11 +465,13 @@ d)试题分析报告。按试题号排序，列出各题学生答对的百分比
 
 11为中间节点；考虑到原因1和原因2不可能同时为1，因此在因果图上施加E约束。
 
-![img](http://www.uml.org.cn/Test/images/2019061818.png)
+{% asset_img 41a3ec871e2c3e314536e205754a7ac7.png UML.ORG.CN %}
+
 
 3) 根据因果图建立判定表。
 
-![img](http://www.uml.org.cn/Test/images/2019061819.gif)
+{% asset_img 8c8172cdb8fc2413f1c743395b0fba01.gif UML.ORG.CN %}
+
 
 表中8种情况的左面两列情况中，原因①和原因②同时为1，这是不可能出现的，故应排除这两种情况。表的最下一栏给出了6种情况的测试用例，这是我们所需要的数据。
 
@@ -496,11 +515,13 @@ d)试题分析报告。按试题号排序，列出各题学生答对的百分比
 
 14——钱已付清
 
-![img](http://www.uml.org.cn/Test/images/2019061820.gif)
+{% asset_img c71c9d89e286d5f5f1b5f14aff026e38.gif UML.ORG.CN %}
+
 
 3) 转换成判定表：
 
-![img](http://www.uml.org.cn/Test/images/2019061821.gif)
+{% asset_img 8e416ce4476c452b57ea2f0a747297b1.gif UML.ORG.CN %}
+
 
 4) 在判定表中，阴影部分表示因违反约束条件的不可能出现的情况，删去。第16列与第32列因什么动作也没做，也删去。最后可根据剩下的16列作为确定测试用例的依据。
 
@@ -512,7 +533,8 @@ d)试题分析报告。按试题号排序，列出各题学生答对的百分比
 
 阅读指南，判定表：
 
-![img](http://www.uml.org.cn/Test/images/2019061823.png)
+{% asset_img e9aca30985d96c8f654aace1b71ee7c6.png UML.ORG.CN %}
+
 
 判定表由四部分组成，如下图：
 
@@ -538,7 +560,8 @@ d)试题分析报告。按试题号排序，列出各题学生答对的百分比
 
 3) 化简后的读书指南判定表
 
-![img](http://www.uml.org.cn/Test/images/2019061823.png)
+{% asset_img e9aca30985d96c8f654aace1b71ee7c6.png UML.ORG.CN %}
+
 
 判定表建立步骤：
 
@@ -562,19 +585,22 @@ d)试题分析报告。按试题号排序，列出各题学生答对的百分比
 
 2、列出所有的条件桩和动作桩：
 
-![img](http://www.uml.org.cn/Test/images/2019061824.png)
+{% asset_img d0b8b100578ec25224f2ebf118e53cbb.png UML.ORG.CN %}
+
 
 3、填入条件项。可从最后1行条件项开始，逐行向上填满。
 
 4、填入动作桩和动作项。这样便得到如下图的初始判定表
 
-![img](http://www.uml.org.cn/Test/images/2019061825.png)
+{% asset_img 3cc9e631f593c9fdd5a7e8f129fd2f5d.png UML.ORG.CN %}
+
 
 5、
 
 初始判定表化简。合并相似规则后得到
 
-![img](http://www.uml.org.cn/Test/images/2019061826.png)
+{% asset_img 5522a0307454cb50c72ff46be943ae57.png UML.ORG.CN %}
+
 
 ### 实例2，NextData函数的精简决策表
 
@@ -622,7 +648,8 @@ Y2 ＝{年：年不是闰年}
 
 输入变量间存在大量逻辑关系的NextData决策表
 
-![img](http://www.uml.org.cn/Test/images/2019061827.gif)
+{% asset_img 4cdf91c40f2ec54f86ee5e5db6370c1f.gif UML.ORG.CN %}
+
 
 3. 用决策表测试法测试以下程序：该程序有三个输入变量month、day、year（month、day和year均为整数值，并且满足：1≤month≤12和1≤day≤31），分别作为输入日期的月份、日、年份，通过程序可以输出该输入日期在日历上隔一天的日期。
 
@@ -666,11 +693,13 @@ a4: month+1 a5: month=1 a6: year+1
 
 ? 在条件1不满足，而条件4被满足时，要执行操作3。 根据规格说明得到如下判定表：
 
-![img](http://www.uml.org.cn/Test/images/2019061828.gif)
+{% asset_img 310e1c6f00ce9945ec18b3a966739f89.gif UML.ORG.CN %}
+
 
 这里，判定表只给出了16种规则中的8种。事实上，除这8条以外的一些规则是指当不能满足指定的条件，执行3种操作时，要执行1个默许的操作。在没必要时，判定表通常可略去这些规则。但如果用判定表来设计测试用例，就必须列出这些默许规则（如下表）。
 
-![img](http://www.uml.org.cn/Test/images/2019061829.png)
+{% asset_img 5b76cf4d4411e5d3a326c13b672fa6c4.png UML.ORG.CN %}
+
 
 默许的规则
 
@@ -756,7 +785,8 @@ B. Beizer提出这5个必要条件的目的是为了使操作的执行完全依�
 
 基本流和备选流：如下图所示，图中经过用例的每条路径都用基本流和备选流来表示，直黑线表示基本流，是经过用例的最简单的路径。备选流用不同的色彩表示，一个备选流可能从基本流开始，在某个特定条件下执行，然后重新加入基本流中（如备选流1和3）；也可能起源于另一个备选流（如备选流2），或者终止用例而不再重新加入到某个流（如备选流2和4）。
 
-![img](http://www.uml.org.cn/Test/images/2019061830.gif)
+{% asset_img d33bb8ba66379e5984b41e75d4f96d22.gif UML.ORG.CN %}
+
 
 ### 9.3. 实例
 
@@ -764,11 +794,13 @@ B. Beizer提出这5个必要条件的目的是为了使操作的执行完全依�
 
 下图所示是ATM例子的流程示意图。
 
-![img](http://www.uml.org.cn/Test/images/2019061831.gif)
+{% asset_img b4ccf06e04500b069f7da80fd6d005ca.gif UML.ORG.CN %}
+
 
 2. 场景设计：下表所示是生成的场景。
 
-![img](http://www.uml.org.cn/Test/images/2019061832.png)
+{% asset_img 12bd0646e1d89e8674d2232f28980adb.png UML.ORG.CN %}
+
 
 注：为方便起见，备选流3和6（场景3和7）内的循环以及循环组合未纳入上表。
 
@@ -778,7 +810,8 @@ B. Beizer提出这5个必要条件的目的是为了使操作的执行完全依�
 
 表3-9 测试用例表
 
-![img](http://www.uml.org.cn/Test/images/2019061833.png)
+{% asset_img 11e4df1504b1decb3a9f8fc31c28461c.png UML.ORG.CN %}
+
 
 4. 数据设计
 
@@ -788,7 +821,8 @@ B. Beizer提出这5个必要条件的目的是为了使操作的执行完全依�
 
 表3-10 测试用例表
 
-![img](http://www.uml.org.cn/Test/images/2019061834.png)
+{% asset_img 27e798b3cdfc40ff6d13c5f54303a1cc.png UML.ORG.CN %}
+
 
 ## 测试用例设计综合策略
 
@@ -798,7 +832,7 @@ B. Beizer提出这5个必要条件的目的是为了使操作的执行完全依�
 
 2) 必要时用等价类划分方法补充一些测试用例。
 
-3) 用错误推测法再追加一些测试用例。
+3) 用错误推导法再追加一些测试用例。
 
 4) 对照程序逻辑，检查已设计出的测试用例的逻辑覆盖程度，如果没有达到要求的覆盖标准，应当再补充足够的测试用例。
 
@@ -1079,7 +1113,7 @@ MC/DC是条件组合覆盖的子集。条件组合覆盖要求覆盖判定中所
 下面是MC/DC的示例：
 
 代码：
-
+```
 int func(BOOL A, BOOL B, BOOL C)
 
 {
@@ -1091,10 +1125,11 @@ return 1;
 return 0;
 
 }
-
+```
 用例：
 
-![img](http://www.uml.org.cn/Test/images/2019061835.jpg)
+{% asset_img 64bda3d17357c40835d91bf8ef0ded9f.jpg UML.ORG.CN %}
+
 
 对于条件A，用例1和用例2，A取值相反，B和C相同，判定结果分别为1和0；
 
@@ -1150,7 +1185,8 @@ MC/DC被称为“最严格的标准”，但这种说法是将条件组合覆盖
 
 圆圈称为控制流图的一个结点，表示一个或多个无分支的语句或源程序语句
 
-![img](http://www.uml.org.cn/Test/images/2019061836.gif)
+{% asset_img f21c09cc7eb6f73656442f799e539200.gif UML.ORG.CN %}
+
 
 流图只有二种图形符号：
 
@@ -1170,7 +1206,8 @@ MC/DC被称为“最严格的标准”，但这种说法是将条件组合覆盖
 
 如下图所示
 
-![img](http://www.uml.org.cn/Test/images/2019061837.gif)
+{% asset_img c6af4324610d840a7ecb3018cfcd2a97.gif UML.ORG.CN %}
+
 
 3）如果判断中的条件表达式是由一个或多个逻辑运算符 (OR, AND, NAND, NOR)连接的复合条件表达式，则需要改为一系列只有单条件的嵌套的判断。
 
@@ -1186,11 +1223,13 @@ MC/DC被称为“最严格的标准”，但这种说法是将条件组合覆盖
 
 对应的逻辑为：
 
-![img](http://www.uml.org.cn/Test/images/2019061838.gif)
+{% asset_img 19089b3074b5e4bb4c497da0b21a455f.gif UML.ORG.CN %}
+
 
 独立路径：至少沿一条新的边移动的路径
 
-![img](http://www.uml.org.cn/Test/images/2019061839.gif)
+{% asset_img 1a180655353801d689e76a08d9e95c71.gif UML.ORG.CN %}
+
 
 基本路径测试法的步骤：
 
@@ -1198,11 +1237,13 @@ MC/DC被称为“最严格的标准”，但这种说法是将条件组合覆盖
 
 流程图用来描述程序控制结构。可将流程图映射到一个相应的流图(假设流程图的菱形决定框中不包含复合条件)。在流图中，每一个圆，称为流图的结点，代表一个或多个语句。一个处理方框序列和一个菱形决测框可被映射为一个结点，流图中的箭头，称为边或连接，代表控制流，类似于流程图中的箭头。一条边必须终止于一个结点，即使该结点并不代表任何语句(例如：if-else-then结构)。由边和结点限定的范围称为区域。计算区域时应包括图外部的范围。
 
-![img](http://www.uml.org.cn/Test/images/2019061840.gif)
+{% asset_img 25a0b0d57a643cf2609c21d35ff60ccd.gif UML.ORG.CN %}
+
 
 画出其程序流程图和对应的控制流图如下
 
-![img](http://www.uml.org.cn/Test/images/2019061841.gif)
+{% asset_img e74f9e72c9fee608337367de061a8d2d.gif UML.ORG.CN %}
+
 
 ### 第二步：计算圈复杂度
 
@@ -1216,7 +1257,8 @@ MC/DC被称为“最严格的标准”，但这种说法是将条件组合覆盖
 
 给定流图G的圈复杂度V(G)，定义为V(G)=P+1，P是流图G中判定结点的数量。
 
-![img](http://www.uml.org.cn/Test/images/2019061842.gif)
+{% asset_img 8decd94c63dae1ed3b85734eee755656.gif UML.ORG.CN %}
+
 
 ### 第三步：导出测试用例
 
@@ -1236,17 +1278,20 @@ o第四步：准备测试用例
 
 为了确保基本路径集中的每一条路径的执行，根据判断结点给出的条件，选择适当的数据以保证某一条路径可以被测试到，满足上面例子基本路径集的测试用例是：
 
-![img](http://www.uml.org.cn/Test/images/2019061843.gif)
+{% asset_img aac24b59ddb72b0b62e016433d610778.gif UML.ORG.CN %}
+
 
 举例说明：
 
 例：下例程序流程图描述了最多输入50个值(以–1作为输入结束标志)，计算其中有效的学生分数的个数、总分数和平均值。
 
-![img](http://www.uml.org.cn/Test/images/2019061844.gif)
+{% asset_img de613762587bb229c6885750ae461102.gif UML.ORG.CN %}
+
 
 步骤1：导出过程的流图。
 
-![img](http://www.uml.org.cn/Test/images/2019061845.gif)
+{% asset_img da37e960bea1ab63963bb87654014f30.gif UML.ORG.CN %}
+
 
 步骤2:确定环形复杂性度量V(G)：
 
@@ -1304,7 +1349,8 @@ score[k]<0， k< i ;
 
 期望结果：根据输入的有效分数算出正确的分数个数n1、总分sum和平均分average。
 
-![img](http://www.uml.org.cn/Test/images/2019061846.gif)
+{% asset_img bb676b80d1745f3ec5202ab9e89b6f47.gif UML.ORG.CN %}
+
 
 连接权为“1”表示存在一个连接，在图中如果一行有两个或更多的元素“1”，则这行所代表的结点一定是一个判定结点，通过连接矩阵中有两个以上(包括两个)元素为“1”的个数，就可以得到确定该图圈复杂度的另一种算法。
 
@@ -1432,7 +1478,8 @@ HTTP请求方式：GET
 
 字段列表如下：
 
-![img](http://www.uml.org.cn/Test/images/2019061847.png)
+{% asset_img 38225651528ee218388d7d05965baf52.png UML.ORG.CN %}
+
 
 消息请求样例：
 
@@ -1442,11 +1489,13 @@ shopId=1111111111&token=123411nmk515155&queryDate=2015-10-10
 
 字段元素如下：
 
-![img](http://www.uml.org.cn/Test/images/2019061848.png)
+{% asset_img b75d5e893d425662c77d858092d4b4b0.png UML.ORG.CN %}
+
 
 明细列表对象字段元素定义：
 
-![img](http://www.uml.org.cn/Test/images/2019061849.png)
+{% asset_img 9956046475a17de854a5d917844bdbf1.png UML.ORG.CN %}
+
 
 
 
@@ -1456,15 +1505,18 @@ shopId=1111111111&token=123411nmk515155&queryDate=2015-10-10
 
 用例设计
 
-![img](http://www.uml.org.cn/Test/images/2019061851.png)
+{% asset_img 691f1b47c6b8b3a8f8556a747cde345c.png UML.ORG.CN %}
 
 
 
-![img](http://www.uml.org.cn/Test/images/2019061852.png)
 
-![img](http://www.uml.org.cn/Test/images/2019061853.png)
+{% asset_img 2bcccff4c2e315239ea06d21cac9eceb.png UML.ORG.CN %}
 
-![img](http://www.uml.org.cn/Test/images/2019061854.png)
+
+{% asset_img c57730679b49d76f887d2fcffd38d9bc.png UML.ORG.CN %}
+
+
+{% asset_img 6460a6a6fe0bde78edabcc875912f8f7.png UML.ORG.CN %}
 
 
 
