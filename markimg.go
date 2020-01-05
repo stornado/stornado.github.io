@@ -159,7 +159,7 @@ func main() {
 	}
 
 	if _, err := os.Stat(*markdownFilepath); os.IsNotExist(err) {
-		log.Fatalln("%s 不存在\n", *markdownFilepath)
+		log.Fatalf("%s 不存在\n", *markdownFilepath)
 	}
 
 	if *imageSaveDir == "" {
@@ -181,15 +181,13 @@ func main() {
 	}
 
 	if len(imgUrls) == 0 {
-		log.Fatalln("%s 无图片需要下载替换")
+		log.Fatalf("%s 无图片需要下载替换", *markdownFilepath)
 	}
 
 	ch := make(chan MarkdownImgUrl)
 
 	for _, imgUrl := range imgUrls {
-		go func(imgUrl MarkdownImgUrl) {
-			ch <- imgUrl
-		}(imgUrl)
+		ch <- imgUrl
 	}
 
 	saved := make(map[string]string)

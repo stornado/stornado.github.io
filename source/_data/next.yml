@@ -80,14 +80,11 @@ codeblock:
   highlight_theme: night eighties
   copy_button:
     enable: true
-
     show_result: true
 
 back2top:
   enable: true
-
   sidebar: true
-
   scrollpercent: true
 
 reading_progress:
@@ -111,7 +108,6 @@ baidu_site_verification: aYgTqx38cK
 
 math:
   per_page: true
-
   mathjax:
     enable: true
     mhchem: true
