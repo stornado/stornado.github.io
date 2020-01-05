@@ -1,9 +1,10 @@
 ---
-layout: drafts
 title: 结构化思维
 date: 2020-01-04 20:50:13
 tags:
+  - book
 ---
+
 
 
 

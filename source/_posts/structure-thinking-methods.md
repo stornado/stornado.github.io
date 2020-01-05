@@ -1,9 +1,10 @@
 ---
-layout: drafts
 title: 结构化思维方法
 date: 2020-01-05 15:07:09
 tags:
+  - book
 ---
+
 
 
 
