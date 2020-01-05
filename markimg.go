@@ -19,7 +19,10 @@ import (
 	"strings"
 )
 
-const MARKDWON_IMAGE_URL_PATTERN = `!\[(.+?)\]\((.+?)(\s+'(.+?)'|\s+"(.+?)")?\)`
+const (
+	MARKDOWN_IMAGE_URL_PATTERN = `!\[(.+?)\]\((.+?)(\s+'(.+?)'|\s+"(.+?)")?\)`
+	IMAGE_CONTENT_TYPE_PATTERN = `.*image/(\w+).*`
+)
 
 func genMd5(text string) (md5hash string) {
 	m := md5.New()
@@ -35,11 +38,11 @@ func getFilename(filepath string) (filename string) {
 func download(url string, dir string) (host, title, dst string, err error) {
 	local := path.Join(dir, genMd5(url)+path.Ext(url))
 	if _, err = os.Stat(local); os.IsExist(err) {
-		log.Fatalf("%s aready saved at %s\n", url, local)
+		log.Fatalf("%s already saved at %s\n", url, local)
 		return
 	}
 
-	log.Printf("fetching %s\n", url)
+	// log.Printf("fetching %s\n", url)
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("fetch %s %v\n", url, err)
@@ -47,6 +50,16 @@ func download(url string, dir string) (host, title, dst string, err error) {
 	}
 
 	defer resp.Body.Close()
+
+	conentType := string(resp.Header.Get("Content-Type"))
+	imgSuffixRe := regexp.MustCompile(IMAGE_CONTENT_TYPE_PATTERN)
+	if path.Ext(url) == "" && conentType != "" {
+		if imgSuffix := imgSuffixRe.FindStringSubmatch(conentType); imgSuffix[1] != "" {
+			local += "." + imgSuffix[1]
+		}
+	}
+
+	// log.Printf("%s will save at %s\n", url, local)
 
 	f, err := os.Create(local)
 	if err != nil {
@@ -62,71 +75,81 @@ func download(url string, dir string) (host, title, dst string, err error) {
 	host = strings.ToUpper(strings.TrimPrefix(resp.Request.Host, "www."))
 	title = getFilename(url)
 	dst = local
+
+	log.Printf("%s saved at %s\n", url, dst)
 	return
 }
 
-type MarkdownImgUrl struct {
+type MarkdownImgURL struct {
 	MarkImg string
-	ImageUrl
+	ImageURL
 }
 
-type ImageUrl struct {
+type ImageURL struct {
 	AltText string
-	Url     string
+	Link    string
 	Title   string `json:"omitempty"`
 }
 
-func findImgUrl(filepath string) (imgUrls []MarkdownImgUrl, err error) {
+func findImgURL(filepath string) (imgURLs []MarkdownImgURL, err error) {
 	f, err := ioutil.ReadFile(filepath)
 	if err != nil {
-		log.Fatalf("open markdwon %s %s\n", filepath, err)
+		log.Fatalf("open markdown %s %s\n", filepath, err)
 		return
 	}
 
 	content := string(f)
 
-	imgUrlRe := regexp.MustCompile(MARKDWON_IMAGE_URL_PATTERN)
-	urls := imgUrlRe.FindAllStringSubmatch(content, -1)
+	imgURLRe := regexp.MustCompile(MARKDOWN_IMAGE_URL_PATTERN)
+	urls := imgURLRe.FindAllStringSubmatch(content, -1)
 
 	for _, url := range urls {
-		imgUrls = append(imgUrls, MarkdownImgUrl{url[0], ImageUrl{AltText: url[1], Url: url[2], Title: url[3]}})
+		imgURLs = append(imgURLs, MarkdownImgURL{url[0], ImageURL{AltText: url[1], Link: url[2], Title: url[3]}})
 		log.Printf("find %s %s %s", url[1], url[2], url[3])
 	}
 
-	log.Println(imgUrls)
 	return
 }
 
-func replaceMarkdownImgUrl(filepath string, replace map[string]string) (output []byte, err error) {
+func replaceMarkdownImgURL(filepath string, replace map[string]string) (output []byte, err error) {
 	f, err := os.OpenFile(filepath, os.O_RDONLY, 0644)
 	if err != nil {
-		log.Fatalf("open markdwon %s %s\n", filepath, err)
+		log.Fatalf("open markdown %s %s\n", filepath, err)
 		return
 	}
 	defer f.Close()
 	reader := bufio.NewReader(f)
 
+	replaced := false
 	for {
 		line, _, err := reader.ReadLine()
 		if err != nil {
 			if err == io.EOF {
-				err = nil
+				return output, nil
 			}
 			return nil, err
 		}
-		for mkUrl, hexoImgUrl := range replace {
-			if ok, _ := regexp.Match(mkUrl, line); ok {
-				reg := regexp.MustCompile(mkUrl)
-				newByte := reg.ReplaceAll(line, []byte(hexoImgUrl))
+		replaced = false
+		for mkURL, assetImgURL := range replace {
+			if ok, _ := regexp.Match(mkURL, line); ok {
+				reg := regexp.MustCompile(mkURL)
+				newByte := reg.ReplaceAll(line, []byte(assetImgURL))
 				output = append(output, newByte...)
 				output = append(output, []byte("\n")...)
-			} else {
-				output = append(output, line...)
+				replaced = true
+			} else if strings.Contains(string(line), mkURL) {
+				newByte := []byte(strings.ReplaceAll(string(line), mkURL, assetImgURL))
+				output = append(output, newByte...)
 				output = append(output, []byte("\n")...)
+				replaced = true
 			}
 		}
+
+		if !replaced {
+			output = append(output, line...)
+			output = append(output, []byte("\n")...)
+		}
 	}
-	return
 }
 
 func writeToFile(filepath string, output []byte) (err error) {
@@ -144,9 +167,28 @@ func writeToFile(filepath string, output []byte) (err error) {
 	return
 }
 
+func saveMarkdownImg(markdownImgURLs <-chan MarkdownImgURL, quit <-chan int, saved *map[string]string) {
+
+	for {
+		select {
+		case imgURL := <-markdownImgURLs:
+			host, _, dst, err := download(imgURL.Link, *imageSaveDir)
+			if err != nil {
+				log.Fatalln(err)
+			}
+
+			(*saved)[imgURL.MarkImg] = fmt.Sprintf("{%% asset_img %s From: %s %%}", path.Base(dst), host)
+
+			log.Printf("saved %s %s %s\n", imgURL.AltText, imgURL.Link, dst)
+		case <-quit:
+			return
+		}
+	}
+}
+
 var markdownFilepath = flag.String("markdown", "", "输入markdown文件绝对路径")
 var imageSaveDir = flag.String("dest", "", "请输入图片保存目录(默认为markdown同名目录)")
-var replaceWtihHexoAssetImg = flag.Bool("replace", false, "是否使用HEXO {% asset_img %}替换![]()")
+var replaceWithAssetImg = flag.Bool("replace", false, "是否使用HEXO {% asset_img %}替换![]()")
 
 func main() {
 
@@ -155,7 +197,6 @@ func main() {
 	if *markdownFilepath == "" {
 		flag.Usage()
 		log.Fatalf("\n\n请输入markdown文件地址")
-
 	}
 
 	if _, err := os.Stat(*markdownFilepath); os.IsNotExist(err) {
@@ -168,46 +209,39 @@ func main() {
 	}
 
 	if _, err := os.Stat(*imageSaveDir); os.IsNotExist(err) {
-		//log.Fatalf("%s 不存在\n", *imageSaveDir)
 		err := os.MkdirAll(*imageSaveDir, os.ModeDir)
 		if err != nil {
 			log.Fatalf("创建 %s %v\n", *imageSaveDir, err)
 		}
 	}
 
-	imgUrls, err := findImgUrl(*markdownFilepath)
+	imgURLs, err := findImgURL(*markdownFilepath)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	if len(imgUrls) == 0 {
+	if len(imgURLs) == 0 {
 		log.Fatalf("%s 无图片需要下载替换", *markdownFilepath)
 	}
 
-	ch := make(chan MarkdownImgUrl)
+	markdownImgURLs := make(chan MarkdownImgURL)
+	quit := make(chan int)
 
-	for _, imgUrl := range imgUrls {
-		ch <- imgUrl
-	}
+	go func() {
+		for _, imgURL := range imgURLs {
+			markdownImgURLs <- imgURL
+		}
+		quit <- 0
+	}()
+
+	log.Println("waiting for download")
 
 	saved := make(map[string]string)
 
-	for imgUrl := range ch {
-		go func(imgUrl MarkdownImgUrl) {
-			host, title, dst, err := download(imgUrl.Url, *imageSaveDir)
-			if err != nil {
-				log.Fatalln(err)
-			}
+	saveMarkdownImg(markdownImgURLs, quit, &saved)
 
-			saved[imgUrl.MarkImg] = fmt.Sprintf("{%% asset_img %s From: %s %%}", path.Base(dst), host)
-
-			log.Printf("saved %s %s %s %s %s %s\n", imgUrl.AltText, imgUrl.Url, imgUrl.Title, host, title, dst)
-		}(imgUrl)
-	}
-	close(ch)
-
-	if *replaceWtihHexoAssetImg && len(saved) > 0 {
-		output, err := replaceMarkdownImgUrl(*markdownFilepath, saved)
+	if *replaceWithAssetImg && len(saved) > 0 {
+		output, err := replaceMarkdownImgURL(*markdownFilepath, saved)
 		if err != nil {
 			log.Fatalln(err)
 		}

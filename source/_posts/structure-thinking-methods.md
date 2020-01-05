@@ -11,21 +11,21 @@ tags:
 
 请你花10秒钟的时间，记住以下的20个数字：
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/15411194647580dcd5f5870)
+{% asset_img afb4f724da3e26b51ff951d80144cd7e.jpeg From: P3.PSTATP.COM %}
 
 
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/15411194647283d195123d6)
+{% asset_img 9d27a59d115a827c28f28479f6459ebf.jpeg From: P1.PSTATP.COM %}
 
 
 
 好，我们再来试一组数字，还是花10秒钟来记住它：
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/1541119464754b181950f4b)
+{% asset_img e6d0cefc2d6d0214f0c562fc8d9300ac.jpeg From: P1.PSTATP.COM %}
 
 
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/1541119464849e602ed0c00)
+{% asset_img cb16fdd47a9dc18936a7bfaa820a1dee.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -52,7 +52,7 @@ tags:
 
 我们思考问题的时候，脑子里的想法会不断地涌现出来，看似有很多，却杂乱无章，就像是衣橱里的一堆没有整理的衣服，彼此缠绕，互相堆砌在一起。
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/1541119464799ae7a7fee7a)
+{% asset_img 56bad163e44cd84dfcf2c96659152d4c.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -82,7 +82,7 @@ tags:
 
 比如按季节分类，按穿着场合分类，按服装风格分类等等..
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/1541119464787c040ab64e2)
+{% asset_img 9ea3f85e5bfe2881e4d719f257ce3bc4.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -106,7 +106,7 @@ tags:
 
 把你的想法和思维内容，像整理衣服一样，分门别类的安放好，组成一个结构分明的整体，方便日后的理解、存储、使用。这个，就称之为「结构化思维」
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/1541119464909b32cffafc4)
+{% asset_img 133e8a9cfe1f2a21ada7ab0420a4f71e.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -118,7 +118,7 @@ tags:
 
 如果你不会结构化思维，你可能会这样说...
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/15411194649043e473885cd)
+{% asset_img e7ca7ab2d44ca05fe1eea36284a44c2c.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -128,7 +128,7 @@ tags:
 
 如果你不会结构化思维，你可能会这样表达...
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/15411194649676d7f1112b9)
+{% asset_img bcbb91ff10594521815b330bf4b649bd.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -138,7 +138,7 @@ tags:
 
 如果你不会结构化思维，你可能会这样回答...
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/15411194650027b9945b71c)
+{% asset_img e5829b2814902f791f0032900057c811.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -156,7 +156,7 @@ tags:
 
 一辆汽车，拥有上万个零件，当你发现汽车的行驶功能出现故障时，如果你不是专业修汽车的，你根本不知道是哪个零件可能出了问题，你能想到的也是这上万零件里的一小部分...
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/1541119465293a85c30a7a1)
+{% asset_img 0696e9ce03b87e1c89c2fbd304bbf883.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -180,7 +180,7 @@ tags:
 
 在维修师傅的眼中，汽车并不是由上万个零件拼接而成的，而是「结构化」的：
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/1541119465092c98e1088ad)
+{% asset_img 14d413b8436f5ad3031c696554d1ffcc.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -216,7 +216,7 @@ tags:
 
 或者按头部、身体、四肢的构造分类，就能组合成一个大黄蜂….
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/1541119465094110038f105)
+{% asset_img 7557a94a52574352821aeb9e5dd988d5.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -238,7 +238,7 @@ tags:
 
 简单来说就是：先确认目标问题，再根据分解的目的，将问题分解成不同的类别，类别下再放入对应的不同要素，这样逐层分解，最终的形成类似于金字塔的形状结构。
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/15411194651330b64fe53a9)
+{% asset_img 18752cc481ce1c227bdfa1974bb89b5e.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -250,7 +250,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 也就是金字塔的每一层，内容不能有重复的部分，也不能有遗漏的部分。
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/15411194651291faa223f8f)
+{% asset_img 0c4b6cd48d78b2e2f24c9a30402b84c4.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -261,13 +261,13 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 这个就有重叠的部分：有些衣服既是职业装，也是春秋季服饰；
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/154111946520102b76da467)
+{% asset_img 18552f1ed7dc8fafcd37c09bdc1cfefd.jpeg From: P1.PSTATP.COM %}
 
 
 
 也有遗漏的部分：夏天穿的休闲服应该归到哪一类？
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/154111946537094984b2b73)
+{% asset_img 8b71b689914e1761f83519a55600ba19.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -275,7 +275,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 你可以按季节分：春秋装，冬装，夏装。
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/15411194656242ac204c373)
+{% asset_img 93c92d9a8c10868113fe7342cdece995.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -301,7 +301,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 因此，我们可以在金字塔的第一层，划分为：新客户、跟进中的客户、老客户这三类。
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/1541119465263d410c23e7d)
+{% asset_img aceda7aee64a24f8af607e27dca96218.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -352,7 +352,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 你也可以找来一些帮手，把大伙儿关在会议室里一起讨论，运用群体智慧，通过各种唇枪舌战，各种奇思妙想，将想法、建议、点子铺满整个白板...
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/1541119465601a81b1e3757)
+{% asset_img 47bc38e70e3da503910df1424efead0f.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -378,7 +378,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 经过一番调整，凌乱的内容很快被分成了5个大组：渠道、获客方法、产品活动、客户分类、沟通方式，这里的分组名称不要求太精确，因为后期可能还需要调整。
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/154111946569468b9a7fdfd)
+{% asset_img e1063bdfcf72a32d59ec07ba08409361.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -402,7 +402,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 - 之前的类别命名不精确，其实应该分为「渠道、营销」这2部分，不同的用户对应不同的渠道，不同的渠道对应不同的营销方式；
 - 头脑风暴时只考虑了新客户的渠道，没有考虑准客户和老客户的渠道，要补上...
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/1541119465433b35f20a27b)
+{% asset_img 367dd070a406a3462f6f19d52ca4f332.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -412,7 +412,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 不管是新客户、准客户还是老客户，我们采取的产品活动都是同一个，因此可以把产品活动放在他们的上方，作为金字塔的顶端，这也因此成为了本次3个月业绩冲刺的核心活动。
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/15411194654319103ad4932)
+{% asset_img 8b1fe017ceb4b94a5db33e433f120a1b.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -434,7 +434,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 最后，你就可以根据这个金字塔结构，给出未来3个月业绩冲刺的完整方案了：
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/1541119465577cff3d0a155)
+{% asset_img 80d704ed918b453aca1a01146fdff23a.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -466,7 +466,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 你拿出一张白纸放在面前，想象在白纸上即将填满的内容，将构成一个完整的方案。
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/1541119465562223aa12873)
+{% asset_img 15bc8c7eeed3cf1b21c4254e4eb61fe7.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -478,7 +478,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 你需要拿起一支笔，开始对这个完整的方案，用横、竖线进行切割。只要你画的线是贯穿、封闭的，那么切出来的结构一定是MECE的。
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/154111946560004bc88a11f)
+{% asset_img e5eeea24e99ca41539593ee09cdd803a.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -496,7 +496,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 两分法是指：任何事物都是一对矛盾的统一体，彼此对立，加在一起又是一个整体。比如：有无、是非、黑白、阴阳、虚实、因果….
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/1541119465738c8d47c3cb3)
+{% asset_img f9af7569d833c99c8839f38d28a47ec2.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -510,7 +510,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 我们可以把他们先分成：能力强、能力弱的两类，彼此对立，结合在一起又是统一的整体，符合MECE。
 
-![思维混乱，是因为大脑没有结构](http://p9.pstatp.com/large/pgc-image/1541119465757559e3a7ed0)
+{% asset_img 7e85b13077eed8f8f86a19cc7f91840f.jpeg From: P9.PSTATP.COM %}
 
 
 
@@ -531,13 +531,13 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 - 能力弱/态度差
 - 能力弱/态度好
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/1541119465739cdd156b0f4)
+{% asset_img 534da723b88c677481ff467b6972abb5.jpeg From: P3.PSTATP.COM %}
 
 
 
 有了这个结构，我们就能很方便的制定出对应的招聘策略了：
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/15411194657836e990c1f9d)
+{% asset_img 65a71df80c26d5fec749cf39a154d773.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -549,13 +549,13 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 比如，基于两分法的管理理论：
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/1541119465814bd9c4756b3)
+{% asset_img 7aee04d575829c86229a00fa3aeb8b69.jpeg From: P3.PSTATP.COM %}
 
 
 
 比如，将两次两分法，组合成一个二维四象限的各种管理理论：
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/154111946584892d7f743ec)
+{% asset_img 0c3024f9b9974865f91de1bbfa6c9357.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -574,7 +574,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 你也能将两个三分法，组合成一个九宫格，比如：
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/15411194658959e9cdd80c0)
+{% asset_img 0d5a3ce5b85e98570a9ec4b64af74ac6.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -586,19 +586,19 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 比如，让你思维更缜密的「5W2H结构」。
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/15411194658578c1dd1113f)
+{% asset_img 706df51d76407c6e1542715920d85e76.jpeg From: P1.PSTATP.COM %}
 
 
 
 比如，让你快速理清商业模式的「商业模式画布」
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/15411194658840b4782afb1)
+{% asset_img d32c561d14060e28233efdf5ecaae369.jpeg From: P1.PSTATP.COM %}
 
 
 
 比如，让你能全面分析企业发展问题的「麦肯锡7S」
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/1541119465887d6faa06f9e)
+{% asset_img 2dde2cd4ed08ef803e57d1b6c977f3f0.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -626,7 +626,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 因此，我们第一条线可以先把结构分为「内部因素、外部因素」这两部分。
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/1541119465995378adb3c3e)
+{% asset_img b650749aceed16603fea92a0aade5e19.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -643,7 +643,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 切割后，出现了一个二维四象限，彼此符合MECE原则。为了便于理解，我们对这4部分进行重新命名：
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/1541119466025459614d56a)
+{% asset_img 627914b3aaafc6979ab9c0ea8b614ab8.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -656,25 +656,25 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 比如，在「营销渠道」这个分类中，不同的用户类别适用于不同的渠道和营销方式，因此，可以用三分法，切成：新客户、准客户、老客户三类；再横向切成营销和渠道两部分；
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/15411194660208f4bd50486)
+{% asset_img 1735a9dacfac39e0ddd41c957cb4a0a7.jpeg From: P1.PSTATP.COM %}
 
 
 
 比如，在「销售团队」这个分类中，使用X-Y结构，设置业绩目标，施加外部压力；设置业务奖励，提供内在激励；
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/15411194660847dad5156a9)
+{% asset_img da60200d2060088b28d2b0aed94f39bb.jpeg From: P3.PSTATP.COM %}
 
 
 
 比如，在「市场需求」这个分类中，用两分法，切分为用户需求和市场热点，用于搜集信息，协助设计部门做出更受欢迎的产品或者活动；
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/1541119466081fbbf703067)
+{% asset_img eebd9c6e79c4b98a00b5b274ca20989c.jpeg From: P3.PSTATP.COM %}
 
 
 
 比如，在「产品设计/供应」这个分类中，用两分法，切分为产品设计和供应链管理，针对用户的需求和未来这3个月可能出现的销售高峰，调整产品设计，对供应链进行优化等…
 
-![思维混乱，是因为大脑没有结构](http://p3.pstatp.com/large/pgc-image/15411194660762d523e7276)
+{% asset_img d1421662f17bc24bc5e27f1d4fde5ff8.jpeg From: P3.PSTATP.COM %}
 
 
 
@@ -682,7 +682,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 除了看到前面金字塔结构中的所有和营销相关的内容，你还能看到之前未考虑到的公司内部视角和产品生产视角：
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/154111946613012f0813c4a)
+{% asset_img ce6a15a0573ef9059e2d702764bbd5eb.jpeg From: P1.PSTATP.COM %}
 
 
 
@@ -708,7 +708,7 @@ MECE是麦肯锡著名咨询师「巴巴拉·明托」在她的著作《金字�
 
 随后，又进入下一波优化循环，如此往复...
 
-![思维混乱，是因为大脑没有结构](http://p1.pstatp.com/large/pgc-image/154111946618470e513a45b)
+{% asset_img c7d4f5327a2ead1a9d32c60898d19866.jpeg From: P1.PSTATP.COM %}
 
 
 
