@@ -51,10 +51,9 @@ tag_icon: true
 
 reward_settings:
   enable: true
-  animation: false
 
 reward:
-  wechatpay: /images/wechatpay.png
+  wechatpay: /images/wechatpay.jpg
   alipay: /images/alipay.jpg
 
 related_posts:
@@ -113,10 +112,6 @@ math:
     mhchem: true
 
 pjax: true
-
-lazyload: true
-
-pangu: true
 
 comments:
   style: tabs
