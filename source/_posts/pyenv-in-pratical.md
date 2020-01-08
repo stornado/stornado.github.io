@@ -20,7 +20,7 @@ date: 2020-01-08 10:15:12
 
 或者
 
-`Python 3.7` 依赖 `OpenSSL 1.0.2` 或更高版本，手动安装OpenSSL或者直接安装3.6最新版本
+`Python 3.7` 依赖 `OpenSSL 1.0.2e` 或更高版本，手动安装OpenSSL或者直接安装3.6最新版本
 
 ```shell
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
@@ -31,17 +31,23 @@ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nf
 git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
 echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bash_profile
 
+sudo yum install openssl-devel zlib-devel python-devel -y
+
+pyenv install -v 3.6.10
+# 若下载失败则手动下载上传到cache目录再安装
 mkdir ~/.pyenv/cache
 cd ~/.pyenv/cache
 wget https://www.python.org/ftp/python/3.6.10/Python-3.6.10.tgz -P ~/.pyenv/cache
 mv ~/.pyenv/cache/Python-3.6.10.tgz ~/.pyenv/cache/Python-3.6.10.tar.gz
 cp ~/.pyenv/cache/Python-3.6.10.tar.gz /tmp
 
-sudo yum install openssl-devel zlib-devel python-devel -y
-
 pyenv install -v 3.6.10
 # 或
 CFLAGS=-I/usr/include/openssl LDFLAGS=-L/usr/lib64 pyenv install -v 3.6.10
+
+# CentOS7 下载
+# https://www.python.org/ftp/python/3.7.6/Python-3.7.6.tar.xz
+# https://www.python.org/ftp/python/3.6.10/Python-3.6.10.tar.xz
 ```
 
 <!-- more -->
