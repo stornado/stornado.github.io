@@ -44,6 +44,8 @@ pyenv install -v 3.6.10
 CFLAGS=-I/usr/include/openssl LDFLAGS=-L/usr/lib64 pyenv install -v 3.6.10
 ```
 
+<!-- more -->
+
 ### 安装cx_Oracle
 
 需要保证 `Python` 位数与 `Oracle intstantclient` 位数一致
