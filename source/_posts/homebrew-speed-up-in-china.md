@@ -25,6 +25,8 @@ brew update
 brew doctor
 ```
 
+<!-- more -->
+
 ### 或者使用阿里云镜像
 
 #### 使用bash
