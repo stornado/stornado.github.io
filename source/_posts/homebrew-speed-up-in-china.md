@@ -1,5 +1,5 @@
 ---
-title: homebrew speed up in china
+title: Homebrew 使用国内源
 date: 2020-01-10 10:08:33
 tags:
   - brew
