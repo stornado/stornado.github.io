@@ -208,3 +208,6 @@ fabric.properties
 .deploy_git
 db.json
 public
+
+!themes/next/source/lib/pace
+!themes/next/source/lib/pjax

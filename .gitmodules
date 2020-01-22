@@ -1,9 +1,9 @@
-[submodule "theme-next"]
-path="themes/next"
-url="https://github.com/theme-next/hexo-theme-next.git"
-[submodule "theme-next-pjax"]
-path="themes/next/source/lib/pjax"
-url="https://github.com/theme-next/theme-next-pjax.git"
-[submodule "themes-next-pace"]
-path="themes/next/source/lib/pace"
-url="https://github.com/theme-next/theme-next-pace.git"
+[submodule "themes/next"]
+	path = themes/next
+	url = https://github.com/theme-next/hexo-theme-next.git
+[submodule "themes/next/source/lib/pjax"]
+	path = themes/next/source/lib/pjax
+	url = https://github.com/theme-next/theme-next-pjax.git
+[submodule "themes/next/source/lib/pace"]
+	path = themes/next/source/lib/pace
+	url = https://github.com/theme-next/theme-next-pace.git
