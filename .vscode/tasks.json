@@ -60,7 +60,12 @@
             ],
             "dependsOrder": "sequence",
             "presentation": {
-                "reveal": "never",
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
             }
         }
     ]
