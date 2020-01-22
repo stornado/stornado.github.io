@@ -1,0 +1,18 @@
+{
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext",
+        "yaml"
+    ],
+    "cSpell.userWords": [
+        "redis",
+        "mysql",
+        "oracle",
+        "markdown",
+        "hexo"
+    ]
+}

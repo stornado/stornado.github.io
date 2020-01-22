@@ -208,5 +208,3 @@ fabric.properties
 .deploy_git
 db.json
 public
-
-.vscode
