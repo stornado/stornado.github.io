@@ -31,6 +31,37 @@
                 "build"
             ],
             "dependsOrder": "sequence"
+        },
+        {
+            "label": "submodule",
+            "type": "shell",
+            "command": "git submoduel update --recursive",
+            "presentation": {
+                "reveal": "never"
+            }
+        },
+        {
+            "label": "yarn",
+            "type": "shell",
+            "command": "yarn upgrade",
+            "presentation": {
+                "reveal": "never",
+            }
+        },
+        {
+            "label": "deploy",
+            "type": "shell",
+            "command": "hexo deploy",
+            "dependsOn": [
+                "submodule",
+                "yarn",
+                "clean",
+                "build"
+            ],
+            "dependsOrder": "sequence",
+            "presentation": {
+                "reveal": "never",
+            }
         }
     ]
 }
