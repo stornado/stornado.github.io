@@ -8,6 +8,11 @@
         "plaintext",
         "yaml"
     ],
+    "spellright.ignoreFiles": [
+        "**/.gitignore",
+        "**/.spellignore",
+        "**/yarn.lock"
+    ],
     "cSpell.userWords": [
         "redis",
         "mysql",
