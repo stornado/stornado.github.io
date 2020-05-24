@@ -8,7 +8,7 @@ favicon:
 
 footer:
   icon:
-    name: heart
+    name: fa fa-heart
     animated: true
 
 creative_commons:
@@ -20,10 +20,10 @@ creative_commons:
 scheme: Gemini
 
 menu:
-  home: / || home
-  tags: /tags/ || tags
-  categories: /categories/ || th
-  archives: /archives/ || archive
+  home: / || fa fa-home
+  tags: /tags/ || fa fa-tags
+  categories: /categories/ || fa fa-th
+  archives: /archives/ || fa fa-archive
 
 menu_settings:
   icons: true
@@ -132,8 +132,6 @@ gitalk:
   language: zh-CN
 
 baidu_analytics: e1d846feb2f251f98b0482d1f5fd6a4e
-
-growingio_analytics: # <project_id>
 
 cnzz_siteid: 1254452804
 
