@@ -37,9 +37,9 @@ avatar:
 site_state: true
 
 social:
-  GitHub: https://github.com/stornado || github
-  E-Mail: mailto:ryan@zxytech.com || envelope
-  Twitter: https://twitter.com/ryanstornado || twitter
+  GitHub: https://github.com/stornado || fab fa-github
+  E-Mail: mailto:ryan@zxytech.com || fa fa-envelope
+  Twitter: https://twitter.com/ryanstornado || fab fa-twitter
 
 social_icons:
   enable: true
