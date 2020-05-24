@@ -40,7 +40,6 @@ social:
   GitHub: https://github.com/stornado || github
   E-Mail: mailto:ryan@zxytech.com || envelope
   Twitter: https://twitter.com/ryanstornado || twitter
-  RSS: /atom.xml || rss
 
 social_icons:
   enable: true
@@ -155,51 +154,10 @@ motion:
 
 mermaid:
   enable: true
+  # Available themes: default | dark | forest | neutral
   theme: forest
+  version: "8.4.8" # default v7.1.2
 
 pace:
-  enable: false
+  enable: true
   theme: minimal
-
-# https://github.com/theme-next/hexo-filter-optimize
-filter_optimize:
-  enable: true
-  # remove the surrounding comments in each of the bundled files
-  remove_comments: false
-  css:
-    # minify all css files
-    minify: true
-    # bundle loaded css files into one
-    bundle: true
-    # use a script block to load css elements dynamically
-    delivery: true
-    # make specific css content inline into the html page
-    #   - only support the full path
-    #   - default is ['css/main.css']
-    inlines:
-    excludes:
-  js:
-    # minify all js files
-    minify: true
-    # bundle loaded js files into one
-    bundle: true
-    excludes:
-  # set the priority of this plugin,
-  # lower means it will be executed first, default of Hexo is 10
-  priority: 12
-
-# https://github.com/theme-next/hexo-theme-next-anchor
-anchor:
-  enable: true
-  color: '#0e83cd'
-  position: right # If left, anchors will always be visible.
-  margin: 7px 
-  text: '#'
-  icon:
-    # If true, the `text` option will be ignored.
-    enable: false 
-    # By default, NexT has built-in FontAwesome support.
-    # This option means `font-family: FontAwesome`, so DO Not change it.
-    # Also you can choose ForkAwesome, but that's another story.
-    font: FontAwesome
-    content: \f0c1 # CSS content for FontAwesome & ForkAwesome.
