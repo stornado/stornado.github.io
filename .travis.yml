@@ -7,10 +7,14 @@ branches:
   only:
     - develop # build develop branch only
 
+pandoc_version: 2.9.2.1
+ghc:
+  - "8.10.1"
+
 addons:
   apt:
     packages:
-      - pandoc@2
+      - pandoc
 
 script:
   - pandoc -v
