@@ -7,12 +7,11 @@ branches:
   only:
     - develop # build develop branch only
 
-pandoc_version: 2.9.2.1
-
-addons:
-  apt:
-    packages:
-      - pandoc
+# https://tlvince.com/pandoc-on-travisci
+before_install:
+  - curl -L https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb > pandoc.deb
+  - dpkg -x pandoc.deb .
+  - export PATH="$PWD/usr/bin:$PATH"
 
 script:
   - pandoc -v
