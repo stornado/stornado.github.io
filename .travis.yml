@@ -7,9 +7,10 @@ branches:
   only:
     - develop # build develop branch only
 
-pandoc_version: 2.9.2.1
+pandoc_version: "2.9.2.1"
 ghc:
   - "8.10.1"
+cabal: "3.2.0.0"
 
 addons:
   apt:
