@@ -9,11 +9,6 @@ branches:
 
 pandoc_version: 2.9.2.1
 
-addons:
-  apt:
-    packages:
-      - pandoc
-
 script:
   - pandoc -v
   - pandoc --list-extensions=markdown
