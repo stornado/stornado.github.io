@@ -1462,14 +1462,6 @@ hexo-deployer-git@^2.0.0:
     moment "^2.18.0"
     swig-templates "^2.0.2"
 
-hexo-filter-emoji@^2.0.2:
-  version "2.2.1"
-  resolved "https://registry.npm.taobao.org/hexo-filter-emoji/download/hexo-filter-emoji-2.2.1.tgz#19d46307293744177a2e125492e6c146bd2fa794"
-  integrity sha1-GdRjByk3RBd6LhJUkubBRr0vp5Q=
-  dependencies:
-    lodash "4.17.15"
-    random-ua "0.0.6"
-
 hexo-filter-flowchart@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npm.taobao.org/hexo-filter-flowchart/download/hexo-filter-flowchart-1.0.4.tgz#5b213126a02771df260ed0d5c6e04613486f9ccf"
@@ -2107,15 +2099,15 @@ lazy-cache@^1.0.3:
   resolved "https://registry.npm.taobao.org/lazy-cache/download/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
   integrity sha1-odePw6UEdMuAhF07O24dpJpEbo4=
 
-lodash@4.17.15, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14:
-  version "4.17.15"
-  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha1-tEf2ZwoEVbv+7dETku/zMOoJdUg=
-
 lodash@^2.4.1:
   version "2.4.2"
   resolved "https://registry.npm.taobao.org/lodash/download/lodash-2.4.2.tgz#fadd834b9683073da179b3eae6d9c0d15053f73e"
   integrity sha1-+t2DS5aDBz2hebPq5tnA0VBT9z4=
+
+lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14:
+  version "4.17.15"
+  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha1-tEf2ZwoEVbv+7dETku/zMOoJdUg=
 
 log-util@^1.2.0:
   version "1.2.0"
@@ -2625,11 +2617,6 @@ qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.npm.taobao.org/qs/download/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha1-yzroBuh0BERYTvFUzo7pjUA/PjY=
-
-random-ua@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.npm.taobao.org/random-ua/download/random-ua-0.0.6.tgz#eb70901b72a4fe0b8d3ab752a6b25122e40c0ad7"
-  integrity sha1-63CQG3Kk/guNOrdSprJRIuQMCtc=
 
 randomatic@^3.0.0:
   version "3.1.1"
