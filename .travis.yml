@@ -11,6 +11,7 @@ pandoc_version: "2.9.2.1"
 ghc:
   - "8.10.1"
 cabal: "3.2.0.0"
+pandoc:  "2.9.2.1"
 
 addons:
   apt:
