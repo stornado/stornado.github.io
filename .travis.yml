@@ -10,9 +10,7 @@ branches:
 addons:
   apt:
     packages:
-      - cabal-install
-      - ghc
-      - pandoc
+      - pandoc@2
 
 script:
   - pandoc -v
