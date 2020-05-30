@@ -10,14 +10,16 @@ script:
   - npm install -g yarn
   - yarn
   - yarn upgrade
-  - git clone --depth=1 https://github.com/theme-next/hexo-theme-next.git themes/next
   - git clone --depth=1 https://github.com/theme-next/theme-next-pjax.git themes/next/source/lib/pjax
   - git clone --depth=1 https://github.com/theme-next/theme-next-reading-progress.git themes/next/source/lib/reading_progress
   - git clone --depth=1 https://github.com/theme-next/theme-next-pace.git themes/next/source/lib/pace
   - |
-    echo "" >> themes/next/layout/_partials/footer.swig
-    cat source/_data/mermaid.footer.swig >> themes/next/layout/_partials/footer.swig
-    echo "" >> themes/next/layout/_partials/footer.swig
+    echo "" >> themes/next/layout/_scripts/index.swig
+    echo "{%- if theme.mermaid %}
+      {% include 'mermaid.swig' %}
+    {%- endif %}" >> themes/next/layout/_scripts/index.swig
+    echo "" >> themes/next/layout/_scripts/index.swig
+    cat source/_data/mermaid.swig >> themes/next/layout/_scripts/mermaid.swig
   - hexo clean & hexo generate # generate static files
 deploy:
   provider: pages
