@@ -10,8 +10,9 @@ branches:
 addons:
   apt:
     packages:
+      - cabal-install
+      - ghc
       - pandoc
-      - smart
 
 script:
   - yarn
