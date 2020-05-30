@@ -135,11 +135,6 @@ baidu_analytics: e1d846feb2f251f98b0482d1f5fd6a4e
 
 cnzz_siteid: 1254452804
 
-local_search:
-  enable: true
-  trigger: auto
-  top_n_per_article: 3
-
 motion:
   enable: true
   async: true
@@ -159,3 +154,26 @@ mermaid:
 pace:
   enable: true
   theme: minimal
+
+# Search
+local_search:
+  enable: true
+  trigger: auto
+  top_n_per_article: 3
+
+# https://github.com/theme-next/hexo-generator-searchdb
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+  content: true
+
+# Post wordcount display settings
+# Dependencies: https://github.com/theme-next/hexo-symbols-count-time
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
+  exclude_codeblock: false

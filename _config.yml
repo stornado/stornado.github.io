@@ -83,24 +83,6 @@ deploy:
   repository: git@github.com:stornado/stornado.github.io.git
   branch: master
 
-# Search
-# https://github.com/theme-next/hexo-generator-searchdb
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000
-  content: true
-
-# Post wordcount display settings
-# Dependencies: https://github.com/theme-next/hexo-symbols-count-time
-symbols_count_time:
-  symbols: true
-  time: true
-  total_symbols: true
-  total_time: true
-  exclude_codeblock: false
-
 # https://github.com/bubkoo/hexo-filter-flowchart
 flowchart:
   # raphael:   # optional, the source url of raphael.js
@@ -115,5 +97,5 @@ sequence:
   # sequence:    # optional, the source url of sequence-diagram.js
   # css: # optional, the url for css, such as hand drawn theme
   options:
-    theme:
+    theme: simple
     css_class:
