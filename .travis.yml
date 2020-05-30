@@ -14,8 +14,6 @@ before_install:
   - export PATH="$PWD/usr/bin:$PATH"
 
 script:
-  - pandoc -v
-  - pandoc --list-extensions=markdown
   - yarn
   - yarn upgrade
   - git clone --depth=1 https://github.com/theme-next/theme-next-pjax.git themes/next/source/lib/pjax
@@ -28,7 +26,8 @@ script:
     {%- endif %}" >> themes/next/layout/_scripts/index.swig
     echo "" >> themes/next/layout/_scripts/index.swig
     cat source/_data/mermaid.swig >> themes/next/layout/_scripts/mermaid.swig
-  - hexo clean & hexo generate # generate static files
+  - hexo clean
+  - hexo generate # generate static files
 deploy:
   provider: pages
   skip-cleanup: true
