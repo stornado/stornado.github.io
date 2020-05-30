@@ -9,6 +9,7 @@
     "cryptiles": "^4.1.2",
     "hawk": "^7.0.10",
     "hexo": "^4.2.0",
+    "hexo-cli": "^3.1.0",
     "hexo-deployer-git": "^2.0.0",
     "hexo-filter-emoji": "^2.0.2",
     "hexo-filter-flowchart": "^1.0.4",
