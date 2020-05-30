@@ -8,8 +8,10 @@ branches:
     - develop # build develop branch only
 
 addons:
-  apt_packages:
-    - pandoc
+  apt:
+    packages:
+      - pandoc
+      - smart
 
 script:
   - yarn
