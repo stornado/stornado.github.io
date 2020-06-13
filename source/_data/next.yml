@@ -149,7 +149,6 @@ mermaid:
   enable: true
   # Available themes: default | dark | forest | neutral
   theme: forest
-  version: "8.4.8" # default v7.1.2
 
 pace:
   enable: true
@@ -179,3 +178,8 @@ symbols_count_time:
   exclude_codeblock: false
 
 darkmode: true
+
+
+custom_file_path:
+  style: source/_data/styles.styl
+  

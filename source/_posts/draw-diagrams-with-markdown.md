@@ -49,7 +49,7 @@ cond(yes)->e
 cond(no)->op
 ```
 
-# Mermaid
+# Mermaid Diagrams
 
 Typora also has integration with [mermaid](https://mermaid-js.github.io/mermaid/#/), which supports sequence diagrams, flowcharts, Gantt charts, class and state diagrams, and pie charts.
 
