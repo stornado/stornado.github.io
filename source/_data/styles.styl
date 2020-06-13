@@ -1,3 +1,13 @@
-.mermaid {
+if (hexo-config('mermaid.enable')) {
+  .mermaid {
     background: var(--body-bg-color);
+  }
+}
+
+div[id^="flowchart"] {
+  background: var(--body-bg-color);
+}
+
+div[id^="sequence"] {
+  background: var(--body-bg-color);
 }
