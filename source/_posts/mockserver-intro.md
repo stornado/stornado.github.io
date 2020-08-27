@@ -120,6 +120,119 @@ docker restart mockserver
 
 
 
+
+### 配置开机启动
+
+#### 1. 添加文件 `/etc/rc.d/init.d/mockserver`
+
+```bash
+#!/bin/bash
+#
+# mockserver
+# chkconfig: 2345 80 90
+# description: start mockserver docker
+# config: /home/mockserver/config/mockserver.properties
+#
+# Copyright 2002 Red Hat, Inc.
+#
+# Based in part on a shell script by
+# Andreas Dilger <adilger@turbolinux.com>  Sep 26, 2001
+
+PATH=/sbin:/usr/sbin:$PATH
+RETVAL=0
+
+
+usage ()
+{
+	echo $"Usage: $0 {start|stop|status|restart}" 1>&2
+	RETVAL=2
+}
+
+start ()
+{
+	docker start mockserver
+}
+
+stop ()
+{
+	docker stop mockserver
+}
+
+status ()
+{
+	docker ps
+}
+
+
+restart ()
+{
+	docker restart mockserver
+}
+
+
+
+case "$1" in
+    stop) stop ;;
+    status) status ;;
+    start|restart|reload|force-reload) restart ;;
+    *) usage ;;
+esac
+
+exit $RETVAL
+```
+
+#### 2. 添加到开机启动
+
+```shell
+chmod +x /etc/rc.d/init.d/mockserver
+chkconfig --add mockserver
+```
+
+### 添加防火墙规则
+
+#### 1. 添加 `/usr/lib/firewalld/services/mockserver.xml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+    <short>MockServer</short>
+    <description>Easy mocking of any system you integrate with via HTTP or HTTPS</description>
+    <port protocol="tcp" port="1080"/>
+    <port protocol="udp" port="1080"/>
+</service>
+```
+
+#### 2. 永久添加规则
+
+`firewall-cmd --permanent --add-service=mockserver`
+
+
+
+
+
+## 使用示例
+
+### 使用REST创建
+
+```http
+PUT http://172.20.66.36:1080/mockserver/expectation HTTP/1.1
+Content-Type: application/json
+
+{
+  "httpRequest" : {
+    "path" : "/authentication/verify-id",
+  },
+  "httpResponse" : {
+    "body" : {
+      "code": "0000",
+      "message": "操作成功"
+    }
+  }
+}
+```
+
+
+
 ### Dockerfile
 
 ```shell
