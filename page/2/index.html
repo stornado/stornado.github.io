@@ -2,7 +2,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -22,7 +22,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"stornado.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"save":"auto","color":"#222"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"stornado.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
@@ -129,6 +129,11 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+
+  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
@@ -137,11 +142,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
 
           <br>
@@ -322,7 +322,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -364,7 +364,7 @@
 
       
           <h1 id="introduction-to-redis">Introduction to Redis</h1>
-<p>Redis is an open source (BSD licensed), in-memory <strong>data structure store</strong>, used as a database, cache and message broker. It supports data structures such as <a href="https://redis.io/topics/data-types-intro#strings" target="_blank" rel="noopener">strings</a>, <a href="https://redis.io/topics/data-types-intro#hashes" target="_blank" rel="noopener">hashes</a>, <a href="https://redis.io/topics/data-types-intro#lists" target="_blank" rel="noopener">lists</a>, <a href="https://redis.io/topics/data-types-intro#sets" target="_blank" rel="noopener">sets</a>, <a href="https://redis.io/topics/data-types-intro#sorted-sets" target="_blank" rel="noopener">sorted sets</a> with range queries, <a href="https://redis.io/topics/data-types-intro#bitmaps" target="_blank" rel="noopener">bitmaps</a>, <a href="https://redis.io/topics/data-types-intro#hyperloglogs" target="_blank" rel="noopener">hyperloglogs</a>, <a href="https://redis.io/commands/geoadd" target="_blank" rel="noopener">geospatial indexes</a> with radius queries and <a href="https://redis.io/topics/streams-intro" target="_blank" rel="noopener">streams</a>. Redis has built-in <a href="https://redis.io/topics/replication" target="_blank" rel="noopener">replication</a>, <a href="https://redis.io/commands/eval" target="_blank" rel="noopener">Lua scripting</a>, <a href="https://redis.io/topics/lru-cache" target="_blank" rel="noopener">LRU eviction</a>, <a href="https://redis.io/topics/transactions" target="_blank" rel="noopener">transactions</a> and different levels of <a href="https://redis.io/topics/persistence" target="_blank" rel="noopener">on-disk persistence</a>, and provides high availability via <a href="https://redis.io/topics/sentinel" target="_blank" rel="noopener">Redis Sentinel</a> and automatic partitioning with <a href="https://redis.io/topics/cluster-tutorial" target="_blank" rel="noopener">Redis Cluster</a>.</p>
+<p>Redis is an open source (BSD licensed), in-memory <strong>data structure store</strong>, used as a database, cache and message broker. It supports data structures such as <a target="_blank" rel="noopener" href="https://redis.io/topics/data-types-intro#strings">strings</a>, <a target="_blank" rel="noopener" href="https://redis.io/topics/data-types-intro#hashes">hashes</a>, <a target="_blank" rel="noopener" href="https://redis.io/topics/data-types-intro#lists">lists</a>, <a target="_blank" rel="noopener" href="https://redis.io/topics/data-types-intro#sets">sets</a>, <a target="_blank" rel="noopener" href="https://redis.io/topics/data-types-intro#sorted-sets">sorted sets</a> with range queries, <a target="_blank" rel="noopener" href="https://redis.io/topics/data-types-intro#bitmaps">bitmaps</a>, <a target="_blank" rel="noopener" href="https://redis.io/topics/data-types-intro#hyperloglogs">hyperloglogs</a>, <a target="_blank" rel="noopener" href="https://redis.io/commands/geoadd">geospatial indexes</a> with radius queries and <a target="_blank" rel="noopener" href="https://redis.io/topics/streams-intro">streams</a>. Redis has built-in <a target="_blank" rel="noopener" href="https://redis.io/topics/replication">replication</a>, <a target="_blank" rel="noopener" href="https://redis.io/commands/eval">Lua scripting</a>, <a target="_blank" rel="noopener" href="https://redis.io/topics/lru-cache">LRU eviction</a>, <a target="_blank" rel="noopener" href="https://redis.io/topics/transactions">transactions</a> and different levels of <a target="_blank" rel="noopener" href="https://redis.io/topics/persistence">on-disk persistence</a>, and provides high availability via <a target="_blank" rel="noopener" href="https://redis.io/topics/sentinel">Redis Sentinel</a> and automatic partitioning with <a target="_blank" rel="noopener" href="https://redis.io/topics/cluster-tutorial">Redis Cluster</a>.</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/01/05/introduction-to-redis/#more" rel="contents">
@@ -424,7 +424,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
 
           <br>
@@ -516,7 +516,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -638,7 +638,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -744,7 +744,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -850,7 +850,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1022,7 +1022,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1040,14 +1040,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>23k</span>
+              <span>24k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 ≈</span>
-              <span>21 分钟</span>
+              <span>22 分钟</span>
             </span>
 
         </div>
@@ -1143,7 +1143,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1184,7 +1184,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Monkey 是一个在<a href="https://developer.android.com/tools/help/emulator.html" target="_blank" rel="noopener">模拟器</a>或设备上运行的程序，可生成伪随机用户事件（例如点击、轻触或手势）流以及很多系统级事件。您可以使用 Monkey 以随机且可重复的方式对正在开发的应用进行压力测试。</p>
+          <p>Monkey 是一个在<a target="_blank" rel="noopener" href="https://developer.android.com/tools/help/emulator.html">模拟器</a>或设备上运行的程序，可生成伪随机用户事件（例如点击、轻触或手势）流以及很多系统级事件。您可以使用 Monkey 以随机且可重复的方式对正在开发的应用进行压力测试。</p>
 <h1 id="概览">概览</h1>
 <p>Monkey 是一个命令行工具，可以在任何模拟器实例或设备上运行。它会将伪随机用户事件流发送到系统中，从而在您正在开发的应用软件上进行压力测试。</p>
 <p>Monkey 包含许多选项，主要分为以下四个类别：</p>
@@ -1266,7 +1266,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1477,7 +1477,7 @@
 <div class="copyright">
   
   © 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1486,12 +1486,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">252k</span>
+    <span title="站点总字数">254k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:49</span>
+    <span title="站点阅读时长">3:51</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

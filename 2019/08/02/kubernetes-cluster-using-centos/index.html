@@ -2,7 +2,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -22,7 +22,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"stornado.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"save":"auto","color":"#222"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"stornado.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="准备工作  一台或多台运行着下列系统的机器:  CentOS 7 RHEL 7  每台机器 2 GB 或更多的 RAM (如果少于这个数字将会影响您应用的运行内存) 2 CPU 核心或更多 集群中的所有机器的网络彼此均能相互连接(公网和内网都可以) 节点之中不可以有重复的主机名，MAC 地址，product_uuid。更多详细信息请参见这里 。 开启主机上的一些特定端口. 更多详细信息请参见这里。">
@@ -33,7 +33,7 @@
 <meta property="og:description" content="准备工作  一台或多台运行着下列系统的机器:  CentOS 7 RHEL 7  每台机器 2 GB 或更多的 RAM (如果少于这个数字将会影响您应用的运行内存) 2 CPU 核心或更多 集群中的所有机器的网络彼此均能相互连接(公网和内网都可以) 节点之中不可以有重复的主机名，MAC 地址，product_uuid。更多详细信息请参见这里 。 开启主机上的一些特定端口. 更多详细信息请参见这里。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-08-02T12:33:54.000Z">
-<meta property="article:modified_time" content="2020-12-21T11:08:05.268Z">
+<meta property="article:modified_time" content="2021-01-29T05:10:03.604Z">
 <meta property="article:author" content="仲夏叶">
 <meta property="article:tag" content="kubernetes">
 <meta property="article:tag" content="centos">
@@ -136,6 +136,11 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+
+  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
@@ -144,11 +149,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 19:08:05" itemprop="dateModified" datetime="2020-12-21T19:08:05+08:00">2020-12-21</time>
+                <time title="修改时间：2021-01-29 13:10:03" itemprop="dateModified" datetime="2021-01-29T13:10:03+08:00">2021-01-29</time>
               </span>
 
           <br>
@@ -272,8 +272,8 @@
 <li>每台机器 2 GB 或更多的 RAM (如果少于这个数字将会影响您应用的运行内存)</li>
 <li>2 CPU 核心或更多</li>
 <li>集群中的所有机器的网络彼此均能相互连接(公网和内网都可以)</li>
-<li>节点之中不可以有重复的主机名，MAC 地址，product_uuid。更多详细信息请参见<a href="https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/#verify-the-mac-address-and-product-uuid-are-unique-for-every-node" target="_blank" rel="noopener">这里</a> 。</li>
-<li>开启主机上的一些特定端口. 更多详细信息请参见<a href="https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/#check-required-ports" target="_blank" rel="noopener">这里</a>。</li>
+<li>节点之中不可以有重复的主机名，MAC 地址，product_uuid。更多详细信息请参见<a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/#verify-the-mac-address-and-product-uuid-are-unique-for-every-node">这里</a> 。</li>
+<li>开启主机上的一些特定端口. 更多详细信息请参见<a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/#check-required-ports">这里</a>。</li>
 <li>禁用 Swap 交换分区。为了保证 kubelet 正确运行，您 <strong>必须</strong> 禁用交换分区。</li>
 </ul>
 <a id="more"></a>
@@ -282,7 +282,7 @@
 <li>您可以使用下列命令获取网络接口的 MAC 地址：<code>ip link</code> 或是 <code>ifconfig -a</code></li>
 <li>下列命令可以用来获取 product_uuid <code>sudo cat /sys/class/dmi/id/product_uuid</code></li>
 </ul>
-<p>一般来讲，硬件设备会拥有独一无二的地址，但是有些虚拟机可能会雷同。Kubernetes 使用这些值来唯一确定集群中的节点。如果这些值在集群中不唯一，可能会导致安装<a href="https://github.com/kubernetes/kubeadm/issues/31" target="_blank" rel="noopener">失败</a>。</p>
+<p>一般来讲，硬件设备会拥有独一无二的地址，但是有些虚拟机可能会雷同。Kubernetes 使用这些值来唯一确定集群中的节点。如果这些值在集群中不唯一，可能会导致安装<a target="_blank" rel="noopener" href="https://github.com/kubernetes/kubeadm/issues/31">失败</a>。</p>
 <h3 id="检查网络适配器">检查网络适配器</h3>
 <p>如果您有一个以上的网络适配器，同时您的 Kubernetes 组件通过默认路由不可达，我们建议您预先添加 IP 路由规则，这样 Kubernetes 集群就可以通过对应的适配器完成连接。</p>
 <h3 id="检查所需端口">检查所需端口</h3>
@@ -363,7 +363,7 @@
 </tr>
 </tbody>
 </table>
-<p><code>**</code> <a href="https://kubernetes.io/docs/concepts/services-networking/service/" target="_blank" rel="noopener">NodePort 服务</a> 的默认端口范围。</p>
+<p><code>**</code> <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/services-networking/service/">NodePort 服务</a> 的默认端口范围。</p>
 <p>任何使用 <code>*</code> 标记的端口号都有可能被覆盖，所以您需要保证您的自定义端口的状态是开放的。</p>
 <p>虽然主节点已经包含了 etcd 的端口，您也可以使用自定义的外部 etcd 集群，或是指定自定义端口。 您使用的 pod 网络插件 (见下) 也可能需要某些特定端口开启。由于各个 pod 网络插件都有所不同，请参阅他们各自文档中对端口的要求。</p>
 <h3 id="安装-kubeadm-kubelet-和-kubectl">安装 kubeadm, kubelet 和 kubectl</h3>
@@ -374,10 +374,10 @@
 <li><code>kubectl</code>: 用来与集群通信的命令行工具。</li>
 </ul>
 <p>kubeadm <strong>不能</strong> 帮您安装或管理 <code>kubelet</code> 或 <code>kubectl</code> ，所以您得保证他们满足通过 kubeadm 安装的 Kubernetes 控制层对版本的要求。如果版本没有满足要求，就有可能导致一些难以想到的错误或问题。然而控制层与 kubelet 间的 <em>小版本号</em> 不一致无伤大雅，不过请记住 kubelet 的版本不可以超过 API server 的版本。例如 1.8.0 的 API server 可以适配 1.7.0 的 kubelet，反之就不行了。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span><br><span class="line">exclude=kube*</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 SELinux 设置为 permissive 模式(将其禁用)</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">'s/^SELINUX=enforcing$/SELINUX=permissive/'</span> /etc/selinux/config</span><br><span class="line"></span><br><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> kubelet &amp;&amp; systemctl start kubelet</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF &gt; /etc/yum.repos.d/kubernetes.repo</span></span><br><span class="line"><span class="string">[kubernetes]</span></span><br><span class="line"><span class="string">name=Kubernetes</span></span><br><span class="line"><span class="string">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">repo_gpgcheck=1</span></span><br><span class="line"><span class="string">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span></span><br><span class="line"><span class="string">exclude=kube*</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 SELinux 设置为 permissive 模式(将其禁用)</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">'s/^SELINUX=enforcing$/SELINUX=permissive/'</span> /etc/selinux/config</span><br><span class="line"></span><br><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> kubelet &amp;&amp; systemctl start kubelet</span><br></pre></td></tr></tbody></table></figure>
 <p><strong>请注意：</strong></p>
 <p>- 通过命令 <code>setenforce 0</code> 和 <code>sed ...</code> 可以将 SELinux 设置为 permissive 模式(将其禁用)。 只有执行这一操作之后，容器才能访问宿主的文件系统，进而能够正常使用 Pod 网络。您必须这么做，直到 kubelet 做出升级支持 SELinux 为止。 - 一些 RHEL/CentOS 7 的用户曾经遇到过：由于 iptables 被绕过导致网络请求被错误的路由。您得保证 在您的 <code>sysctl</code> 配置中 <code>net.bridge.bridge-nf-call-iptables</code> 被设为1。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF &gt;  /etc/sysctl.d/k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">EOF</span><br><span class="line">sysctl --system</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF &gt;  /etc/sysctl.d/k8s.conf</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">sysctl --system</span><br></pre></td></tr></tbody></table></figure>
 <p>kubelet 现在每隔几秒就会重启，因为它陷入了一个等待 kubeadm 指令的死循环。</p>
 <h3 id="在-master-节点上配置-kubelet-所需的-cgroup-驱动">在 Master 节点上配置 kubelet 所需的 cgroup 驱动</h3>
 <p>使用 Docker 时，kubeadm 会自动为其检测 cgroup 驱动在运行时对 <code>/var/lib/kubelet/kubeadm-flags.env</code> 文件进行配置。 如果您使用了不同的 CRI， 您得把 <code>/etc/default/kubelet</code> 文件中的 <code>cgroup-driver</code> 位置改为对应的值，像这样：</p>
@@ -494,7 +494,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确保每个节点上-mac-地址和-product_uuid-的唯一性"><span class="nav-number">1.1.</span> <span class="nav-text">确保每个节点上 MAC 地址和 product_uuid 的唯一性。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查网络适配器"><span class="nav-number">1.2.</span> <span class="nav-text">检查网络适配器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查所需端口"><span class="nav-number">1.3.</span> <span class="nav-text">检查所需端口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#master-节点"><span class="nav-number">1.3.1.</span> <span class="nav-text">Master 节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#worker-节点"><span class="nav-number">1.3.2.</span> <span class="nav-text">Worker 节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-kubeadm-kubelet-和-kubectl"><span class="nav-number">1.4.</span> <span class="nav-text">安装 kubeadm, kubelet 和 kubectl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-master-节点上配置-kubelet-所需的-cgroup-驱动"><span class="nav-number">1.5.</span> <span class="nav-text">在 Master 节点上配置 kubelet 所需的 cgroup 驱动</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-kubeadm-创建一个单主集群"><span class="nav-number"></span> <span class="nav-text">使用 kubeadm 创建一个单主集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">0.1.</span> <span class="nav-text"></span></a></li></ol></li></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E4%BF%9D%E6%AF%8F%E4%B8%AA%E8%8A%82%E7%82%B9%E4%B8%8A-mac-%E5%9C%B0%E5%9D%80%E5%92%8C-product_uuid-%E7%9A%84%E5%94%AF%E4%B8%80%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">确保每个节点上 MAC 地址和 product_uuid 的唯一性。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%BD%91%E7%BB%9C%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">检查网络适配器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%89%80%E9%9C%80%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.3.</span> <span class="nav-text">检查所需端口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#master-%E8%8A%82%E7%82%B9"><span class="nav-number">1.3.1.</span> <span class="nav-text">Master 节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#worker-%E8%8A%82%E7%82%B9"><span class="nav-number">1.3.2.</span> <span class="nav-text">Worker 节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-kubeadm-kubelet-%E5%92%8C-kubectl"><span class="nav-number">1.4.</span> <span class="nav-text">安装 kubeadm, kubelet 和 kubectl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-master-%E8%8A%82%E7%82%B9%E4%B8%8A%E9%85%8D%E7%BD%AE-kubelet-%E6%89%80%E9%9C%80%E7%9A%84-cgroup-%E9%A9%B1%E5%8A%A8"><span class="nav-number">1.5.</span> <span class="nav-text">在 Master 节点上配置 kubelet 所需的 cgroup 驱动</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-kubeadm-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%95%E4%B8%BB%E9%9B%86%E7%BE%A4"><span class="nav-number"></span> <span class="nav-text">使用 kubeadm 创建一个单主集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">0.1.</span> <span class="nav-text"></span></a></li></ol></li></div>
       </div>
       <!--/noindex-->
 
@@ -567,7 +567,7 @@
 <div class="copyright">
   
   © 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -576,12 +576,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">252k</span>
+    <span title="站点总字数">254k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:49</span>
+    <span title="站点阅读时长">3:51</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
