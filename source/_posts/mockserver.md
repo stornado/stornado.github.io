@@ -32,6 +32,8 @@ For each request received the following steps happen:
 
 An **expectation** defines the **action** that is taken, for example, a response could be returned.
 
+<!-- more -->
+
 MockServer supports the follow **actions**:
 
 - return a "mock" [response](https://www.mock-server.com/mock_server/creating_expectations.html#mock_response)  when a request matches an  expectation
