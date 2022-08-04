@@ -1,0 +1,845 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msapplication-config" content="/images/mstile-150x150.png">
+  <meta name="google-site-verification" content="Vb0EkkfGHD4yjSK3hHo9zSszfnkbr8wPpPDCVVtvxDg">
+  <meta name="msvalidate.01" content="BB5484EDD5B0CB57C647B2184772CBDC">
+  <meta name="baidu-site-verification" content="aYgTqx38cK">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"stornado.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="标准号：GB/T 15532-2008 计算机软件测试规范 关联标准  GB/T 8566 信息技术 软件生存周期过程 GB/T 9386 计算机软件测试文档编制规范 GB/T 11457 信息技术 软件工程术语 GB/T 16260.1 软件工程 产品质量 第一部分：质量模型 GB/T 18492 信息技术 系统及软件完整性级别 GB/T 20158 信息技术 软件生存周期过程 配置管理  测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机软件测试规范">
+<meta property="og:url" content="https://stornado.github.io/2019/12/03/specification-of-computer-software-testing/index.html">
+<meta property="og:site_name" content="仲夏叶 | Stornado">
+<meta property="og:description" content="标准号：GB/T 15532-2008 计算机软件测试规范 关联标准  GB/T 8566 信息技术 软件生存周期过程 GB/T 9386 计算机软件测试文档编制规范 GB/T 11457 信息技术 软件工程术语 GB/T 16260.1 软件工程 产品质量 第一部分：质量模型 GB/T 18492 信息技术 系统及软件完整性级别 GB/T 20158 信息技术 软件生存周期过程 配置管理  测试">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-03T14:40:33.000Z">
+<meta property="article:modified_time" content="2022-08-04T06:23:25.686Z">
+<meta property="article:author" content="仲夏叶">
+<meta property="article:tag" content="testing">
+<meta property="article:tag" content="specification">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://stornado.github.io/2019/12/03/specification-of-computer-software-testing/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>计算机软件测试规范 | 仲夏叶 | Stornado</title>
+  
+
+
+  <script data-pjax="">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e1d846feb2f251f98b0482d1f5fd6a4e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">仲夏叶 | Stornado</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">生命就是用求知的欲望燃烧自己</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/stornado" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stornado.github.io/2019/12/03/specification-of-computer-software-testing/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="仲夏叶">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仲夏叶 | Stornado">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机软件测试规范<a href="https://github.com/stornado/stornado.github.io/tree/develop/source/_posts/specification-of-computer-software-testing.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-03 22:40:33" itemprop="dateCreated datePublished" datetime="2019-12-03T22:40:33+08:00">2019-12-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-04 14:23:25" itemprop="dateModified" datetime="2022-08-04T14:23:25+08:00">2022-08-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/tutorial/" itemprop="url" rel="index"><span itemprop="name">tutorial</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/tutorial/testing/" itemprop="url" rel="index"><span itemprop="name">testing</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/specification/" itemprop="url" rel="index"><span itemprop="name">specification</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 ≈</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>标准号：GB/T 15532-2008 计算机软件测试规范</p>
+<p>关联标准</p>
+<blockquote>
+<p>GB/T 8566 信息技术 软件生存周期过程</p>
+<p>GB/T 9386 计算机软件测试文档编制规范</p>
+<p>GB/T 11457 信息技术 软件工程术语</p>
+<p>GB/T 16260.1 软件工程 产品质量 第一部分：质量模型</p>
+<p>GB/T 18492 信息技术 系统及软件完整性级别</p>
+<p>GB/T 20158 信息技术 软件生存周期过程 配置管理</p>
+</blockquote>
+<h1 id="测试目的">测试目的</h1>
+<p>计算机软件的测试目的是：</p>
+<ol type="1">
+<li>验证软件是否满足软件开发合同或项目开发计划、系统/子系统设计文档、软件需求规格说明、软件设计说明和软件产品说明等规定的软件质量要求；</li>
+<li>通过测试，发现软件缺陷；</li>
+<li>为软件产品的质量测量和评价提供依据。</li>
+</ol>
+<h1 id="测试类别">测试类别</h1>
+<p>根据 GB/T 8566 的要求，本标准对如下测试类别做详细描述：</p>
+<ol type="1">
+<li>单元测试；</li>
+<li>集成测试；</li>
+<li>配置项测试（也称软件合格性测试或确认测试）；</li>
+<li>系统测试；</li>
+<li>验收测试。</li>
+</ol>
+<p>可根据软件的模型、类型、完整性级别选择执行测试类型。</p>
+<p>回归测试可出现在上述每个测试类别中，并贯穿于整个软件生存周期，故单独分类进行描述。</p>
+<h1 id="测试过程">测试过程</h1>
+<h2 id="概述">概述</h2>
+<p>软件测试过程一般包括四项活动，按顺序分别是：测试侧或、测试设计、测试执行、测试总结。</p>
+<h2 id="测试策划">测试策划</h2>
+<p>测试策划主要是进行测试需求分析。即确定需要测试的内容或质量特性；确定测试的充分性要求；踢出测试的基本方法；确定测试的资源和技术需求；进行风险分析与评估；制定测试计划（含资源计划和进度计划）。有关测试计划的内容和要求见
+GB/T 9386 。</p>
+<h2 id="测试设计">测试设计</h2>
+<p>依据测试需求，分析并选用已有的测试用例或设计新的测试用例；获取并验证测试数据；根据测试资源、风险等约束条件，确定测试用例执行顺序；获取测试资源，开发测试软件；建立并校准测试环境；进行测试就绪评审，主要评审测试计划的合理性和测试用例的正确性、有效性和覆盖充分性，评审测试组织、环境和设备工具是否齐备并符合要求。在进入下一阶段工作之前，应通过测试就绪评审。</p>
+<span id="more"></span>
+<h2 id="测试执行">测试执行</h2>
+<p>执行测试用例，获取测试结果；分析并制定测试结果。同时根据不同的判定结果采取相应的措施；对测试过程的正常或异常终止情况进行核对，并分局核对结果，对未达到测试终止条件的测试用例，决定是停止测试，还是需要修改或补充测试用例集，并进一步测试。</p>
+<h2 id="测试总结">测试总结</h2>
+<p>整理和分析测试数据，评价测试效果和被测软件项，描述测试状态。如，实际测试与测试计划和测试说明的差异、测试充分性分析、未能解决的测试时间等；描述北侧软件项的状态，如，被测软件与需求的差异，发现的软件差错等；最后，完成软件测试报告，并通过测试评审。</p>
+<h1 id="测试方法">测试方法</h1>
+<h2 id="静态测试方法">静态测试方法</h2>
+<p>静态测试方法包括检查单和静态分析方法，对文档的静态测试方法主要以检查单的形式进行，而对代码的静态测试方法一般采用代码审查、代码走查和静态分析，静态分析一般包括控制流分析、数据流分析、接口分析和表达式分析。</p>
+<p>应对软件代码进行审查、走查或静态分析；对于规模较小、安全性要求很高的代码也可进行形式化证明。</p>
+<h2 id="动态测试方法">动态测试方法</h2>
+<p>动态测试方法一般采用白盒测试方法和黑盒测试方法。黑盒测试方法一般包裹功能分解、边界值分析、判定表、因果图、状态图、随机测试、猜错法和正交实验法等；白盒测试方法一般包括控制流测试（语句覆盖测试、分支覆盖测试、条件覆盖测试、条件组合覆盖测试、路径覆盖测试）、数据流测试、程序变异、程序插桩、域测试和符号求值等。</p>
+<p>在软件动态测试过程中，采用适当的测试方法，实现测试目标。配置项测试和系统测试一般采用黑盒测试方法；集成测试一般主要采用黑盒测试方法，辅助以白盒测试方法；单元测试一般采用白盒测试方法，辅助以黑盒测试方法。</p>
+<p>静态测试和动态测试的详细说明参加附录 A。</p>
+<h3 id="概述-1">概述</h3>
+<p>动态测试是建立在程序的执行过程中。根据被测对象内部情况的了解与否，分为黑盒测试和白盒测试。</p>
+<p>黑盒测试又称功能测试、数据驱动测试或基于规格说明的测试，这种测试不必了解被测对象的内部情况，而依靠需求规格说明中的功能来设计测试用例。</p>
+<p>白盒测试又称结构测试、逻辑测试或基于程序的测试，这种测试应了解程序的内部构造，并根据内部构造设计测试用例。</p>
+<p>在单元测试时一般采用白盒测试，在配置项测试或系统测试时一般采用黑盒测试。</p>
+<h3 id="黑盒测试方法">黑盒测试方法</h3>
+<h4 id="功能分解">功能分解</h4>
+<p>功能分解是将需求规格说明中每一个功能加以分解，确保各个功能被全面地测试。功能分解是一种较常用的方法。</p>
+<p>步骤如下：</p>
+<ol type="1">
+<li>使用程序设计中的功能抽象方法把程序分解为功能单元；</li>
+<li>使用数据抽象方法产生测试每个功能单元的数据。</li>
+</ol>
+<p>功能抽象中程序被看成一种抽象的功能层次，每个层次可标识被测试的功能，层次结构中的某一功能由其下一层功能定义。按照功能层次进行分解，可以得到众多的最低层次的子功能，以这些子功能为对象，进行测试用例设计。</p>
+<p>数据对象中，数据结构可以由抽象数据类型的层次图来描述，每个抽象数据类型有其取值集合。程序的每一个输入和输出量的取值集合用数据对象来描述。</p>
+<h4 id="等价类划分">等价类划分</h4>
+<p>等价类划分是在分析需求规格说明的基础上，吧程序的输入域划分成若干部分，然后在每部分中选取代表性数据形成测试用例。</p>
+<p>步骤如下：</p>
+<ol type="1">
+<li>划分有效等价类：对规格说明是有意义、合理的输入数据所构成的集合；</li>
+<li>划分无效等价类：对规格说明是无意义、不合理的输入数据所构成的集合；</li>
+<li>为每个等价类定义一个唯一的编号；</li>
+<li>为每一个等价类设计一组测试用例，确保覆盖相应的等价类。</li>
+</ol>
+<h4 id="边界值分析">边界值分析</h4>
+<p>边界值分析是针对边界值进行测试的。使用等于、小于或大于边界值的数据对程序进行测试的方法就是边界值分析方法。</p>
+<p>步骤如下：</p>
+<ol type="1">
+<li>通过分析规格说明，找出所有可能的边界条件；</li>
+<li>对每一个边界条件，给出满足和不满足边界值的输入数据；</li>
+<li>设计相应的测试用例。</li>
+</ol>
+<p>对满足边界值的输入可以发现计算差错，对不满足的输入可以发现域差错。该方法会为其他测试方法补充一些测试用例，绝大多数测试都会用到本方法。</p>
+<h4 id="判定表">判定表</h4>
+<p>判定表由四部分组成：条件桩、条件条目、动作桩、动作条目。任何一个条件组合的取值及其相应要执行的操作构成规则，条目中的每一列是一条规则。</p>
+<p>条件引用输入的等价类，动作引用被测软件的主要功能处理部分，规则就是测试用例。</p>
+<p>建立并优化判定表，把判定表中每一列表表示的情况写成测试用例。</p>
+<p>该方法的使用有以下要求：</p>
+<ol type="1">
+<li>规格说明以判定表形式给出，或是很容易转换成判定表；</li>
+<li>条件的排列顺序不会影响执行哪些操作；</li>
+<li>桂策的排列顺序不会影响执行哪些操作；</li>
+<li>每当某一规则的条件已经满足，并确定要执行的操作后，不必检验别的规则；</li>
+<li>如果某一规则得到满足，将执行多个操作，这些操作的执行与顺序无关。</li>
+</ol>
+<h4 id="因果图">因果图</h4>
+<p>因果图方法是通过画因果图，把用自然语言描述的功能说明转换为判定表，然后为判定表的每一列设计一个测试用例。</p>
+<p>步骤如下：</p>
+<ol type="1">
+<li>分析程序规格说明，引出原因（输入条件）和结果（输出结果），并给每一个原因和结果赋予一个标识符；</li>
+<li>分析程序规格说明中语义的内容，并将其表示成连接各个原因和各个结果的“因果图”；</li>
+<li>在因果图上标明约束条件；</li>
+<li>通过跟踪因果图中的状态条件，把因果图转换成有限项的判定表；</li>
+<li>把判定表中每一列表示的情况生成测试用例。</li>
+</ol>
+<p>如果需求规格说明中含有输入条件的组合，宜采用本方法。有些软件的因果图可能非常庞大，以至于根据因果图得到的测试用例数目非常大，此时不宜使用本方法。</p>
+<h4 id="随机测试">随机测试</h4>
+<p>随机测试指测试输入数据是所有可能输入值中随机选取的。测试人员只需要规定输入变量的取值区间，在需要时提供必要的变换机制，使产生的随机数服从预期的概率分布。该方法获得预期输出比较困难，多用于可靠性测试和系统强度测试。</p>
+<h4 id="猜错法">猜错法</h4>
+<p>猜错法是有经验的测试人员，通过列出可能有的差错和易错情况表，写出测试用例的方法。</p>
+<h4 id="正交实验法">正交实验法</h4>
+<p>正交实验法是从大量的实验点中挑出适量的、有代表性的点，应用正交表，合理地安排实验的一种科学的实验设计方法。</p>
+<p>利用正交实验法来设计测试用例时，首先要根据被测软件的规格说明书找出影响功能实现的操作对象和外部因素，把它们当做因子，而把各个因子的取值当做状态，生成二元的因素分析表。然后，利用正交表进行各因子的状态组合，构造有效的测试数据集，并由此建立因果图。这样得出的测试用例的数目将大大减少。</p>
+<h3 id="白盒测试方法">白盒测试方法</h3>
+<h4 id="控制流测试">控制流测试</h4>
+<p>控制流测试依据控制流程图产生测试用例，通过对不同控制结构成分的测试验证程序的控制结构。所谓验证某种控制结构即指使这种控制结构在程序运行中得到执行，也称这一过程为覆盖。以下介绍几种覆盖：</p>
+<ol type="1">
+<li>语句覆盖：要求设计适当数量的测试用例，运行被测程序，使得程序中每一条语句至少被执行一次，语句覆盖在测试中主要发现出错语句。</li>
+<li>分支覆盖：要求设计适当数量的测试用例，运行被测程序，使得程序中每个真值分支和假值分支至少执行一次，分支覆盖也称判定覆盖。</li>
+<li>条件覆盖：要求设计适当数量的测试用例，运行被测程序，使得每个判断中的每个条件的可能取值至少满足一次。</li>
+<li>条件组合覆盖：要求设计适当数量的测试用例，运行被测程序，使得每个判断中条件的各种组合至少出现一次，这种方法包含了“分支覆盖”和“条件覆盖”的各种要求。</li>
+<li>路径覆盖：要求设计适当数量的测试用例，运行被测程序，使得程序沿所有可能的路径执行，较大程序的路径可能很多，所以在设计测试用例时，要简化循环次数。</li>
+</ol>
+<p>以上各种覆盖的控制流测试步骤如下：</p>
+<ol type="1">
+<li>将程序流程图转换成控制流图；</li>
+<li>经过语法分析求得路径表达式；</li>
+<li>生成路径树；</li>
+<li>进行路径编码；</li>
+<li>经过译码得到执行的路径；</li>
+<li>通过路径枚举产生特定路径的测试用例。</li>
+</ol>
+<h4 id="数据流测试">数据流测试</h4>
+<p>数据流测试是用控制流程图对变量的定义和引用进行分析，查找出未定义的变量或定义了未使用的变量，这些变量可能是拼错的变量、变量混淆或丢失了语句。数据流测试一般使用工具进行。</p>
+<p>数据流测试通过一定的覆盖准则，检查程序中每个数据对象的每次定义、使用和消除的情况。</p>
+<p>数据流测试步骤：</p>
+<ol type="1">
+<li>将程序流程图转换成控制流图；</li>
+<li>在每个链路上标注对有关变量的数据操作的操作符号和符号序列；</li>
+<li>选定数据流测试策略；</li>
+<li>根据测试策略得到测试路径；</li>
+<li>根据路径可以获得测试输入数据和测试用例。</li>
+<li>动态数据流异常检查在程序运行时执行，获得的是对数据对象的真实操作序列，克服了静态分析检查的局限，但动态方式检查是沿着与测试输入有关的一部分路径进行的，检查的全面性和程序结构覆盖有关。</li>
+</ol>
+<h4 id="程序变异">程序变异</h4>
+<p>一种差错驱动测试，是为了查出被测软件在做过其他测试后还剩余一些的小差错。本方法一般测试工具进行。</p>
+<h4 id="程序插桩">程序插桩</h4>
+<p>程序插桩是向被测程序中插入操作以实现测试目的的方法。程序插桩不应该影响到被测程序的运行过程和功能。</p>
+<p>有很多的工具有程序插桩功能。由于数据记录量大，手工进行较为烦琐。</p>
+<h4 id="域测试">域测试</h4>
+<p>域测试是要判别程序对输入空间的划分是否正确。该方法限制太多，使用不方便，供有特殊需求的测试使用。</p>
+<h4 id="符号求值">符号求值</h4>
+<p>符号求值是允许数值变量取“符号值”以及数值。符号求值可以检查公式的执行结果是否达到程序预期的目的；也可以通过程序的符号执行，产生出程序的路径，用于产生测试数据。符号求值最好使用工具，在公式分支较少时手工推到也是可行的。</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/12/21/common-system-and-software-testing-pitfalls/" rel="bookmark">测试陷阱分类</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2019/12/18/autotest-abc-and-case-suggest/" rel="bookmark">自动化测试入门级用例编写建议</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/06/23/how-to-write-good-test-cases/" rel="bookmark">如何编写好的测试用例</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/08/26/mockserver-intro/" rel="bookmark">MockServer 简介</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/30/mockserver/" rel="bookmark">MockServer 介绍</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="仲夏叶 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="仲夏叶 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>仲夏叶
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://stornado.github.io/2019/12/03/specification-of-computer-software-testing/" title="计算机软件测试规范">https://stornado.github.io/2019/12/03/specification-of-computer-software-testing/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/testing/" rel="tag"><i class="fa fa-tag"></i> testing</a>
+              <a href="/tags/specification/" rel="tag"><i class="fa fa-tag"></i> specification</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/09/28/issue-driven/" rel="prev" title="麦肯锡教我的思考武器">
+      <i class="fa fa-chevron-left"></i> 麦肯锡教我的思考武器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/04/python-strftime-reference/" rel="next" title="Python strftime reference">
+      Python strftime reference <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">测试目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%B1%BB%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">测试类别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">测试过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%AD%96%E5%88%92"><span class="nav-number">3.2.</span> <span class="nav-text">测试策划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.3.</span> <span class="nav-text">测试设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%89%A7%E8%A1%8C"><span class="nav-number">3.4.</span> <span class="nav-text">测试执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%80%BB%E7%BB%93"><span class="nav-number">3.5.</span> <span class="nav-text">测试总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">测试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">静态测试方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">动态测试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.2.</span> <span class="nav-text">黑盒测试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%88%86%E8%A7%A3"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">功能分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">等价类划分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90"><span class="nav-number">4.2.2.3.</span> <span class="nav-text">边界值分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E5%AE%9A%E8%A1%A8"><span class="nav-number">4.2.2.4.</span> <span class="nav-text">判定表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%A0%E6%9E%9C%E5%9B%BE"><span class="nav-number">4.2.2.5.</span> <span class="nav-text">因果图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%B5%8B%E8%AF%95"><span class="nav-number">4.2.2.6.</span> <span class="nav-text">随机测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8C%9C%E9%94%99%E6%B3%95"><span class="nav-number">4.2.2.7.</span> <span class="nav-text">猜错法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E4%BA%A4%E5%AE%9E%E9%AA%8C%E6%B3%95"><span class="nav-number">4.2.2.8.</span> <span class="nav-text">正交实验法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.3.</span> <span class="nav-text">白盒测试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%B5%81%E6%B5%8B%E8%AF%95"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">控制流测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E6%B5%8B%E8%AF%95"><span class="nav-number">4.2.3.2.</span> <span class="nav-text">数据流测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%8F%98%E5%BC%82"><span class="nav-number">4.2.3.3.</span> <span class="nav-text">程序变异</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E6%8F%92%E6%A1%A9"><span class="nav-number">4.2.3.4.</span> <span class="nav-text">程序插桩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%9F%E6%B5%8B%E8%AF%95"><span class="nav-number">4.2.3.5.</span> <span class="nav-text">域测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E6%B1%82%E5%80%BC"><span class="nav-number">4.2.3.6.</span> <span class="nav-text">符号求值</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="仲夏叶" src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">仲夏叶</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/stornado" title="GitHub → https://github.com/stornado" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ryan@zxytech.com" title="E-Mail → mailto:ryan@zxytech.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/ryanstornado" title="Twitter → https://twitter.com/ryanstornado" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">仲夏叶</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">254k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:51</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+  <div style="display: none;">
+    <script data-pjax="" src="//s95.cnzz.com/z_stat.php?id=1254452804&amp;web_id=1254452804"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="https://unpkg.com/mermaid@/dist/mermaid.min.js"></script>
+  
+  <style>
+    .mermaid {
+      background: var(--body-bg-color);
+    }
+  </style>
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+    </div>
+
+
+<script src="/bundle.js"></script><script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+;
+
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+;
+
+    if (window.mermaid) {
+      mermaid.initialize({'theme': 'forest'});
+    }
+  ;
+
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+;
+
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'debe3bf900ab05b9ae3b',
+      clientSecret: '3593904f48e12175e52c39855bcc80018f0831f8',
+      repo        : 'stornado.github.io',
+      owner       : 'stornado',
+      admin       : ['stornado'],
+      id          : '55b027dfa12abfe48ca298454fab8002',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script></body></html>

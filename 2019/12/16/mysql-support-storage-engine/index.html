@@ -1,0 +1,1254 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msapplication-config" content="/images/mstile-150x150.png">
+  <meta name="google-site-verification" content="Vb0EkkfGHD4yjSK3hHo9zSszfnkbr8wPpPDCVVtvxDg">
+  <meta name="msvalidate.01" content="BB5484EDD5B0CB57C647B2184772CBDC">
+  <meta name="baidu-site-verification" content="aYgTqx38cK">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"stornado.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="MySQL 8.0 Supported Storage Engines  InnoDB: The default storage engine in MySQL 8.0. InnoDB is a transaction-safe (ACID compliant) storage engine for MySQL that has commit, rollback, and crash-recove">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL 8.0 Supported Storage Engines">
+<meta property="og:url" content="https://stornado.github.io/2019/12/16/mysql-support-storage-engine/index.html">
+<meta property="og:site_name" content="仲夏叶 | Stornado">
+<meta property="og:description" content="MySQL 8.0 Supported Storage Engines  InnoDB: The default storage engine in MySQL 8.0. InnoDB is a transaction-safe (ACID compliant) storage engine for MySQL that has commit, rollback, and crash-recove">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-16T07:07:42.000Z">
+<meta property="article:modified_time" content="2022-08-04T06:23:25.685Z">
+<meta property="article:author" content="仲夏叶">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="myisam">
+<meta property="article:tag" content="innodb">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://stornado.github.io/2019/12/16/mysql-support-storage-engine/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MySQL 8.0 Supported Storage Engines | 仲夏叶 | Stornado</title>
+  
+
+
+  <script data-pjax="">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e1d846feb2f251f98b0482d1f5fd6a4e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">仲夏叶 | Stornado</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">生命就是用求知的欲望燃烧自己</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/stornado" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stornado.github.io/2019/12/16/mysql-support-storage-engine/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="仲夏叶">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仲夏叶 | Stornado">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL 8.0 Supported Storage Engines<a href="https://github.com/stornado/stornado.github.io/tree/develop/source/_posts/mysql-support-storage-engine.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-16 15:07:42" itemprop="dateCreated datePublished" datetime="2019-12-16T15:07:42+08:00">2019-12-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-04 14:23:25" itemprop="dateModified" datetime="2022-08-04T14:23:25+08:00">2022-08-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 ≈</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="mysql-8.0-supported-storage-engines">MySQL 8.0 Supported Storage
+Engines</h1>
+<ul>
+<li><strong><code>InnoDB</code></strong>: The default storage engine in
+MySQL 8.0. <code>InnoDB</code> is a transaction-safe (ACID compliant)
+storage engine for MySQL that has commit, rollback, and crash-recovery
+capabilities to protect user data. <code>InnoDB</code> row-level locking
+(without escalation to coarser granularity locks) and Oracle-style
+consistent nonlocking reads increase multi-user concurrency and
+performance. <code>InnoDB</code> stores user data in clustered indexes
+to reduce I/O for common queries based on primary keys. To maintain data
+integrity, <code>InnoDB</code> also supports <code>FOREIGN KEY</code>
+referential-integrity constraints.</li>
+<li><strong><code>MyISAM</code></strong>: These tables have a small
+footprint. <strong>Table-level locking</strong> limits the performance
+in read/write workloads, so it is often used in read-only or read-mostly
+workloads in Web and data warehousing configurations.</li>
+<li><strong><code>Memory</code></strong>: Stores all data in RAM, for
+fast access in environments that require quick lookups of non-critical
+data. This engine was formerly known as the <code>HEAP</code> engine.
+Its use cases are decreasing; <code>InnoDB</code> with its buffer pool
+memory area provides a general-purpose and durable way to keep most or
+all data in memory, and <code>NDBCLUSTER</code> provides fast key-value
+lookups for huge distributed data sets.</li>
+<li><strong><code>CSV</code></strong>: Its tables are really text files
+with comma-separated values. CSV tables let you import or dump data in
+CSV format, to exchange data with scripts and applications that read and
+write that same format. Because CSV tables are not indexed, you
+typically keep the data in <code>InnoDB</code> tables during normal
+operation, and only use CSV tables during the import or export
+stage.</li>
+<li><strong><code>Archive</code></strong>: These compact, unindexed
+tables are intended for storing and retrieving large amounts of
+seldom-referenced historical, archived, or security audit
+information.</li>
+<li><strong><code>Blackhole</code></strong>: The Blackhole storage
+engine accepts but does not store data, similar to the Unix
+<code>/dev/null</code> device. Queries always return an empty set. These
+tables can be used in replication configurations where DML statements
+are sent to slave servers, but the master server does not keep its own
+copy of the data.</li>
+<li><strong><code>NDB</code></strong> (also known as
+<strong><code>NDBCLUSTER</code></strong>): This clustered database
+engine is particularly suited for applications that require the highest
+possible degree of uptime and availability.</li>
+<li><strong><code>Merge</code></strong>: Enables a MySQL DBA or
+developer to logically group a series of identical <code>MyISAM</code>
+tables and reference them as one object. Good for VLDB environments such
+as data warehousing.</li>
+<li><strong><code>Federated</code></strong>: Offers the ability to link
+separate MySQL servers to create one logical database from many physical
+servers. Very good for distributed or data mart environments.</li>
+<li><strong><code>Example</code></strong>: This engine serves as an
+example in the MySQL source code that illustrates how to begin writing
+new storage engines. It is primarily of interest to developers. The
+storage engine is a “stub” that does nothing. You can create tables with
+this engine, but no data can be stored in them or retrieved from
+them.</li>
+</ul>
+<span id="more"></span>
+<h2 id="storage-engines-feature-summary">Storage Engines Feature
+Summary</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>MyISAM</th>
+<th>Memory</th>
+<th>InnoDB</th>
+<th>Archive</th>
+<th>NDB</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>B-tree indexes</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Backup/point-in-time recovery</strong> (note 1)</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Cluster database support</strong></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Clustered indexes</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><strong>Compressed data</strong></td>
+<td>Yes (note 2)</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Data caches</strong></td>
+<td>No</td>
+<td>N/A</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Encrypted data</strong></td>
+<td>Yes (note 3)</td>
+<td>Yes (note 3)</td>
+<td>Yes (note 4)</td>
+<td>Yes (note 3)</td>
+<td>Yes (note 3)</td>
+</tr>
+<tr class="even">
+<td><strong>Foreign key support</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes (note 5)</td>
+</tr>
+<tr class="odd">
+<td><strong>Full-text search indexes</strong></td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes (note 6)</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Geospatial data type support</strong></td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Geospatial indexing support</strong></td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes (note 7)</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Hash indexes</strong></td>
+<td>No</td>
+<td>Yes</td>
+<td>No (note 8)</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Index caches</strong></td>
+<td>Yes</td>
+<td>N/A</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Locking granularity</strong></td>
+<td>Table</td>
+<td>Table</td>
+<td>Row</td>
+<td>Row</td>
+<td>Row</td>
+</tr>
+<tr class="odd">
+<td><strong>MVCC</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Replication support</strong> (note 1)</td>
+<td>Yes</td>
+<td>Limited (note 9)</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Storage limits</strong></td>
+<td>256TB</td>
+<td>RAM</td>
+<td>64TB</td>
+<td>None</td>
+<td>384EB</td>
+</tr>
+<tr class="even">
+<td><strong>T-tree indexes</strong></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Transactions</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Update statistics for data dictionary</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes:</strong></p>
+<ol type="1">
+<li><p>Implemented in the server, rather than in the storage
+engine.</p></li>
+<li><p>Compressed MyISAM tables are supported only when using the
+compressed row format. Tables using the compressed row format with
+MyISAM are read only.</p></li>
+<li><p>Implemented in the server via encryption functions.</p></li>
+<li><p>Implemented in the server via encryption functions; In MySQL 5.7
+and later, data-at-rest tablespace encryption is supported.</p></li>
+<li><p>Support for foreign keys is available in MySQL Cluster NDB 7.3
+and later.</p></li>
+<li><p>InnoDB support for FULLTEXT indexes is available in MySQL 5.6 and
+later.</p></li>
+<li><p>InnoDB support for geospatial indexing is available in MySQL 5.7
+and later.</p></li>
+<li><p>InnoDB utilizes hash indexes internally for its Adaptive Hash
+Index feature.</p></li>
+<li><p>See the discussion later in this section.</p></li>
+</ol>
+<h2 id="myisam-storage-engine-features">MyISAM Storage Engine
+Features</h2>
+<table>
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>B-tree indexes</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Backup/point-in-time recovery</strong> (Implemented in the
+server, rather than in the storage engine.)</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Cluster database support</strong></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Clustered indexes</strong></td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><strong>Compressed data</strong></td>
+<td>Yes (Compressed MyISAM tables are supported only when using the
+compressed row format. Tables using the compressed row format with
+MyISAM are read only.)</td>
+</tr>
+<tr class="even">
+<td><strong>Data caches</strong></td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><strong>Encrypted data</strong></td>
+<td>Yes (Implemented in the server via encryption functions.)</td>
+</tr>
+<tr class="even">
+<td><strong>Foreign key support</strong></td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><strong>Full-text search indexes</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Geospatial data type support</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Geospatial indexing support</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Hash indexes</strong></td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><strong>Index caches</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Locking granularity</strong></td>
+<td>Table</td>
+</tr>
+<tr class="odd">
+<td><strong>MVCC</strong></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Replication support</strong> (Implemented in the server,
+rather than in the storage engine.)</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Storage limits</strong></td>
+<td>256TB</td>
+</tr>
+<tr class="even">
+<td><strong>T-tree indexes</strong></td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><strong>Transactions</strong></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Update statistics for data dictionary</strong></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Each <code>MyISAM</code> table is stored on disk in two files. The
+files have names that begin with the table name and have an extension to
+indicate the file type. The data file has an <code>.MYD</code>
+(<code>MYData</code>) extension. The index file has an
+<code>.MYI</code>(<code>MYIndex</code>) extension. The table definition
+is stored in the MySQL data dictionary.</p>
+<p><code>InnoDB</code> is a general-purpose storage engine that balances
+high reliability and high performance. In MySQL 8.0, <code>InnoDB</code>
+is the default MySQL storage engine. Unless you have configured a
+different default storage engine, issuing a
+<strong><code>CREATE TABLE</code></strong> statement without an
+<code>ENGINE=</code> clause creates an <code>InnoDB</code> table.</p>
+<h2 id="key-advantages-of-innodb">Key Advantages of InnoDB</h2>
+<ul>
+<li>Its <strong>DML</strong> operations follow the <strong>ACID</strong>
+model, with <strong>transactions</strong> featuring
+<strong>commit</strong>, <strong>rollback</strong>, and
+<strong>crash-recovery</strong>capabilities to protect user data.</li>
+<li>Row-level <strong>locking</strong> and Oracle-style
+<strong>consistent reads</strong> increase multi-user concurrency and
+performance.</li>
+<li><code>InnoDB</code> tables arrange your data on disk to optimize
+queries based on <strong>primary keys</strong>. Each <code>InnoDB</code>
+table has a primary key index called the <strong>clustered
+index</strong> that organizes the data to minimize I/O for primary key
+lookups.</li>
+<li>To maintain data <strong>integrity</strong>, <code>InnoDB</code>
+supports <strong><code>FOREIGN KEY</code></strong> constraints. With
+foreign keys, inserts, updates, and deletes are checked to ensure they
+do not result in inconsistencies across different tables.</li>
+</ul>
+<h2 id="innodb-storage-engine-features">InnoDB Storage Engine
+Features</h2>
+<table>
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>B-tree indexes</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Backup/point-in-time recovery</strong> (Implemented in the
+server, rather than in the storage engine.)</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Cluster database support</strong></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Clustered indexes</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Compressed data</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Data caches</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Encrypted data</strong></td>
+<td>Yes (Implemented in the server via encryption functions; In MySQL
+5.7 and later, data-at-rest tablespace encryption is supported.)</td>
+</tr>
+<tr class="even">
+<td><strong>Foreign key support</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Full-text search indexes</strong></td>
+<td>Yes (InnoDB support for FULLTEXT indexes is available in MySQL 5.6
+and later.)</td>
+</tr>
+<tr class="even">
+<td><strong>Geospatial data type support</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Geospatial indexing support</strong></td>
+<td>Yes (InnoDB support for geospatial indexing is available in MySQL
+5.7 and later.)</td>
+</tr>
+<tr class="even">
+<td><strong>Hash indexes</strong></td>
+<td>No (InnoDB utilizes hash indexes internally for its Adaptive Hash
+Index feature.)</td>
+</tr>
+<tr class="odd">
+<td><strong>Index caches</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Locking granularity</strong></td>
+<td>Row</td>
+</tr>
+<tr class="odd">
+<td><strong>MVCC</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Replication support</strong> (Implemented in the server,
+rather than in the storage engine.)</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Storage limits</strong></td>
+<td>64TB</td>
+</tr>
+<tr class="even">
+<td><strong>T-tree indexes</strong></td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><strong>Transactions</strong></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Update statistics for data dictionary</strong></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="benefits-of-using-innodb-tables">Benefits of Using InnoDB
+Tables</h2>
+<p>You may find <code>InnoDB</code> tables beneficial for the following
+reasons:</p>
+<ul>
+<li>If your server crashes because of a hardware or software issue,
+regardless of what was happening in the database at the time, you don't
+need to do anything special after restarting the database.
+<code>InnoDB</code> <strong>crash recovery</strong> automatically
+finalizes any changes that were committed before the time of the crash,
+and undoes any changes that were in process but not committed. Just
+restart and continue where you left off.</li>
+<li>The <code>InnoDB</code> storage engine maintains its own
+<strong>buffer pool</strong> that caches table and index data in main
+memory as data is accessed. Frequently used data is processed directly
+from memory. This cache applies to many types of information and speeds
+up processing. On dedicated database servers, up to 80% of physical
+memory is often assigned to the buffer pool.</li>
+<li>If you split up related data into different tables, you can set up
+<strong>foreign keys</strong> that enforce <strong>referential
+integrity</strong>. Update or delete data, and the related data in other
+tables is updated or deleted automatically. Try to insert data into a
+secondary table without corresponding data in the primary table, and the
+bad data gets kicked out automatically.</li>
+<li>If data becomes corrupted on disk or in memory, a
+<strong>checksum</strong> mechanism alerts you to the bogus data before
+you use it.</li>
+<li>When you design your database with appropriate <strong>primary
+key</strong> columns for each table, operations involving those columns
+are automatically optimized. It is very fast to reference the primary
+key columns in <strong><code>WHERE</code></strong> clauses,
+<strong><code>ORDER BY</code></strong> clauses,
+<strong><code>GROUP BY</code></strong> clauses, and
+<strong>join</strong> operations.</li>
+<li>Inserts, updates, and deletes are optimized by an automatic
+mechanism called <strong>change buffering</strong>. <code>InnoDB</code>
+not only allows concurrent read and write access to the same table, it
+caches changed data to streamline disk I/O.</li>
+<li>Performance benefits are not limited to giant tables with
+long-running queries. When the same rows are accessed over and over from
+a table, a feature called the <strong>Adaptive Hash Index</strong> takes
+over to make these lookups even faster, as if they came out of a hash
+table.</li>
+<li>You can compress tables and associated indexes.</li>
+<li>You can create and drop indexes with much less impact on performance
+and availability.</li>
+<li>Truncating a <strong>file-per-table</strong> tablespace is very
+fast, and can free up disk space for the operating system to reuse,
+rather than freeing up space within the <strong>system
+tablespace</strong> that only <code>InnoDB</code> can reuse.</li>
+<li>The storage layout for table data is more efficient for
+<strong><code>BLOB</code></strong> and long text fields, with the
+<strong>DYNAMIC</strong> row format.</li>
+<li>You can monitor the internal workings of the storage engine by
+querying <strong>INFORMATION_SCHEMA</strong> tables.</li>
+<li>You can monitor the performance details of the storage engine by
+querying <strong>Performance Schema</strong> tables.</li>
+<li>You can freely mix <code>InnoDB</code> tables with tables from other
+MySQL storage engines, even within the same statement. For example, you
+can use a <strong>join</strong> operation to combine data from
+<code>InnoDB</code> and <strong><code>MEMORY</code></strong> tables in a
+single query.</li>
+<li><code>InnoDB</code> has been designed for CPU efficiency and maximum
+performance when processing large data volumes.</li>
+<li><code>InnoDB</code> tables can handle large quantities of data, even
+on operating systems where file size is limited to 2GB.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2019/12/26/mysql-replication-abc/" rel="bookmark">MySQL Replication 简介</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2019/12/28/mysql-show-syntax-and-performance-status-variable/" rel="bookmark">MySQL show syntax and server status variables</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2019/12/27/usefull-mysql-sql-statement-syntax/" rel="bookmark">MySQL Statement Syntax</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="仲夏叶 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="仲夏叶 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>仲夏叶
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://stornado.github.io/2019/12/16/mysql-support-storage-engine/" title="MySQL 8.0 Supported Storage Engines">https://stornado.github.io/2019/12/16/mysql-support-storage-engine/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
+              <a href="/tags/myisam/" rel="tag"><i class="fa fa-tag"></i> myisam</a>
+              <a href="/tags/innodb/" rel="tag"><i class="fa fa-tag"></i> innodb</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/04/python-strftime-reference/" rel="prev" title="Python strftime reference">
+      <i class="fa fa-chevron-left"></i> Python strftime reference
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/18/autotest-abc-and-case-suggest/" rel="next" title="自动化测试入门级用例编写建议">
+      自动化测试入门级用例编写建议 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql-8.0-supported-storage-engines"><span class="nav-number">1.</span> <span class="nav-text">MySQL 8.0 Supported Storage
+Engines</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#storage-engines-feature-summary"><span class="nav-number">1.1.</span> <span class="nav-text">Storage Engines Feature
+Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#myisam-storage-engine-features"><span class="nav-number">1.2.</span> <span class="nav-text">MyISAM Storage Engine
+Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#key-advantages-of-innodb"><span class="nav-number">1.3.</span> <span class="nav-text">Key Advantages of InnoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innodb-storage-engine-features"><span class="nav-number">1.4.</span> <span class="nav-text">InnoDB Storage Engine
+Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#benefits-of-using-innodb-tables"><span class="nav-number">1.5.</span> <span class="nav-text">Benefits of Using InnoDB
+Tables</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="仲夏叶" src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">仲夏叶</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/stornado" title="GitHub → https://github.com/stornado" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ryan@zxytech.com" title="E-Mail → mailto:ryan@zxytech.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/ryanstornado" title="Twitter → https://twitter.com/ryanstornado" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">仲夏叶</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">254k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:51</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+  <div style="display: none;">
+    <script data-pjax="" src="//s95.cnzz.com/z_stat.php?id=1254452804&amp;web_id=1254452804"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="https://unpkg.com/mermaid@/dist/mermaid.min.js"></script>
+  
+  <style>
+    .mermaid {
+      background: var(--body-bg-color);
+    }
+  </style>
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+    </div>
+
+
+<script src="/bundle.js"></script><script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+;
+
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+;
+
+    if (window.mermaid) {
+      mermaid.initialize({'theme': 'forest'});
+    }
+  ;
+
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+;
+
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'debe3bf900ab05b9ae3b',
+      clientSecret: '3593904f48e12175e52c39855bcc80018f0831f8',
+      repo        : 'stornado.github.io',
+      owner       : 'stornado',
+      admin       : ['stornado'],
+      id          : 'cb2cb51201a922f628291aeb393b9550',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script></body></html>

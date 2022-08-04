@@ -1,0 +1,949 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msapplication-config" content="/images/mstile-150x150.png">
+  <meta name="google-site-verification" content="Vb0EkkfGHD4yjSK3hHo9zSszfnkbr8wPpPDCVVtvxDg">
+  <meta name="msvalidate.01" content="BB5484EDD5B0CB57C647B2184772CBDC">
+  <meta name="baidu-site-verification" content="aYgTqx38cK">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"stornado.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="MockServer Easy mocking of any system you integrate with via HTTP or HTTPS What is MockServer For any system you integrate with via HTTP or HTTPS MockServer can be used as:  a mock configured to retur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MockServer 介绍">
+<meta property="og:url" content="https://stornado.github.io/2020/07/30/mockserver/index.html">
+<meta property="og:site_name" content="仲夏叶 | Stornado">
+<meta property="og:description" content="MockServer Easy mocking of any system you integrate with via HTTP or HTTPS What is MockServer For any system you integrate with via HTTP or HTTPS MockServer can be used as:  a mock configured to retur">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/3029ee6966714aa80ad422f1342f5aee.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/4d8b4734a83b5114138cde558b9326fc.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/157c6d2c9e7e7834fb03b5c48ec8b373.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/757616e3156e6451bb53c22da049c8c4.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/78add90a990f587870a4d3584953b999.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/772ab863e64b2d9e224d79bf934f5351.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/644da0940b9aa53e464517b8fdf417ea.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/a0b9a26003db9061b4bdcf2b70ada552.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/826e507aa151b736158dbfa04f3d94bd.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/7c45fd25df7cb266328a742bc0333e20.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/7e764df0604ea8f5978f07ca85743751.png">
+<meta property="og:image" content="https://stornado.github.io/2020/07/30/mockserver/7a89cd0f16ed918b9b0d0ccd52256152.png">
+<meta property="article:published_time" content="2020-07-30T01:52:16.000Z">
+<meta property="article:modified_time" content="2022-08-04T06:23:25.673Z">
+<meta property="article:author" content="仲夏叶">
+<meta property="article:tag" content="testing">
+<meta property="article:tag" content="mockserver">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://stornado.github.io/2020/07/30/mockserver/3029ee6966714aa80ad422f1342f5aee.png">
+
+<link rel="canonical" href="https://stornado.github.io/2020/07/30/mockserver/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MockServer 介绍 | 仲夏叶 | Stornado</title>
+  
+
+
+  <script data-pjax="">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e1d846feb2f251f98b0482d1f5fd6a4e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">仲夏叶 | Stornado</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">生命就是用求知的欲望燃烧自己</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/stornado" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stornado.github.io/2020/07/30/mockserver/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="仲夏叶">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仲夏叶 | Stornado">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MockServer 介绍<a href="https://github.com/stornado/stornado.github.io/tree/develop/source/_posts/mockserver.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-30 09:52:16" itemprop="dateCreated datePublished" datetime="2020-07-30T09:52:16+08:00">2020-07-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-04 14:23:25" itemprop="dateModified" datetime="2022-08-04T14:23:25+08:00">2022-08-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/testing/" itemprop="url" rel="index"><span itemprop="name">testing</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/testing/mockserver/" itemprop="url" rel="index"><span itemprop="name">mockserver</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 ≈</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="mockserver">MockServer</h1>
+<p>Easy mocking of any system you integrate with via HTTP or HTTPS</p>
+<h2 id="what-is-mockserver"><a target="_blank" rel="noopener" href="https://www.mock-server.com/#what_is_mockserver">What is
+MockServer</a></h2>
+<p>For any system you integrate with via HTTP or HTTPS MockServer can be
+used as:</p>
+<ul>
+<li>a <a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/getting_started.html">mock</a>
+configured to return specific responses for different requests</li>
+<li>a <a target="_blank" rel="noopener" href="https://www.mock-server.com/proxy/getting_started.html">proxy</a>
+recording and optionally modifying requests and responses</li>
+<li>both a <a target="_blank" rel="noopener" href="https://www.mock-server.com/proxy/getting_started.html">proxy</a>
+for some requests and a <a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/getting_started.html">mock</a>
+for other requests at the same time</li>
+</ul>
+<p>When MockServer receives a request it matches the request against
+active <strong>expectations</strong> that have been configured, if no
+matches are found it proxies the request if appropriate otherwise a 404
+is returned.</p>
+<p>For each request received the following steps happen:</p>
+<ol type="1">
+<li>find matching expectation and perform action</li>
+<li>if no matching expectation proxy request</li>
+<li>if not a proxy request return 404</li>
+</ol>
+<p>An <strong>expectation</strong> defines the <strong>action</strong>
+that is taken, for example, a response could be returned.</p>
+<span id="more"></span>
+<p>MockServer supports the follow <strong>actions</strong>:</p>
+<ul>
+<li><p>return a "mock" <a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/creating_expectations.html#mock_response">response</a>
+when a request matches an expectation</p>
+<img src="/2020/07/30/mockserver/3029ee6966714aa80ad422f1342f5aee.png" class="" title="From: MOCK-SERVER.COM"></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/creating_expectations.html#mock_forward">forward</a>
+a request when the request matches an expectation (i.e. a dynamic port
+forwarding proxy)</p>
+<img src="/2020/07/30/mockserver/4d8b4734a83b5114138cde558b9326fc.png" class="" title="From: MOCK-SERVER.COM"></li>
+<li><p>execute a <a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/creating_expectations.html#callback">callback</a>
+when a request matches an expectation, allowing the response to be
+created dynamically</p>
+<img src="/2020/07/30/mockserver/157c6d2c9e7e7834fb03b5c48ec8b373.png" class="" title="From: MOCK-SERVER.COM"></li>
+<li><p>return an <a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/creating_expectations.html#mock_error">invalid
+response</a> or close the connection when a request matches an
+expectation</p>
+<img src="/2020/07/30/mockserver/757616e3156e6451bb53c22da049c8c4.png" class="" title="From: MOCK-SERVER.COM"></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/verification.html">verify</a>
+requests have been sent (i.e. as a test assertion)</p>
+<img src="/2020/07/30/mockserver/78add90a990f587870a4d3584953b999.png" class="" title="From: MOCK-SERVER.COM"></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/verification.html">retrieve</a>
+logs, requests or expectations to help debug</p>
+<img src="/2020/07/30/mockserver/772ab863e64b2d9e224d79bf934f5351.png" class="" title="From: MOCK-SERVER.COM"></li>
+</ul>
+<h2 id="proxying-with-mockserver"><a target="_blank" rel="noopener" href="https://www.mock-server.com/#proxying_with_mockserver">Proxying
+with MockServer</a></h2>
+<p>MockServer can:</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.mock-server.com/proxy/getting_started.html">proxy</a>
+all requests using any of the following proxying methods:</p></li>
+<li><p>Port Forwarding</p>
+<ul>
+<li>Web Proxying (i.e. HTTP proxy)</li>
+</ul></li>
+<li><p>HTTPS Tunneling Proxying (using HTTP CONNECT)</p>
+<ul>
+<li>SOCKS Proxying (i.e. dynamic port forwarding)</li>
+</ul></li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://www.mock-server.com/proxy/verification.html">verify</a>
+proxied requests</strong> have been sent (i.e. in a test
+assertion)</p></li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://www.mock-server.com/proxy/record_and_replay.html">record</a>
+proxied requests and responses</strong> to analyse how a system
+behaves</p></li>
+</ul>
+<p>MockServer supports the following proxying techniques:</p>
+<ul>
+<li><p>Port Forwarding</p>
+<ul>
+<li>all requests are forwarded to a single hostname or IP and port</li>
+<li>to proxy requests the <strong>HTTP client</strong> should <a target="_blank" rel="noopener" href="https://www.mock-server.com/proxy/configuring_sut.html">use the
+hostname and port of MockServer</a></li>
+</ul></li>
+<li><p>Web Proxying (i.e. HTTP proxy)</p>
+<ul>
+<li>each request is forwarded dynamically using its Host header</li>
+<li>to proxy requests the <strong>HTTP client</strong> should <a target="_blank" rel="noopener" href="https://www.mock-server.com/proxy/configuring_sut.html">be
+configured to use an HTTP Proxy</a></li>
+</ul></li>
+<li><p>Secure Web Proxying (i.e. HTTPS tunneling proxying)</p>
+<ul>
+<li>requests are forwarded using a CONNECT request that setups an HTTP
+tunnel</li>
+<li>an SSL certificate is auto-generated allowing encrypted HTTPS
+traffic to be recorded transparently</li>
+<li>to proxy requests the <strong>HTTP client</strong> should <a target="_blank" rel="noopener" href="https://www.mock-server.com/proxy/configuring_sut.html">be
+configured to use an HTTP Proxy</a></li>
+</ul></li>
+<li><p>SOCKS Proxying (i.e. dynamic port forwarding)</p>
+<ul>
+<li>requests are forwarded using a SOCK CONNECT CMD request that
+established a socket tunnel</li>
+<li>if the traffic is encrypted an SSL certificate is auto-generated
+allowing SSL traffic to be recorded transparently</li>
+<li>to proxy requests the <strong>operating system (or JVM)</strong>
+should <a target="_blank" rel="noopener" href="https://www.mock-server.com/proxy/configuring_sut.html">be
+configured to use an HTTP Proxy</a></li>
+</ul></li>
+<li><p>SSL &amp; Certificates</p>
+<ul>
+<li>all SSL traffic is handled transparently by auto-generating an
+appropriate SSL certificate</li>
+<li>generated certificates use a single <a target="_blank" rel="noopener" href="https://github.com/mock-server/mockserver/blob/master/mockserver-core/src/main/resources/org/mockserver/socket/CertificateAuthorityCertificate.pem">MockServer
+root CA certificate</a> enabling the root certificate to be <a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/HTTPS_TLS.html">easily
+imported</a></li>
+</ul></li>
+<li><p>Port Unification</p>
+<ul>
+<li>to simplify configuration all protocols (i.e. HTTP, HTTPS / TLS,
+SOCKS, etc) are supported on the same port</li>
+<li>the protocol is dynamically detected by both MockServer</li>
+</ul></li>
+<li><p>Simultaneous Proxying &amp; Mocking</p>
+<ul>
+<li>if MockServer is being used as a proxy <strong>expectations</strong>
+can also be created</li>
+<li>when a request is received it is first matched against active
+<strong>expectations</strong> that have been configured</li>
+<li>if an <strong>expectations</strong> is matched its
+<strong>action</strong> will be performed instead of proxying the
+request</li>
+</ul></li>
+</ul>
+<h2 id="why-use-mockserver"><a target="_blank" rel="noopener" href="https://www.mock-server.com/#why-use-mockserver">Why use
+MockServer</a></h2>
+<p>MockServer allows you to mock any server or service via HTTP or
+HTTPS, such as a REST or RPC service.</p>
+<p>This is useful in the following scenarios:</p>
+<ul>
+<li>testing
+<ul>
+<li>easily recreate all types of responses for HTTP dependencies such as
+REST or RPC services to test applications easily and affectively</li>
+<li>isolate the system-under-test to ensure tests run reliably and only
+fail when there is a genuine bug. It is important only the
+system-under-test is tested and not its dependencies to avoid tests
+failing due to irrelevant external changes such as network failure or a
+server being rebooted / redeployed.</li>
+<li>easily setup mock responses independently for each test to ensure
+test data is encapsulated with each test. Avoid sharing data between
+tests that is difficult to manage and maintain and risks tests infecting
+each other</li>
+<li>create test assertions that verify the requests the
+system-under-test has sent</li>
+</ul></li>
+<li>de-coupling development
+<ul>
+<li>start working against a service API before the service is available.
+If an API or service is not yet fully developed MockServer can mock the
+API allowing any team who is using the service to start work without
+being delayed</li>
+<li>isolate development teams during the initial development phases when
+the APIs / services may be extremely unstable and volatile. Using
+MockServer allows development work to continue even when an external
+service fails</li>
+</ul></li>
+<li>isolate single service
+<ul>
+<li>during deployment and debugging it is helpful to run a single
+application or service or handle a sub-set of requests on on a local
+machine in debug mode. Using MockServer it is easy to <a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/isolating_single_service.html">selectively
+forward requests to a local process</a> running in debug mode, all other
+request can be forwarded to the real services for example running in a
+QA or UAT environment</li>
+</ul></li>
+</ul>
+<h3 id="mocking-dependencies-verifying-request"><strong>Mocking
+Dependencies &amp; Verifying Request</strong></h3>
+<p>Given a system with service dependencies, as follows:</p>
+<img src="/2020/07/30/mockserver/644da0940b9aa53e464517b8fdf417ea.png" class="" title="From: MOCK-SERVER.COM">
+<p>MockServer could be used to mock the service dependencies, as
+follows:</p>
+<img src="/2020/07/30/mockserver/a0b9a26003db9061b4bdcf2b70ada552.png" class="" title="From: MOCK-SERVER.COM">
+<h3 id="isolating-single-service-application"><strong>Isolating Single
+Service / Application</strong></h3>
+<p>A single page application may load static resources such as HTML, CSS
+and JavaScript from a web server and also make AJAX calls to one or more
+separate services, as follows:</p>
+<img src="/2020/07/30/mockserver/826e507aa151b736158dbfa04f3d94bd.png" class="" title="From: MOCK-SERVER.COM">
+<p>To isolate a single AJAX service, for development or debugging, the
+MockServer can selectively forward specific requests to local instance
+of the service:</p>
+<img src="/2020/07/30/mockserver/7c45fd25df7cb266328a742bc0333e20.png" class="" title="From: MOCK-SERVER.COM">
+<p>Using MockServer as a content routing load balancer is described in
+more detail in the section called <a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/isolating_single_service.html">Isolate
+Single Service</a>.</p>
+<h2 id="why-use-mockserver-as-a-proxy">Why use MockServer as a
+proxy</h2>
+<p>MockServer allows you to record request from the system-under-test or
+two analysis an existing system by recording outbound requests.</p>
+<p>This is useful in the following scenarios:</p>
+<ul>
+<li>testing
+<ul>
+<li>create test assertions that verify the requests the
+system-under-test has been sent, without needing to mock any
+requests</li>
+</ul></li>
+<li>analyse existing system
+<ul>
+<li>record all outbound requests so it is possible to analise and under
+stand what outbound requests an existing system is making</li>
+</ul></li>
+<li>debug HTTP interactions
+<ul>
+<li>log all outbound requests so it is possible to visualise all
+interactions (for example from a browser) to external services. This is
+particularly important as network analysis tools in browsers such as
+Chrome do not accurately show all network interactions, such as,
+favicon.ico requests. In addition, many proxies do not handle encrypted
+HTTPS traffic, however, MockServer auto-generates certificates using a
+single <a target="_blank" rel="noopener" href="https://github.com/mock-server/mockserver/blob/master/mockserver-core/src/main/resources/org/mockserver/socket/CertificateAuthorityCertificate.pem">MockServer
+root CA certificate</a> enabling the root certificate to be <a target="_blank" rel="noopener" href="https://www.mock-server.com/mock_server/HTTPS_TLS.html">easily
+imported</a></li>
+</ul></li>
+<li>record &amp; replay
+<ul>
+<li>all recorded requests can be converted into Java code or JSON
+expectations to simplify the creation of mocks for complex test
+scenarios</li>
+</ul></li>
+</ul>
+<h3 id="recording-requests-analysing-behaviour"><strong>Recording
+Requests &amp; Analysing Behaviour</strong></h3>
+<p>MockServer can record all proxied requests, as follows:</p>
+<img src="/2020/07/30/mockserver/7e764df0604ea8f5978f07ca85743751.png" class="" title="From: MOCK-SERVER.COM">
+<h3 id="verifying-request"><strong>Verifying Request</strong></h3>
+<p>MockServer can verify proxied service requests, as follows:</p>
+<img src="/2020/07/30/mockserver/7a89cd0f16ed918b9b0d0ccd52256152.png" class="" title="From: MOCK-SERVER.COM">
+<blockquote>
+<p>https://www.mock-server.com/#what-is-mockserver</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/08/26/mockserver-intro/" rel="bookmark">MockServer 简介</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/12/21/common-system-and-software-testing-pitfalls/" rel="bookmark">测试陷阱分类</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2019/12/18/autotest-abc-and-case-suggest/" rel="bookmark">自动化测试入门级用例编写建议</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/06/23/how-to-write-good-test-cases/" rel="bookmark">如何编写好的测试用例</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2019/12/03/specification-of-computer-software-testing/" rel="bookmark">计算机软件测试规范</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="仲夏叶 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="仲夏叶 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>仲夏叶
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://stornado.github.io/2020/07/30/mockserver/" title="MockServer 介绍">https://stornado.github.io/2020/07/30/mockserver/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/testing/" rel="tag"><i class="fa fa-tag"></i> testing</a>
+              <a href="/tags/mockserver/" rel="tag"><i class="fa fa-tag"></i> mockserver</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/01/think-like-a-tester/" rel="prev" title="按测试员的方式思考">
+      <i class="fa fa-chevron-left"></i> 按测试员的方式思考
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/26/mockserver-intro/" rel="next" title="MockServer 简介">
+      MockServer 简介 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mockserver"><span class="nav-number">1.</span> <span class="nav-text">MockServer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-mockserver"><span class="nav-number">1.1.</span> <span class="nav-text">What is
+MockServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proxying-with-mockserver"><span class="nav-number">1.2.</span> <span class="nav-text">Proxying
+with MockServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-use-mockserver"><span class="nav-number">1.3.</span> <span class="nav-text">Why use
+MockServer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mocking-dependencies-verifying-request"><span class="nav-number">1.3.1.</span> <span class="nav-text">Mocking
+Dependencies &amp; Verifying Request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isolating-single-service-application"><span class="nav-number">1.3.2.</span> <span class="nav-text">Isolating Single
+Service / Application</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-use-mockserver-as-a-proxy"><span class="nav-number">1.4.</span> <span class="nav-text">Why use MockServer as a
+proxy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#recording-requests-analysing-behaviour"><span class="nav-number">1.4.1.</span> <span class="nav-text">Recording
+Requests &amp; Analysing Behaviour</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#verifying-request"><span class="nav-number">1.4.2.</span> <span class="nav-text">Verifying Request</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="仲夏叶" src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">仲夏叶</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/stornado" title="GitHub → https://github.com/stornado" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ryan@zxytech.com" title="E-Mail → mailto:ryan@zxytech.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/ryanstornado" title="Twitter → https://twitter.com/ryanstornado" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">仲夏叶</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">254k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:51</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+  <div style="display: none;">
+    <script data-pjax="" src="//s95.cnzz.com/z_stat.php?id=1254452804&amp;web_id=1254452804"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="https://unpkg.com/mermaid@/dist/mermaid.min.js"></script>
+  
+  <style>
+    .mermaid {
+      background: var(--body-bg-color);
+    }
+  </style>
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+    </div>
+
+
+<script src="/bundle.js"></script><script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+;
+
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+;
+
+    if (window.mermaid) {
+      mermaid.initialize({'theme': 'forest'});
+    }
+  ;
+
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+;
+
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'debe3bf900ab05b9ae3b',
+      clientSecret: '3593904f48e12175e52c39855bcc80018f0831f8',
+      repo        : 'stornado.github.io',
+      owner       : 'stornado',
+      admin       : ['stornado'],
+      id          : '2d130cd356507bb1883a03f2975ddc46',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script></body></html>

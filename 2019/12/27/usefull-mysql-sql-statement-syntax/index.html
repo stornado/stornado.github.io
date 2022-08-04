@@ -1,0 +1,2010 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msapplication-config" content="/images/mstile-150x150.png">
+  <meta name="google-site-verification" content="Vb0EkkfGHD4yjSK3hHo9zSszfnkbr8wPpPDCVVtvxDg">
+  <meta name="msvalidate.01" content="BB5484EDD5B0CB57C647B2184772CBDC">
+  <meta name="baidu-site-verification" content="aYgTqx38cK">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"stornado.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="DATABASE ALTER DATABASE Syntax 1234567ALTER &amp;#123;DATABASE | SCHEMA&amp;#125; [db_name]    alter_specification ...alter_specification:    [DEFAULT] CHARACTER SET [=] charset_name  | [DEFAULT] COLLATE [=]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL Statement Syntax">
+<meta property="og:url" content="https://stornado.github.io/2019/12/27/usefull-mysql-sql-statement-syntax/index.html">
+<meta property="og:site_name" content="仲夏叶 | Stornado">
+<meta property="og:description" content="DATABASE ALTER DATABASE Syntax 1234567ALTER &amp;#123;DATABASE | SCHEMA&amp;#125; [db_name]    alter_specification ...alter_specification:    [DEFAULT] CHARACTER SET [=] charset_name  | [DEFAULT] COLLATE [=]">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-27T05:01:17.000Z">
+<meta property="article:modified_time" content="2022-08-04T06:23:25.769Z">
+<meta property="article:author" content="仲夏叶">
+<meta property="article:tag" content="syntax">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://stornado.github.io/2019/12/27/usefull-mysql-sql-statement-syntax/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MySQL Statement Syntax | 仲夏叶 | Stornado</title>
+  
+
+
+  <script data-pjax="">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e1d846feb2f251f98b0482d1f5fd6a4e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">仲夏叶 | Stornado</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">生命就是用求知的欲望燃烧自己</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/stornado" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stornado.github.io/2019/12/27/usefull-mysql-sql-statement-syntax/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="仲夏叶">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仲夏叶 | Stornado">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL Statement Syntax<a href="https://github.com/stornado/stornado.github.io/tree/develop/source/_posts/usefull-mysql-sql-statement-syntax.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-27 13:01:17" itemprop="dateCreated datePublished" datetime="2019-12-27T13:01:17+08:00">2019-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-04 14:23:25" itemprop="dateModified" datetime="2022-08-04T14:23:25+08:00">2022-08-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>54k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 ≈</span>
+              <span>49 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="database">DATABASE</h1>
+<h2 id="alter-database-syntax">ALTER DATABASE Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ALTER {DATABASE | SCHEMA} [db_name]</span><br><span class="line">    alter_specification ...</span><br><span class="line"></span><br><span class="line">alter_specification:</span><br><span class="line">    [DEFAULT] CHARACTER SET [=] charset_name</span><br><span class="line">  | [DEFAULT] COLLATE [=] collation_name</span><br><span class="line">  | DEFAULT ENCRYPTION [=] {'Y' | 'N'}</span><br></pre></td></tr></tbody></table></figure>
+<p><code>ALTER DATABASE</code> enables you to change the overall
+characteristics of a database. These characteristics are stored in the
+data dictionary. To use <code>ALTER DATABASE</code>, you need the
+<code>ALTER</code> privilege on the database. <code>ALTER SCHEMA</code>
+is a synonym for <code>ALTER DATABASE</code>.</p>
+<p>The database name can be omitted from the first syntax, in which case
+the statement applies to the default database.</p>
+<p>If you change the default character set or collation for a database,
+stored routines that use the database defaults must be dropped and
+recreated so that they use the new defaults. (In a stored routine,
+variables with character data types use the database defaults if the
+character set or collation are not specified explicitly.</p>
+<span id="more"></span>
+<h2 id="create-database-syntax">CREATE DATABASE Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name</span><br><span class="line">    [create_specification] ...</span><br><span class="line"></span><br><span class="line">create_specification:</span><br><span class="line">    [DEFAULT] CHARACTER SET [=] charset_name</span><br><span class="line">  | [DEFAULT] COLLATE [=] collation_name</span><br><span class="line">  | DEFAULT ENCRYPTION [=] {'Y' | 'N'}</span><br></pre></td></tr></tbody></table></figure>
+<p><code>CREATE DATABASE</code> creates a database with the given name.
+To use this statement, you need the <code>CREATE</code> privilege for
+the database. <code>CREATE SCHEMA</code> is a synonym for
+<code>CREATE DATABASE</code>.</p>
+<p>An error occurs if the database exists and you did not specify
+<code>IF NOT EXISTS</code>.</p>
+<p><code>CREATE DATABASE</code> is not permitted within a session that
+has an active <code>LOCK TABLES</code> statement.</p>
+<p><em><code>create_specification</code></em> options specify database
+characteristics. Database characteristics are stored in the data
+dictionary.</p>
+<ul>
+<li>The <code>CHARACTER SET</code> clause specifies the default database
+character set. The <code>COLLATE</code> clause specifies the default
+database collation.</li>
+</ul>
+<h2 id="drop-database-syntax">DROP DATABASE Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP {DATABASE | SCHEMA} [IF EXISTS] db_name</span><br></pre></td></tr></tbody></table></figure>
+<p><code>DROP DATABASE</code> drops all tables in the database and
+deletes the database. Be <em>very</em> careful with this statement! To
+use <code>DROP DATABASE</code>, you need the <code>DROP</code> privilege
+on the database. <code>DROP SCHEMA</code> is a synonym for
+<code>DROP DATABASE</code>.</p>
+<p><strong>Important</strong></p>
+<p>When a database is dropped, privileges granted specifically for the
+database are <em>not</em> automatically dropped. They must be dropped
+manually.</p>
+<p><code>IF EXISTS</code> is used to prevent an error from occurring if
+the database does not exist.</p>
+<p>If the default database is dropped, the default database is unset
+(the <code>DATABASE()</code> function returns <code>NULL</code>).</p>
+<p>If you use <code>DROP DATABASE</code> on a symbolically linked
+database, both the link and the original database are deleted.</p>
+<p><code>DROP DATABASE</code> returns the number of tables that were
+removed.</p>
+<p>The <code>DROP DATABASE</code> statement removes from the given
+database directory those files and directories that MySQL itself may
+create during normal operation. This includes all files with the
+extensions shown in the following list:</p>
+<ul>
+<li><code>.BAK</code></li>
+<li><code>.DAT</code></li>
+<li><code>.HSH</code></li>
+<li><code>.MRG</code></li>
+<li><code>.MYD</code></li>
+<li><code>.MYI</code></li>
+<li><code>.cfg</code></li>
+<li><code>.db</code></li>
+<li><code>.ibd</code></li>
+<li><code>.ndb</code></li>
+</ul>
+<p>If other files or directories remain in the database directory after
+MySQL removes those just listed, the database directory cannot be
+removed. In this case, you must remove any remaining files or
+directories manually and issue the <code>DROP DATABASE</code> statement
+again.</p>
+<p>Dropping a database does not remove any <code>TEMPORARY</code> tables
+that were created in that database. <code>TEMPORARY</code> tables are
+automatically removed when the session that created them ends.</p>
+<p>You can also drop databases with <strong>mysqladmin</strong>.</p>
+<h1 id="table">TABLE</h1>
+<h2 id="alter-table-syntax">ALTER TABLE Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE tbl_name</span><br><span class="line">    [alter_specification [, alter_specification] ...]</span><br><span class="line">    [partition_options]</span><br><span class="line"></span><br><span class="line">alter_specification:</span><br><span class="line">    table_options</span><br><span class="line">  | ADD [COLUMN] col_name column_definition</span><br><span class="line">        [FIRST | AFTER col_name]</span><br><span class="line">  | ADD [COLUMN] (col_name column_definition,...)</span><br><span class="line">  | ADD {INDEX|KEY} [index_name]</span><br><span class="line">        [index_type] (key_part,...) [index_option] ...</span><br><span class="line">  | ADD {FULLTEXT|SPATIAL} [INDEX|KEY] [index_name]</span><br><span class="line">        (key_part,...) [index_option] ...</span><br><span class="line">  | ADD [CONSTRAINT [symbol]] PRIMARY KEY</span><br><span class="line">        [index_type] (key_part,...)</span><br><span class="line">        [index_option] ...</span><br><span class="line">  | ADD [CONSTRAINT [symbol]] UNIQUE [INDEX|KEY]</span><br><span class="line">        [index_name] [index_type] (key_part,...)</span><br><span class="line">        [index_option] ...</span><br><span class="line">  | ADD [CONSTRAINT [symbol]] FOREIGN KEY</span><br><span class="line">        [index_name] (col_name,...)</span><br><span class="line">        reference_definition</span><br><span class="line">  | ADD check_constraint_definition</span><br><span class="line">  | DROP CHECK symbol</span><br><span class="line">  | ALTER CHECK symbol [NOT] ENFORCED</span><br><span class="line">  | ALGORITHM [=] {DEFAULT|INSTANT|INPLACE|COPY}</span><br><span class="line">  | ALTER [COLUMN] col_name {SET DEFAULT literal | DROP DEFAULT}</span><br><span class="line">  | ALTER INDEX index_name {VISIBLE | INVISIBLE}</span><br><span class="line">  | CHANGE [COLUMN] old_col_name new_col_name column_definition</span><br><span class="line">        [FIRST|AFTER col_name]</span><br><span class="line">  | [DEFAULT] CHARACTER SET [=] charset_name [COLLATE [=] collation_name]</span><br><span class="line">  | CONVERT TO CHARACTER SET charset_name [COLLATE collation_name]</span><br><span class="line">  | {DISABLE|ENABLE} KEYS</span><br><span class="line">  | {DISCARD|IMPORT} TABLESPACE</span><br><span class="line">  | DROP [COLUMN] col_name</span><br><span class="line">  | DROP {INDEX|KEY} index_name</span><br><span class="line">  | DROP PRIMARY KEY</span><br><span class="line">  | DROP FOREIGN KEY fk_symbol</span><br><span class="line">  | FORCE</span><br><span class="line">  | LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}</span><br><span class="line">  | MODIFY [COLUMN] col_name column_definition</span><br><span class="line">        [FIRST | AFTER col_name]</span><br><span class="line">  | ORDER BY col_name [, col_name] ...</span><br><span class="line">  | RENAME COLUMN old_col_name TO new_col_name</span><br><span class="line">  | RENAME {INDEX|KEY} old_index_name TO new_index_name</span><br><span class="line">  | RENAME [TO|AS] new_tbl_name</span><br><span class="line">  | {WITHOUT|WITH} VALIDATION</span><br><span class="line"></span><br><span class="line">partition_options:</span><br><span class="line">    partition_option [partition_option] ...</span><br><span class="line"></span><br><span class="line">partition_option:</span><br><span class="line">    ADD PARTITION (partition_definition)</span><br><span class="line">  | DROP PARTITION partition_names</span><br><span class="line">  | DISCARD PARTITION {partition_names | ALL} TABLESPACE</span><br><span class="line">  | IMPORT PARTITION {partition_names | ALL} TABLESPACE</span><br><span class="line">  | TRUNCATE PARTITION {partition_names | ALL}</span><br><span class="line">  | COALESCE PARTITION number</span><br><span class="line">  | REORGANIZE PARTITION partition_names INTO (partition_definitions)</span><br><span class="line">  | EXCHANGE PARTITION partition_name WITH TABLE tbl_name [{WITH|WITHOUT} VALIDATION]</span><br><span class="line">  | ANALYZE PARTITION {partition_names | ALL}</span><br><span class="line">  | CHECK PARTITION {partition_names | ALL}</span><br><span class="line">  | OPTIMIZE PARTITION {partition_names | ALL}</span><br><span class="line">  | REBUILD PARTITION {partition_names | ALL}</span><br><span class="line">  | REPAIR PARTITION {partition_names | ALL}</span><br><span class="line">  | REMOVE PARTITIONING</span><br><span class="line"></span><br><span class="line">key_part: {col_name [(length)] | (expr)} [ASC | DESC]</span><br><span class="line"></span><br><span class="line">index_type:</span><br><span class="line">    USING {BTREE | HASH}</span><br><span class="line"></span><br><span class="line">index_option:</span><br><span class="line">    KEY_BLOCK_SIZE [=] value</span><br><span class="line">  | index_type</span><br><span class="line">  | WITH PARSER parser_name</span><br><span class="line">  | COMMENT 'string'</span><br><span class="line">  | {VISIBLE | INVISIBLE}</span><br><span class="line"></span><br><span class="line">check_constraint_definition:</span><br><span class="line">    [CONSTRAINT [symbol]] CHECK (expr) [[NOT] ENFORCED]</span><br><span class="line"></span><br><span class="line">table_options:</span><br><span class="line">    table_option [[,] table_option] ...</span><br><span class="line"></span><br><span class="line">table_option:</span><br><span class="line">    AUTO_INCREMENT [=] value</span><br><span class="line">  | AVG_ROW_LENGTH [=] value</span><br><span class="line">  | [DEFAULT] CHARACTER SET [=] charset_name</span><br><span class="line">  | CHECKSUM [=] {0 | 1}</span><br><span class="line">  | [DEFAULT] COLLATE [=] collation_name</span><br><span class="line">  | COMMENT [=] 'string'</span><br><span class="line">  | COMPRESSION [=] {'ZLIB'|'LZ4'|'NONE'}</span><br><span class="line">  | CONNECTION [=] 'connect_string'</span><br><span class="line">  | {DATA|INDEX} DIRECTORY [=] 'absolute path to directory'</span><br><span class="line">  | DELAY_KEY_WRITE [=] {0 | 1}</span><br><span class="line">  | ENCRYPTION [=] {'Y' | 'N'}</span><br><span class="line">  | ENGINE [=] engine_name</span><br><span class="line">  | INSERT_METHOD [=] { NO | FIRST | LAST }</span><br><span class="line">  | KEY_BLOCK_SIZE [=] value</span><br><span class="line">  | MAX_ROWS [=] value</span><br><span class="line">  | MIN_ROWS [=] value</span><br><span class="line">  | PACK_KEYS [=] {0 | 1 | DEFAULT}</span><br><span class="line">  | PASSWORD [=] 'string'</span><br><span class="line">  | ROW_FORMAT [=] {DEFAULT|DYNAMIC|FIXED|COMPRESSED|REDUNDANT|COMPACT}</span><br><span class="line">  | STATS_AUTO_RECALC [=] {DEFAULT|0|1}</span><br><span class="line">  | STATS_PERSISTENT [=] {DEFAULT|0|1}</span><br><span class="line">  | STATS_SAMPLE_PAGES [=] value</span><br><span class="line">  | TABLESPACE tablespace_name [STORAGE {DISK|MEMORY}]</span><br><span class="line">  | UNION [=] (tbl_name[,tbl_name]...)</span><br><span class="line"></span><br><span class="line">partition_options:</span><br><span class="line">    (see CREATE TABLE options)</span><br></pre></td></tr></tbody></table></figure>
+<p><code>ALTER TABLE</code> changes the structure of a table. For
+example, you can add or delete columns, create or destroy indexes,
+change the type of existing columns, or rename columns or the table
+itself. You can also change characteristics such as the storage engine
+used for the table or the table comment.</p>
+<ul>
+<li><p>To use <code>ALTER TABLE</code>, you need <code>ALTER</code>,
+<code>CREATE</code>, and <code>INSERT</code> privileges for the table.
+Renaming a table requires<code>ALTER</code> and <code>DROP</code> on the
+old table, <code>ALTER</code>, <code>CREATE</code>, and
+<code>INSERT</code> on the new table.</p></li>
+<li><p>Following the table name, specify the alterations to be made. If
+none are given, <code>ALTER TABLE</code> does nothing.</p></li>
+<li><p>The syntax for many of the permissible alterations is similar to
+clauses of the <code>CREATE TABLE</code> statement.
+<em><code>column_definition</code></em> clauses use the same syntax for
+<code>ADD</code> and <code>CHANGE</code> as for
+<code>CREATE TABLE</code>. For more information.</p></li>
+<li><p>The word <code>COLUMN</code> is optional and can be omitted,
+except for <code>RENAME COLUMN</code> (to distinguish a column-renaming
+operation from the <code>RENAME</code> table-renaming
+operation).</p></li>
+<li><p>Multiple <code>ADD</code>, <code>ALTER</code>, <code>DROP</code>,
+and <code>CHANGE</code> clauses are permitted in a single
+<code>ALTER TABLE</code> statement, separated by commas. This is a MySQL
+extension to standard SQL, which permits only one of each clause per
+<code>ALTER TABLE</code>statement. For example, to drop multiple columns
+in a single statement, do this:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE t2 DROP COLUMN c, DROP COLUMN d;</span><br></pre></td></tr></tbody></table></figure></li>
+<li><p>If a storage engine does not support an attempted
+<code>ALTER TABLE</code> operation, a warning may result. Such warnings
+can be displayed with <code>SHOW WARNINGS</code>.</p></li>
+</ul>
+<h2 id="create-table-syntax">CREATE TABLE Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line">CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name</span><br><span class="line">    (create_definition,...)</span><br><span class="line">    [table_options]</span><br><span class="line">    [partition_options]</span><br><span class="line"></span><br><span class="line">CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name</span><br><span class="line">    [(create_definition,...)]</span><br><span class="line">    [table_options]</span><br><span class="line">    [partition_options]</span><br><span class="line">    [IGNORE | REPLACE]</span><br><span class="line">    [AS] query_expression</span><br><span class="line"></span><br><span class="line">CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name</span><br><span class="line">    { LIKE old_tbl_name | (LIKE old_tbl_name) }</span><br><span class="line"></span><br><span class="line">create_definition:</span><br><span class="line">    col_name column_definition</span><br><span class="line">  | {INDEX|KEY} [index_name] [index_type] (key_part,...)</span><br><span class="line">      [index_option] ...</span><br><span class="line">  | {FULLTEXT|SPATIAL} [INDEX|KEY] [index_name] (key_part,...)</span><br><span class="line">      [index_option] ...</span><br><span class="line">  | [CONSTRAINT [symbol]] PRIMARY KEY</span><br><span class="line">      [index_type] (key_part,...)</span><br><span class="line">      [index_option] ...</span><br><span class="line">  | [CONSTRAINT [symbol]] UNIQUE [INDEX|KEY]</span><br><span class="line">      [index_name] [index_type] (key_part,...)</span><br><span class="line">      [index_option] ...</span><br><span class="line">  | [CONSTRAINT [symbol]] FOREIGN KEY</span><br><span class="line">      [index_name] (col_name,...)</span><br><span class="line">      reference_definition</span><br><span class="line">  | check_constraint_definition</span><br><span class="line"></span><br><span class="line">column_definition:</span><br><span class="line">    data_type [NOT NULL | NULL] [DEFAULT {literal | (expr)} ]</span><br><span class="line">      [AUTO_INCREMENT] [UNIQUE [KEY]] [[PRIMARY] KEY]</span><br><span class="line">      [COMMENT 'string']</span><br><span class="line">      [COLLATE collation_name]</span><br><span class="line">      [COLUMN_FORMAT {FIXED|DYNAMIC|DEFAULT}]</span><br><span class="line">      [STORAGE {DISK|MEMORY}]</span><br><span class="line">      [reference_definition]</span><br><span class="line">      [check_constraint_definition]</span><br><span class="line">  | data_type</span><br><span class="line">      [COLLATE collation_name]</span><br><span class="line">      [GENERATED ALWAYS] AS (expr)</span><br><span class="line">      [VIRTUAL | STORED] [NOT NULL | NULL]</span><br><span class="line">      [UNIQUE [KEY]] [[PRIMARY] KEY]</span><br><span class="line">      [COMMENT 'string']</span><br><span class="line">      [reference_definition]</span><br><span class="line">      [check_constraint_definition]</span><br><span class="line"></span><br><span class="line">data_type:</span><br><span class="line">    (see Chapter 11, Data Types)</span><br><span class="line"></span><br><span class="line">key_part: {col_name [(length)] | (expr)} [ASC | DESC]</span><br><span class="line"></span><br><span class="line">index_type:</span><br><span class="line">    USING {BTREE | HASH}</span><br><span class="line"></span><br><span class="line">index_option:</span><br><span class="line">    KEY_BLOCK_SIZE [=] value</span><br><span class="line">  | index_type</span><br><span class="line">  | WITH PARSER parser_name</span><br><span class="line">  | COMMENT 'string'</span><br><span class="line">  | {VISIBLE | INVISIBLE}</span><br><span class="line"></span><br><span class="line">check_constraint_definition:</span><br><span class="line">    [CONSTRAINT [symbol]] CHECK (expr) [[NOT] ENFORCED]</span><br><span class="line"></span><br><span class="line">reference_definition:</span><br><span class="line">    REFERENCES tbl_name (key_part,...)</span><br><span class="line">      [MATCH FULL | MATCH PARTIAL | MATCH SIMPLE]</span><br><span class="line">      [ON DELETE reference_option]</span><br><span class="line">      [ON UPDATE reference_option]</span><br><span class="line"></span><br><span class="line">reference_option:</span><br><span class="line">    RESTRICT | CASCADE | SET NULL | NO ACTION | SET DEFAULT</span><br><span class="line"></span><br><span class="line">table_options:</span><br><span class="line">    table_option [[,] table_option] ...</span><br><span class="line"></span><br><span class="line">table_option:</span><br><span class="line">    AUTO_INCREMENT [=] value</span><br><span class="line">  | AVG_ROW_LENGTH [=] value</span><br><span class="line">  | [DEFAULT] CHARACTER SET [=] charset_name</span><br><span class="line">  | CHECKSUM [=] {0 | 1}</span><br><span class="line">  | [DEFAULT] COLLATE [=] collation_name</span><br><span class="line">  | COMMENT [=] 'string'</span><br><span class="line">  | COMPRESSION [=] {'ZLIB'|'LZ4'|'NONE'}</span><br><span class="line">  | CONNECTION [=] 'connect_string'</span><br><span class="line">  | {DATA|INDEX} DIRECTORY [=] 'absolute path to directory'</span><br><span class="line">  | DELAY_KEY_WRITE [=] {0 | 1}</span><br><span class="line">  | ENCRYPTION [=] {'Y' | 'N'}</span><br><span class="line">  | ENGINE [=] engine_name</span><br><span class="line">  | INSERT_METHOD [=] { NO | FIRST | LAST }</span><br><span class="line">  | KEY_BLOCK_SIZE [=] value</span><br><span class="line">  | MAX_ROWS [=] value</span><br><span class="line">  | MIN_ROWS [=] value</span><br><span class="line">  | PACK_KEYS [=] {0 | 1 | DEFAULT}</span><br><span class="line">  | PASSWORD [=] 'string'</span><br><span class="line">  | ROW_FORMAT [=] {DEFAULT|DYNAMIC|FIXED|COMPRESSED|REDUNDANT|COMPACT}</span><br><span class="line">  | STATS_AUTO_RECALC [=] {DEFAULT|0|1}</span><br><span class="line">  | STATS_PERSISTENT [=] {DEFAULT|0|1}</span><br><span class="line">  | STATS_SAMPLE_PAGES [=] value</span><br><span class="line">  | TABLESPACE tablespace_name [STORAGE {DISK|MEMORY}]</span><br><span class="line">  | UNION [=] (tbl_name[,tbl_name]...)</span><br><span class="line"></span><br><span class="line">partition_options:</span><br><span class="line">    PARTITION BY</span><br><span class="line">        { [LINEAR] HASH(expr)</span><br><span class="line">        | [LINEAR] KEY [ALGORITHM={1|2}] (column_list)</span><br><span class="line">        | RANGE{(expr) | COLUMNS(column_list)}</span><br><span class="line">        | LIST{(expr) | COLUMNS(column_list)} }</span><br><span class="line">    [PARTITIONS num]</span><br><span class="line">    [SUBPARTITION BY</span><br><span class="line">        { [LINEAR] HASH(expr)</span><br><span class="line">        | [LINEAR] KEY [ALGORITHM={1|2}] (column_list) }</span><br><span class="line">      [SUBPARTITIONS num]</span><br><span class="line">    ]</span><br><span class="line">    [(partition_definition [, partition_definition] ...)]</span><br><span class="line"></span><br><span class="line">partition_definition:</span><br><span class="line">    PARTITION partition_name</span><br><span class="line">        [VALUES</span><br><span class="line">            {LESS THAN {(expr | value_list) | MAXVALUE}</span><br><span class="line">            |</span><br><span class="line">            IN (value_list)}]</span><br><span class="line">        [[STORAGE] ENGINE [=] engine_name]</span><br><span class="line">        [COMMENT [=] 'string' ]</span><br><span class="line">        [DATA DIRECTORY [=] 'data_dir']</span><br><span class="line">        [INDEX DIRECTORY [=] 'index_dir']</span><br><span class="line">        [MAX_ROWS [=] max_number_of_rows]</span><br><span class="line">        [MIN_ROWS [=] min_number_of_rows]</span><br><span class="line">        [TABLESPACE [=] tablespace_name]</span><br><span class="line">        [(subpartition_definition [, subpartition_definition] ...)]</span><br><span class="line"></span><br><span class="line">subpartition_definition:</span><br><span class="line">    SUBPARTITION logical_name</span><br><span class="line">        [[STORAGE] ENGINE [=] engine_name]</span><br><span class="line">        [COMMENT [=] 'string' ]</span><br><span class="line">        [DATA DIRECTORY [=] 'data_dir']</span><br><span class="line">        [INDEX DIRECTORY [=] 'index_dir']</span><br><span class="line">        [MAX_ROWS [=] max_number_of_rows]</span><br><span class="line">        [MIN_ROWS [=] min_number_of_rows]</span><br><span class="line">        [TABLESPACE [=] tablespace_name]</span><br><span class="line"></span><br><span class="line">query_expression:</span><br><span class="line">    SELECT ...   (Some valid select or union statement)</span><br></pre></td></tr></tbody></table></figure>
+<p><code>CREATE TABLE</code> creates a table with the given name. You
+must have the <code>CREATE</code> privilege for the table.</p>
+<p>By default, tables are created in the default database, using the
+<code>InnoDB</code> storage engine. An error occurs if the table exists,
+if there is no default database, or if the database does not exist.</p>
+<p><strong>Temporary Tables</strong></p>
+<p>You can use the <code>TEMPORARY</code> keyword when creating a table.
+A <code>TEMPORARY</code> table is visible only within the current
+session, and is dropped automatically when the session is closed.</p>
+<p><strong>PRIMARY KEY</strong></p>
+<p>A unique index where all key columns must be defined as
+<code>NOT NULL</code>. If they are not explicitly declared as
+<code>NOT NULL</code>, MySQL declares them so implicitly (and silently).
+A table can have only one <code>PRIMARY KEY</code>. The name of a
+<code>PRIMARY KEY</code> is always <code>PRIMARY</code>, which thus
+cannot be used as the name for any other kind of index.</p>
+<p>If you do not have a <code>PRIMARY KEY</code> and an application asks
+for the <code>PRIMARY KEY</code> in your tables, MySQL returns the first
+<code>UNIQUE</code> index that has no <code>NULL</code> columns as the
+<code>PRIMARY KEY</code>.</p>
+<p>In <code>InnoDB</code> tables, keep the <code>PRIMARY KEY</code>
+short to minimize storage overhead for secondary indexes. Each secondary
+index entry contains a copy of the primary key columns for the
+corresponding row.</p>
+<p>In the created table, a <code>PRIMARY KEY</code> is placed first,
+followed by all <code>UNIQUE</code> indexes, and then the nonunique
+indexes. This helps the MySQL optimizer to prioritize which index to use
+and also more quickly to detect duplicated <code>UNIQUE</code> keys.</p>
+<p>A <code>PRIMARY KEY</code> can be a multiple-column index. However,
+you cannot create a multiple-column index using the
+<code>PRIMARY KEY</code> key attribute in a column specification. Doing
+so only marks that single column as primary. You must use a separate
+<code>PRIMARY KEY(*</code>key_part<code>*, ...)</code> clause.</p>
+<p>If a table has a <code>PRIMARY KEY</code> or
+<code>UNIQUE NOT NULL</code> index that consists of a single column that
+has an integer type, you can use <code>_rowid</code> to refer to the
+indexed column in <code>SELECT</code> statements, as described in Unique
+Indexes.</p>
+<p>In MySQL, the name of a <code>PRIMARY KEY</code> is
+<code>PRIMARY</code>. For other indexes, if you do not assign a name,
+the index is assigned the same name as the first indexed column, with an
+optional suffix (<code>_2</code>, <code>_3</code>, <code>...</code>) to
+make it unique. You can see index names for a table using
+<code>SHOW INDEX FROM *</code>tbl_name<code>*</code>.</p>
+<blockquote>
+<p>## <strong>Important</strong></p>
+<p>For users familiar with the ANSI/ISO SQL Standard, please note that
+no storage engine, including <code>InnoDB</code>, recognizes or enforces
+the <code>MATCH</code> clause used in referential integrity constraint
+definitions. Use of an explicit <code>MATCH</code>clause will not have
+the specified effect, and also causes <code>ON DELETE</code> and
+<code>ON UPDATE</code> clauses to be ignored. For these reasons,
+specifying <code>MATCH</code> should be avoided.</p>
+<p>The <code>MATCH</code> clause in the SQL standard controls how
+<code>NULL</code> values in a composite (multiple-column) foreign key
+are handled when comparing to a primary key. <code>InnoDB</code>
+essentially implements the semantics defined by
+<code>MATCH SIMPLE</code>, which permit a foreign key to be all or
+partially <code>NULL</code>. In that case, the (child table) row
+containing such a foreign key is permitted to be inserted, and does not
+match any row in the referenced (parent) table. It is possible to
+implement other semantics using triggers.</p>
+<p>Additionally, MySQL requires that the referenced columns be indexed
+for performance. However, <code>InnoDB</code> does not enforce any
+requirement that the referenced columns be declared <code>UNIQUE</code>
+or <code>NOT NULL</code>. The handling of foreign key references to
+nonunique keys or keys that contain <code>NULL</code> values is not well
+defined for operations such as <code>UPDATE</code> or
+<code>DELETE CASCADE</code>. You are advised to use foreign keys that
+reference only keys that are both <code>UNIQUE</code> (or
+<code>PRIMARY</code>) and <code>NOT NULL</code>.</p>
+<p>MySQL parses but ignores “inline <code>REFERENCES</code>
+specifications” (as defined in the SQL standard) where the references
+are defined as part of the column specification. MySQL accepts
+<code>REFERENCES</code> clauses only when specified as part of a
+separate <code>FOREIGN KEY</code> specification.</p>
+</blockquote>
+<h3 id="table-options">Table Options</h3>
+<p>Table options are used to optimize the behavior of the table. In most
+cases, you do not have to specify any of them. These options apply to
+all storage engines unless otherwise indicated. Options that do not
+apply to a given storage engine may be accepted and remembered as part
+of the table definition. Such options then apply if you later use
+<code>ALTER TABLE</code> to convert the table to use a different storage
+engine.</p>
+<ul>
+<li><p><code>ENGINE</code></p>
+<p>Specifies the storage engine for the table, using one of the names
+shown in the following table. The engine name can be unquoted or quoted.
+The quoted name <code>'DEFAULT'</code> is recognized but ignored.</p>
+<table>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Storage Engine</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>InnoDB</code></td>
+<td>Transaction-safe tables with row locking and foreign keys. The
+default storage engine for new tables.</td>
+</tr>
+<tr class="even">
+<td><code>MyISAM</code></td>
+<td>The binary portable storage engine that is primarily used for
+read-only or read-mostly workloads.</td>
+</tr>
+<tr class="odd">
+<td><code>MEMORY</code></td>
+<td>The data for this storage engine is stored only in memory.</td>
+</tr>
+<tr class="even">
+<td><code>CSV</code></td>
+<td>Tables that store rows in comma-separated values format.</td>
+</tr>
+<tr class="odd">
+<td><code>ARCHIVE</code></td>
+<td>The archiving storage engine.</td>
+</tr>
+<tr class="even">
+<td><code>EXAMPLE</code></td>
+<td>An example engine.</td>
+</tr>
+<tr class="odd">
+<td><code>FEDERATED</code></td>
+<td>Storage engine that accesses remote tables.</td>
+</tr>
+<tr class="even">
+<td><code>HEAP</code></td>
+<td>This is a synonym for <code>MEMORY</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>MERGE</code></td>
+<td>A collection of <code>MyISAM</code> tables used as one table. Also
+known as <code>MRG_MyISAM</code>.</td>
+</tr>
+<tr class="even">
+<td><code>NDB</code></td>
+<td>Clustered, fault-tolerant, memory-based tables, supporting
+transactions and foreign keys. Also known as
+<code>NDBCLUSTER</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>By default, if a storage engine is specified that is not available,
+the statement fails with an error. You can override this behavior by
+removing <code>NO_ENGINE_SUBSTITUTION</code> from the server SQL mode so
+that MySQL allows substitution of the specified engine with the default
+storage engine instead. Normally in such cases, this is
+<code>InnoDB</code>, which is the default value for the
+<code>default_storage_engine</code> system variable.
+When<code>NO_ENGINE_SUBSTITUTION</code> is disabled, a warning occurs if
+the storage engine specification is not honored.</p></li>
+<li><p><code>AUTO_INCREMENT</code></p>
+<p>The initial <code>AUTO_INCREMENT</code> value for the table. In MySQL
+8.0, this works for <code>MyISAM</code>, <code>MEMORY</code>,
+<code>InnoDB</code>, and <code>ARCHIVE</code> tables. To set the first
+auto-increment value for engines that do not support the
+<code>AUTO_INCREMENT</code> table option, insert a “dummy” row with a
+value one less than the desired value after creating the table, and then
+delete the dummy row.</p>
+<p>For engines that support the <code>AUTO_INCREMENT</code> table option
+in <code>CREATE TABLE</code> statements, you can also use
+<code>ALTER TABLE</code> tbl_name <code>AUTO_INCREMENT = N</code> to
+reset the <code>AUTO_INCREMENT</code> value. The value cannot be set
+lower than the maximum value currently in the column.</p></li>
+</ul>
+<h2 id="drop-table-syntax">DROP TABLE Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DROP [TEMPORARY] TABLE [IF EXISTS]</span><br><span class="line">    tbl_name [, tbl_name] ...</span><br><span class="line">    [RESTRICT | CASCADE]</span><br></pre></td></tr></tbody></table></figure>
+<p><code>DROP TABLE</code> removes one or more tables. You must have the
+<code>DROP</code> privilege for each table.</p>
+<p><em>Be careful</em> with this statement! For each table, it removes
+the table definition and all table data. If the table is partitioned,
+the statement removes the table definition, all its partitions, all data
+stored in those partitions, and all partition definitions associated
+with the dropped table.</p>
+<p>Dropping a table also drops any triggers for the table.</p>
+<h2 id="rename-table-syntax">RENAME TABLE Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RENAME TABLE</span><br><span class="line">    tbl_name TO new_tbl_name</span><br><span class="line">    [, tbl_name2 TO new_tbl_name2] ...</span><br></pre></td></tr></tbody></table></figure>
+<p><code>RENAME TABLE</code> renames one or more tables. You must have
+<code>ALTER</code> and <code>DROP</code> privileges for the original
+table, and <code>CREATE</code> and <code>INSERT</code> privileges for
+the new table.</p>
+<h2 id="truncate-table-syntax">TRUNCATE TABLE Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TRUNCATE [TABLE] tbl_name</span><br></pre></td></tr></tbody></table></figure>
+<p><code>TRUNCATE TABLE</code> empties a table completely. It requires
+the <code>DROP</code> privilege. Logically, <code>TRUNCATE TABLE</code>
+is similar to a <code>DELETE</code> statement that deletes all rows, or
+a sequence of <code>DROP TABLE</code> and <code>CREATE TABLE</code>
+statements.</p>
+<p>To achieve high performance, <code>TRUNCATE TABLE</code> bypasses the
+DML method of deleting data. Thus, it does not cause
+<code>ON DELETE</code> triggers to fire, it cannot be performed for
+<code>InnoDB</code> tables with parent-child foreign key relationships,
+and it cannot be rolled back like a DML operation. However,
+<code>TRUNCATE TABLE</code> operations on tables that use an atomic
+DDL-supported storage engine are either fully committed or rolled back
+if the server halts during their operation.</p>
+<p>Although <code>TRUNCATE TABLE</code> is similar to
+<code>DELETE</code>, it is classified as a DDL statement rather than a
+DML statement. It differs from <code>DELETE</code> in the following
+ways:</p>
+<ul>
+<li>Truncate operations drop and re-create the table, which is much
+faster than deleting rows one by one, particularly for large
+tables.</li>
+<li>Truncate operations cause an implicit commit, and so cannot be
+rolled back.</li>
+<li>Truncation operations cannot be performed if the session holds an
+active table lock.</li>
+<li><code>TRUNCATE TABLE</code> fails for an <code>InnoDB</code> table
+or <code>NDB</code> table if there are any <code>FOREIGN KEY</code>
+constraints from other tables that reference the table. Foreign key
+constraints between columns of the same table are permitted.</li>
+<li>Truncation operations do not return a meaningful value for the
+number of deleted rows. The usual result is “0 rows affected,” which
+should be interpreted as “no information.”</li>
+<li>As long as the table definition is valid, the table can be
+re-created as an empty table with <code>TRUNCATE TABLE</code>, even if
+the data or index files have become corrupted.</li>
+<li>Any <code>AUTO_INCREMENT</code> value is reset to its start value.
+This is true even for <code>MyISAM</code> and <code>InnoDB</code>, which
+normally do not reuse sequence values.</li>
+<li>When used with partitioned tables, <code>TRUNCATE TABLE</code>
+preserves the partitioning; that is, the data and index files are
+dropped and re-created, while the partition definitions are
+unaffected.</li>
+<li>The <code>TRUNCATE TABLE</code> statement does not invoke
+<code>ON DELETE</code> triggers.</li>
+<li>Truncating a corrupted <code>InnoDB</code> table is supported.</li>
+</ul>
+<p><code>TRUNCATE TABLE</code> for a table closes all handlers for the
+table that were opened with <code>HANDLER OPEN</code>.</p>
+<p><code>TRUNCATE TABLE</code> is treated for purposes of binary logging
+and replication as <code>DROP TABLE</code> followed by
+<code>CREATE TABLE</code>—that is, as DDL rather than DML. This is due
+to the fact that, when using <code>InnoDB</code> and other transactional
+storage engines where the transaction isolation level does not permit
+statement-based logging (<code>READ COMMITTED</code> or
+<code>READ UNCOMMITTED</code>), the statement was not logged and
+replicated when using <code>STATEMENT</code> or <code>MIXED</code>
+logging mode. (Bug #36763) However, it is still applied on replication
+slaves using <code>InnoDB</code> in the manner described previously.</p>
+<p>In MySQL 5.7 and earlier, on a system with a large buffer pool and
+<code>innodb_adaptive_hash_index</code> enabled, a
+<code>TRUNCATE TABLE</code> operation could cause a temporary drop in
+system performance due to an LRU scan that occurred when removing the
+table's adaptive hash index entries (Bug #68184). The remapping of
+<code>TRUNCATE TABLE</code> to <code>DROP TABLE</code> and
+<code>CREATE TABLE</code> in MySQL 8.0 avoids the problematic LRU
+scan.</p>
+<p><code>TRUNCATE TABLE</code> can be used with Performance Schema
+summary tables, but the effect is to reset the summary columns to 0 or
+<code>NULL</code>, not to remove rows.</p>
+<h2 id="create-index-syntax">CREATE INDEX Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">CREATE [UNIQUE | FULLTEXT | SPATIAL] INDEX index_name</span><br><span class="line">    [index_type]</span><br><span class="line">    ON tbl_name (key_part,...)</span><br><span class="line">    [index_option]</span><br><span class="line">    [algorithm_option | lock_option] ...</span><br><span class="line"></span><br><span class="line">key_part: {col_name [(length)] | (expr)} [ASC | DESC]</span><br><span class="line"></span><br><span class="line">index_option:</span><br><span class="line">    KEY_BLOCK_SIZE [=] value</span><br><span class="line">  | index_type</span><br><span class="line">  | WITH PARSER parser_name</span><br><span class="line">  | COMMENT 'string'</span><br><span class="line">  | {VISIBLE | INVISIBLE}</span><br><span class="line"></span><br><span class="line">index_type:</span><br><span class="line">    USING {BTREE | HASH}</span><br><span class="line"></span><br><span class="line">algorithm_option:</span><br><span class="line">    ALGORITHM [=] {DEFAULT | INPLACE | COPY}</span><br><span class="line"></span><br><span class="line">lock_option:</span><br><span class="line">    LOCK [=] {DEFAULT | NONE | SHARED | EXCLUSIVE}</span><br></pre></td></tr></tbody></table></figure>
+<p>Normally, you create all indexes on a table at the time the table
+itself is created with <code>CREATE TABLE</code>. This guideline is
+especially important for <code>InnoDB</code> tables, where the primary
+key determines the physical layout of rows in the data file.
+<code>CREATE INDEX</code> enables you to add indexes to existing
+tables.</p>
+<p><code>CREATE INDEX</code> is mapped to an <code>ALTER TABLE</code>
+statement to create indexes. <code>CREATE INDEX</code> cannot be used to
+create a <code>PRIMARY KEY</code>; use <code>ALTER TABLE</code>
+instead.</p>
+<p>An index specification of the form
+<code>(key_part1, key_part2, ...)</code> creates an index with multiple
+key parts. Index key values are formed by concatenating the values of
+the given key parts. For example
+<code>(col1, col2, col3)</code>specifies a multiple-column index with
+index keys consisting of values from <code>col1</code>,
+<code>col2</code>, and <code>col3</code>.</p>
+<p>A <code>key_part</code> specification can end with <code>ASC</code>
+or <code>DESC</code> to specify whether index values are stored in
+ascending or descending order. The default is ascending if no order
+specifier is given. <code>ASC</code> and <code>DESC</code> are not
+permitted for <code>HASH</code>indexes. <code>ASC</code> and
+<code>DESC</code> are also not supported for multi-valued indexes. As of
+MySQL 8.0.12, <code>ASC</code> and <code>DESC</code> are not permitted
+for <code>SPATIAL</code> indexes.</p>
+<h3 id="innodb-storage-engine-index-characteristics">InnoDB Storage
+Engine Index Characteristics**</h3>
+<table>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 17%">
+<col style="width: 26%">
+<col style="width: 16%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index Class</th>
+<th>Index Type</th>
+<th>Stores NULL VALUES</th>
+<th>Permits Multiple NULL Values</th>
+<th>IS NULL Scan Type</th>
+<th>IS NOT NULL Scan Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Primary key</td>
+<td><code>BTREE</code></td>
+<td>No</td>
+<td>No</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr class="even">
+<td>Unique</td>
+<td><code>BTREE</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+<tr class="odd">
+<td>Key</td>
+<td><code>BTREE</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+<tr class="even">
+<td><code>FULLTEXT</code></td>
+<td>N/A</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Table</td>
+<td>Table</td>
+</tr>
+<tr class="odd">
+<td><code>SPATIAL</code></td>
+<td>N/A</td>
+<td>No</td>
+<td>No</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<h3 id="myisam-storage-engine-index-characteristics"><strong>MyISAM
+Storage Engine Index Characteristics</strong></h3>
+<table>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 17%">
+<col style="width: 26%">
+<col style="width: 16%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index Class</th>
+<th>Index Type</th>
+<th>Stores NULL VALUES</th>
+<th>Permits Multiple NULL Values</th>
+<th>IS NULL Scan Type</th>
+<th>IS NOT NULL Scan Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Primary key</td>
+<td><code>BTREE</code></td>
+<td>No</td>
+<td>No</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr class="even">
+<td>Unique</td>
+<td><code>BTREE</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+<tr class="odd">
+<td>Key</td>
+<td><code>BTREE</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+<tr class="even">
+<td><code>FULLTEXT</code></td>
+<td>N/A</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Table</td>
+<td>Table</td>
+</tr>
+<tr class="odd">
+<td><code>SPATIAL</code></td>
+<td>N/A</td>
+<td>No</td>
+<td>No</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<h3 id="memory-storage-engine-index-characteristics"><strong>MEMORY
+Storage Engine Index Characteristics</strong></h3>
+<table>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 17%">
+<col style="width: 26%">
+<col style="width: 16%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index Class</th>
+<th>Index Type</th>
+<th>Stores NULL VALUES</th>
+<th>Permits Multiple NULL Values</th>
+<th>IS NULL Scan Type</th>
+<th>IS NOT NULL Scan Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Primary key</td>
+<td><code>BTREE</code></td>
+<td>No</td>
+<td>No</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr class="even">
+<td>Unique</td>
+<td><code>BTREE</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+<tr class="odd">
+<td>Key</td>
+<td><code>BTREE</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+<tr class="even">
+<td>Primary key</td>
+<td><code>HASH</code></td>
+<td>No</td>
+<td>No</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr class="odd">
+<td>Unique</td>
+<td><code>HASH</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+<tr class="even">
+<td>Key</td>
+<td><code>HASH</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ndb-storage-engine-index-characteristics"><strong>NDB Storage
+Engine Index Characteristics</strong></h3>
+<table>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 16%">
+<col style="width: 26%">
+<col style="width: 16%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Index Class</th>
+<th>Index Type</th>
+<th>Stores NULL VALUES</th>
+<th>Permits Multiple NULL Values</th>
+<th>IS NULL Scan Type</th>
+<th>IS NOT NULL Scan Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Primary key</td>
+<td><code>BTREE</code></td>
+<td>No</td>
+<td>No</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+<tr class="even">
+<td>Unique</td>
+<td><code>BTREE</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+<tr class="odd">
+<td>Key</td>
+<td><code>BTREE</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Index</td>
+<td>Index</td>
+</tr>
+<tr class="even">
+<td>Primary key</td>
+<td><code>HASH</code></td>
+<td>No</td>
+<td>No</td>
+<td>Table (see note 1)</td>
+<td>Table (see note 1)</td>
+</tr>
+<tr class="odd">
+<td>Unique</td>
+<td><code>HASH</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Table (see note 1)</td>
+<td>Table (see note 1)</td>
+</tr>
+<tr class="even">
+<td>Key</td>
+<td><code>HASH</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Table (see note 1)</td>
+<td>Table (see note 1)</td>
+</tr>
+</tbody>
+</table>
+<p>Table note:</p>
+<ol type="1">
+<li><code>USING HASH</code> prevents creation of an implicit ordered
+index.</li>
+</ol>
+<h2 id="drop-index-syntax">DROP INDEX Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DROP INDEX index_name ON tbl_name</span><br><span class="line">    [algorithm_option | lock_option] ...</span><br><span class="line"></span><br><span class="line">algorithm_option:</span><br><span class="line">    ALGORITHM [=] {DEFAULT|INPLACE|COPY}</span><br><span class="line"></span><br><span class="line">lock_option:</span><br><span class="line">    LOCK [=] {DEFAULT|NONE|SHARED|EXCLUSIVE}</span><br></pre></td></tr></tbody></table></figure>
+<p><code>DROP INDEX</code> drops the index named
+<em><code>index_name</code></em> from the table
+<em><code>tbl_name</code></em>. This statement is mapped to an
+<code>ALTER TABLE</code> statement to drop the index.</p>
+<p>To drop a primary key, the index name is always <code>PRIMARY</code>,
+which must be specified as a quoted identifier because
+<code>PRIMARY</code> is a reserved word:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP INDEX `PRIMARY` ON t;</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="delete-syntax">DELETE Syntax</h1>
+<p><code>DELETE</code> is a DML statement that removes rows from a
+table.</p>
+<p>A <code>DELETE</code> statement can start with a <code>WITH</code>
+clause to define common table expressions accessible within the
+<code>DELETE</code>.</p>
+<h2 id="single-table-syntax">Single-Table Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name [[AS] tbl_alias]</span><br><span class="line">    [PARTITION (partition_name [, partition_name] ...)]</span><br><span class="line">    [WHERE where_condition]</span><br><span class="line">    [ORDER BY ...]</span><br><span class="line">    [LIMIT row_count]</span><br></pre></td></tr></tbody></table></figure>
+<p>The <code>DELETE</code> statement deletes rows from
+<em><code>tbl_name</code></em> and returns the number of deleted rows.
+To check the number of deleted rows, call the <code>ROW_COUNT()</code>
+function.</p>
+<h2 id="main-clauses">Main Clauses</h2>
+<p>The conditions in the optional <code>WHERE</code> clause identify
+which rows to delete. With no <code>WHERE</code> clause, all rows are
+deleted.</p>
+<p><em><code>where_condition</code></em> is an expression that evaluates
+to true for each row to be deleted.</p>
+<p>If the <code>ORDER BY</code> clause is specified, the rows are
+deleted in the order that is specified. The <code>LIMIT</code> clause
+places a limit on the number of rows that can be deleted. These clauses
+apply to single-table deletes, but not multi-table deletes.</p>
+<h2 id="multiple-table-syntax">Multiple-Table Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DELETE [LOW_PRIORITY] [QUICK] [IGNORE]</span><br><span class="line">    tbl_name[.*] [, tbl_name[.*]] ...</span><br><span class="line">    FROM table_references</span><br><span class="line">    [WHERE where_condition]</span><br><span class="line"></span><br><span class="line">DELETE [LOW_PRIORITY] [QUICK] [IGNORE]</span><br><span class="line">    FROM tbl_name[.*] [, tbl_name[.*]] ...</span><br><span class="line">    USING table_references</span><br><span class="line">    [WHERE where_condition]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="privileges">Privileges</h2>
+<p>You need the <code>DELETE</code> privilege on a table to delete rows
+from it. You need only the <code>SELECT</code> privilege for any columns
+that are only read, such as those named in the <code>WHERE</code>
+clause.</p>
+<h2 id="performance">Performance</h2>
+<p>When you do not need to know the number of deleted rows, the
+<code>TRUNCATE TABLE</code> statement is a faster way to empty a table
+than a <code>DELETE</code> statement with no <code>WHERE</code> clause.
+Unlike <code>DELETE</code>, <code>TRUNCATE TABLE</code> cannot be used
+within a transaction or if you have a lock on the table.</p>
+<p>To ensure that a given <code>DELETE</code> statement does not take
+too much time, the MySQL-specific
+<code>LIMIT *</code>row_count<code>*</code>clause for
+<code>DELETE</code> specifies the maximum number of rows to be deleted.
+If the number of rows to delete is larger than the limit, repeat the
+<code>DELETE</code> statement until the number of affected rows is less
+than the <code>LIMIT</code> value.</p>
+<h2 id="subqueries">Subqueries</h2>
+<p>You cannot delete from a table and select from the same table in a
+subquery.</p>
+<h2 id="partitioned-table-support">Partitioned Table Support</h2>
+<p><code>DELETE</code> supports explicit partition selection using the
+<code>PARTITION</code> option, which takes a list of the comma-separated
+names of one or more partitions or subpartitions (or both) from which to
+select rows to be dropped. Partitions not included in the list are
+ignored. Given a partitioned table <code>t</code> with a partition named
+<code>p0</code>, executing the statement
+<code>DELETE FROM t PARTITION (p0)</code> has the same effect on the
+table as executing <code>ALTER TABLE t TRUNCATE PARTITION (p0)</code>;
+in both cases, all rows in partition <code>p0</code> are dropped.</p>
+<p><code>PARTITION</code> can be used along with a <code>WHERE</code>
+condition, in which case the condition is tested only on rows in the
+listed partitions. For example,
+<code>DELETE FROM t PARTITION (p0) WHERE c &lt; 5</code> deletes rows
+only from partition <code>p0</code>for which the condition
+<code>c &lt; 5</code> is true; rows in any other partitions are not
+checked and thus not affected by the<code>DELETE</code>.</p>
+<p>The <code>PARTITION</code> option can also be used in multiple-table
+<code>DELETE</code> statements. You can use up to one such option per
+table named in the <code>FROM</code> option.</p>
+<h2 id="auto-increment-columns">Auto-Increment Columns</h2>
+<p>If you delete the row containing the maximum value for an
+<code>AUTO_INCREMENT</code> column, the value is not reused for a
+<code>MyISAM</code> or <code>InnoDB</code> table. If you delete all rows
+in the table with <code>DELETE FROM *</code>tbl_name<code>*</code>
+(without a <code>WHERE</code> clause) in<code>autocommit</code> mode,
+the sequence starts over for all storage engines except
+<code>InnoDB</code> and <code>MyISAM</code>.</p>
+<p>For <code>MyISAM</code> tables, you can specify an
+<code>AUTO_INCREMENT</code> secondary column in a multiple-column key.
+In this case, reuse of values deleted from the top of the sequence
+occurs even for <code>MyISAM</code> tables.</p>
+<h2 id="modifiers">Modifiers</h2>
+<p>The <code>DELETE</code> statement supports the following
+modifiers:</p>
+<ul>
+<li><p>If you specify the <code>LOW_PRIORITY</code> modifier, the server
+delays execution of the <code>DELETE</code> until no other clients are
+reading from the table. This affects only storage engines that use only
+table-level locking (such as <code>MyISAM</code>, <code>MEMORY</code>,
+and <code>MERGE</code>).</p></li>
+<li><p>For <code>MyISAM</code> tables, if you use the <code>QUICK</code>
+modifier, the storage engine does not merge index leaves during delete,
+which may speed up some kinds of delete operations.</p></li>
+<li><p>The <code>IGNORE</code> modifier causes MySQL to ignore errors
+during the process of deleting rows. (Errors encountered during the
+parsing stage are processed in the usual manner.) Errors that are
+ignored due to the use of <code>IGNORE</code> are returned as warnings.
+For more information, see Comparison of the IGNORE Keyword and Strict
+SQL Mode.</p></li>
+</ul>
+<h2 id="order-of-deletion">Order of Deletion</h2>
+<p>If the <code>DELETE</code> statement includes an
+<code>ORDER BY</code> clause, rows are deleted in the order specified by
+the clause. This is useful primarily in conjunction with
+<code>LIMIT</code>. For example, the following statement finds rows
+matching the <code>WHERE</code>clause, sorts them by
+<code>timestamp_column</code>, and deletes the first (oldest) one:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM somelog WHERE user = 'jcole'</span><br><span class="line">ORDER BY timestamp_column LIMIT 1;</span><br></pre></td></tr></tbody></table></figure>
+<p><code>ORDER BY</code> also helps to delete rows in an order required
+to avoid referential integrity violations.</p>
+<h2 id="innodb-tables">InnoDB Tables</h2>
+<p>If you are deleting many rows from a large table, you may exceed the
+lock table size for an <code>InnoDB</code> table. To avoid this problem,
+or simply to minimize the time that the table remains locked, the
+following strategy (which does not use<code>DELETE</code> at all) might
+be helpful:</p>
+<ol type="1">
+<li><p>Select the rows <em>not</em> to be deleted into an empty table
+that has the same structure as the original table:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO t_copy SELECT * FROM t WHERE ... ;</span><br></pre></td></tr></tbody></table></figure></li>
+<li><p>Use <code>RENAME TABLE</code> to atomically move the original
+table out of the way and rename the copy to the original name:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RENAME TABLE t TO t_old, t_copy TO t;</span><br></pre></td></tr></tbody></table></figure></li>
+<li><p>Drop the original table:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE t_old;</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<p>No other sessions can access the tables involved while
+<code>RENAME TABLE</code> executes, so the rename operation is not
+subject to concurrency problems.</p>
+<h2 id="myisam-tables">MyISAM Tables</h2>
+<p>In <code>MyISAM</code> tables, deleted rows are maintained in a
+linked list and subsequent <code>INSERT</code> operations reuse old row
+positions. To reclaim unused space and reduce file sizes, use the
+<code>OPTIMIZE TABLE</code> statement or the
+<strong>myisamchk</strong>utility to reorganize tables.
+<code>OPTIMIZE TABLE</code> is easier to use, but
+<strong>myisamchk</strong> is faster.</p>
+<p>The <code>QUICK</code> modifier affects whether index leaves are
+merged for delete operations. <code>DELETE QUICK</code> is most useful
+for applications where index values for deleted rows are replaced by
+similar index values from rows inserted later. In this case, the holes
+left by deleted values are reused.</p>
+<p><code>DELETE QUICK</code> is not useful when deleted values lead to
+underfilled index blocks spanning a range of index values for which new
+inserts occur again. In this case, use of <code>QUICK</code> can lead to
+wasted space in the index that remains unreclaimed. Here is an example
+of such a scenario:</p>
+<ol type="1">
+<li>Create a table that contains an indexed <code>AUTO_INCREMENT</code>
+column.</li>
+<li>Insert many rows into the table. Each insert results in an index
+value that is added to the high end of the index.</li>
+<li>Delete a block of rows at the low end of the column range using
+<code>DELETE QUICK</code>.</li>
+</ol>
+<p>In this scenario, the index blocks associated with the deleted index
+values become underfilled but are not merged with other index blocks due
+to the use of <code>QUICK</code>. They remain underfilled when new
+inserts occur, because new rows do not have index values in the deleted
+range. Furthermore, they remain underfilled even if you later use
+<code>DELETE</code>without <code>QUICK</code>, unless some of the
+deleted index values happen to lie in index blocks within or adjacent to
+the underfilled blocks. To reclaim unused index space under these
+circumstances, use <code>OPTIMIZE TABLE</code>.</p>
+<p>If you are going to delete many rows from a table, it might be faster
+to use <code>DELETE QUICK</code> followed by
+<code>OPTIMIZE TABLE</code>. This rebuilds the index rather than
+performing many index block merge operations.</p>
+<h2 id="multi-table-deletes">Multi-Table Deletes</h2>
+<p>You can specify multiple tables in a <code>DELETE</code> statement to
+delete rows from one or more tables depending on the condition in the
+<code>WHERE</code> clause. You cannot use <code>ORDER BY</code> or
+<code>LIMIT</code> in a multiple-table <code>DELETE</code>.
+The<em><code>table_references</code></em> clause lists the tables
+involved in the join.</p>
+<p>For the first multiple-table syntax, only matching rows from the
+tables listed before the <code>FROM</code> clause are deleted. For the
+second multiple-table syntax, only matching rows from the tables listed
+in the <code>FROM</code> clause (before the <code>USING</code>clause)
+are deleted. The effect is that you can delete rows from many tables at
+the same time and have additional tables that are used only for
+searching:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE t1, t2 FROM t1 INNER JOIN t2 INNER JOIN t3</span><br><span class="line">WHERE t1.id=t2.id AND t2.id=t3.id;</span><br></pre></td></tr></tbody></table></figure>
+<p>Or:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM t1, t2 USING t1 INNER JOIN t2 INNER JOIN t3</span><br><span class="line">WHERE t1.id=t2.id AND t2.id=t3.id;</span><br></pre></td></tr></tbody></table></figure>
+<p>These statements use all three tables when searching for rows to
+delete, but delete matching rows only from tables<code>t1</code> and
+<code>t2</code>.</p>
+<p>The preceding examples use <code>INNER JOIN</code>, but
+multiple-table <code>DELETE</code> statements can use other types of
+join permitted in <code>SELECT</code> statements, such as
+<code>LEFT JOIN</code>. For example, to delete rows that exist in
+<code>t1</code> that have no match in <code>t2</code>, use a
+<code>LEFT JOIN</code>:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE t1 FROM t1 LEFT JOIN t2 ON t1.id=t2.id WHERE t2.id IS NULL;</span><br></pre></td></tr></tbody></table></figure>
+<p>The syntax permits <code>.*</code> after each
+<em><code>tbl_name</code></em> for compatibility with
+<strong>Access</strong>.</p>
+<p>If you use a multiple-table <code>DELETE</code> statement involving
+<code>InnoDB</code> tables for which there are foreign key constraints,
+the MySQL optimizer might process tables in an order that differs from
+that of their parent/child relationship. In this case, the statement
+fails and rolls back. Instead, you should delete from a single table and
+rely on the <code>ON DELETE</code>capabilities that <code>InnoDB</code>
+provides to cause the other tables to be modified accordingly.</p>
+<p>Note</p>
+<p>If you declare an alias for a table, you must use the alias when
+referring to the table:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE t1 FROM test AS t1, test2 WHERE ...</span><br></pre></td></tr></tbody></table></figure>
+<p>Table aliases in a multiple-table <code>DELETE</code> should be
+declared only in the <em><code>table_references</code></em> part of the
+statement. Elsewhere, alias references are permitted but not alias
+declarations.</p>
+<p>Correct:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DELETE a1, a2 FROM t1 AS a1 INNER JOIN t2 AS a2</span><br><span class="line">WHERE a1.id=a2.id;</span><br><span class="line"></span><br><span class="line">DELETE FROM a1, a2 USING t1 AS a1 INNER JOIN t2 AS a2</span><br><span class="line">WHERE a1.id=a2.id;</span><br></pre></td></tr></tbody></table></figure>
+<p>Incorrect:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DELETE t1 AS a1, t2 AS a2 FROM t1 INNER JOIN t2</span><br><span class="line">WHERE a1.id=a2.id;</span><br><span class="line"></span><br><span class="line">DELETE FROM t1 AS a1, t2 AS a2 USING t1 INNER JOIN t2</span><br><span class="line">WHERE a1.id=a2.id;</span><br></pre></td></tr></tbody></table></figure>
+<p>Table aliases are also supported for single-table <code>DELETE</code>
+statements beginning with MySQL 8.0.16.</p>
+<h1 id="insert-syntax">INSERT Syntax</h1>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]</span><br><span class="line">    [INTO] tbl_name</span><br><span class="line">    [PARTITION (partition_name [, partition_name] ...)]</span><br><span class="line">    [(col_name [, col_name] ...)]</span><br><span class="line">    {VALUES | VALUE} (value_list) [, (value_list)] ...</span><br><span class="line">    [ON DUPLICATE KEY UPDATE assignment_list]</span><br><span class="line"></span><br><span class="line">INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]</span><br><span class="line">    [INTO] tbl_name</span><br><span class="line">    [PARTITION (partition_name [, partition_name] ...)]</span><br><span class="line">    SET assignment_list</span><br><span class="line">    [ON DUPLICATE KEY UPDATE assignment_list]</span><br><span class="line"></span><br><span class="line">INSERT [LOW_PRIORITY | HIGH_PRIORITY] [IGNORE]</span><br><span class="line">    [INTO] tbl_name</span><br><span class="line">    [PARTITION (partition_name [, partition_name] ...)]</span><br><span class="line">    [(col_name [, col_name] ...)]</span><br><span class="line">    SELECT ...</span><br><span class="line">    [ON DUPLICATE KEY UPDATE assignment_list]</span><br><span class="line"></span><br><span class="line">value:</span><br><span class="line">    {expr | DEFAULT}</span><br><span class="line"></span><br><span class="line">value_list:</span><br><span class="line">    value [, value] ...</span><br><span class="line"></span><br><span class="line">assignment:</span><br><span class="line">    col_name = value</span><br><span class="line"></span><br><span class="line">assignment_list:</span><br><span class="line">    assignment [, assignment] ...</span><br></pre></td></tr></tbody></table></figure>
+<p><code>INSERT</code> inserts new rows into an existing table. The
+<code>INSERT ... VALUES</code> and <code>INSERT ... SET</code> forms of
+the statement insert rows based on explicitly specified values. The
+<code>INSERT ... SELECT</code> form inserts rows selected from another
+table or tables. <code>INSERT</code> with an
+<code>ON DUPLICATE KEY UPDATE</code> clause enables existing rows to be
+updated if a row to be inserted would cause a duplicate value in a
+<code>UNIQUE</code> index or <code>PRIMARY KEY</code>.</p>
+<p>Inserting into a table requires the <code>INSERT</code> privilege for
+the table. If the <code>ON DUPLICATE KEY UPDATE</code> clause is used
+and a duplicate key causes an <code>UPDATE</code> to be performed
+instead, the statement requires the <code>UPDATE</code> privilege for
+the columns to be updated. For columns that are read but not modified
+you need only the <code>SELECT</code> privilege (such as for a column
+referenced only on the right hand side of an
+<em><code>col_name</code></em>=<em><code>expr</code></em> assignment in
+an <code>ON DUPLICATE KEY UPDATE</code> clause).</p>
+<p>When inserting into a partitioned table, you can control which
+partitions and subpartitions accept new rows. The<code>PARTITION</code>
+option takes a list of the comma-separated names of one or more
+partitions or subpartitions (or both) of the table. If any of the rows
+to be inserted by a given <code>INSERT</code> statement do not match one
+of the partitions listed, the<code>INSERT</code> statement fails with
+the error Found a row not matching the given partition set.</p>
+<h2 id="insert-...-select-syntax">INSERT ... SELECT Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">INSERT [LOW_PRIORITY | HIGH_PRIORITY] [IGNORE]</span><br><span class="line">    [INTO] tbl_name</span><br><span class="line">    [PARTITION (partition_name [, partition_name] ...)]</span><br><span class="line">    [(col_name [, col_name] ...)]</span><br><span class="line">    SELECT ...</span><br><span class="line">    [ON DUPLICATE KEY UPDATE assignment_list]</span><br><span class="line"></span><br><span class="line">value:</span><br><span class="line">    {expr | DEFAULT}</span><br><span class="line"></span><br><span class="line">assignment:</span><br><span class="line">    col_name = value</span><br><span class="line"></span><br><span class="line">assignment_list:</span><br><span class="line">    assignment [, assignment] ...</span><br></pre></td></tr></tbody></table></figure>
+<p>With <code>INSERT ... SELECT</code>, you can quickly insert many rows
+into a table from the result of a <code>SELECT</code> statement, which
+can select from one or many tables. For example:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO tbl_temp2 (fld_id)</span><br><span class="line">  SELECT tbl_temp1.fld_order_id</span><br><span class="line">  FROM tbl_temp1 WHERE tbl_temp1.fld_order_id &gt; 100;</span><br></pre></td></tr></tbody></table></figure>
+<p>The following conditions hold for <code>INSERT ... SELECT</code>
+statements:</p>
+<ul>
+<li><p>Specify <code>IGNORE</code> to ignore rows that would cause
+duplicate-key violations.</p></li>
+<li><p>The target table of the <code>INSERT</code> statement may appear
+in the <code>FROM</code> clause of the <code>SELECT</code> part of the
+query. However, you cannot insert into a table and select from the same
+table in a subquery.</p>
+<p>When selecting from and inserting into the same table, MySQL creates
+an internal temporary table to hold the rows from the
+<code>SELECT</code> and then inserts those rows into the target table.
+However, you cannot use <code>INSERT INTO t ... SELECT ... FROM t</code>
+when <code>t</code> is a <code>TEMPORARY</code> table, because
+<code>TEMPORARY</code> tables cannot be referred to twice in the same
+statement.</p></li>
+<li><p><code>AUTO_INCREMENT</code> columns work as usual.</p></li>
+<li><p>To ensure that the binary log can be used to re-create the
+original tables, MySQL does not permit concurrent inserts for
+<code>INSERT ... SELECT</code> statements (see Section 8.11.3,
+“Concurrent Inserts”).</p></li>
+<li><p>To avoid ambiguous column reference problems when the
+<code>SELECT</code> and the <code>INSERT</code> refer to the same table,
+provide a unique alias for each table used in the <code>SELECT</code>
+part, and qualify column names in that part with the appropriate
+alias.</p></li>
+</ul>
+<p>You can explicitly select which partitions or subpartitions (or both)
+of the source or target table (or both) are to be used with a
+<code>PARTITION</code> option following the name of the table. When
+<code>PARTITION</code> is used with the name of the source table in the
+<code>SELECT</code> portion of the statement, rows are selected only
+from the partitions or subpartitions named in its partition list. When
+<code>PARTITION</code> is used with the name of the target table for the
+<code>INSERT</code> portion of the statement, it must be possible to
+insert all rows selected into the partitions or subpartitions named in
+the partition list following the option. Otherwise, the
+<code>INSERT ... SELECT</code> statement fails. For more information and
+examples.</p>
+<p>The order in which a <code>SELECT</code> statement with no
+<code>ORDER BY</code> clause returns rows is nondeterministic. This
+means that, when using replication, there is no guarantee that such a
+<code>SELECT</code> returns rows in the same order on the master and the
+slave, which can lead to inconsistencies between them. To prevent this
+from occurring, always write <code>INSERT ... SELECT</code> statements
+that are to be replicated using an <code>ORDER BY</code> clause that
+produces the same row order on the master and the slave.</p>
+<h2 id="insert-...-on-duplicate-key-update-syntax">INSERT ... ON
+DUPLICATE KEY UPDATE Syntax</h2>
+<p>If you specify an <code>ON DUPLICATE KEY UPDATE</code> clause and a
+row to be inserted would cause a duplicate value in a
+<code>UNIQUE</code> index or <code>PRIMARY KEY</code>, an
+<code>UPDATE</code> of the old row occurs. For example, if column
+<code>a</code> is declared as <code>UNIQUE</code>and contains the value
+<code>1</code>, the following two statements have similar effect:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO t1 (a,b,c) VALUES (1,2,3)</span><br><span class="line">  ON DUPLICATE KEY UPDATE c=c+1;</span><br><span class="line"></span><br><span class="line">UPDATE t1 SET c=c+1 WHERE a=1;</span><br></pre></td></tr></tbody></table></figure>
+<p>(The effects are not identical for an <code>InnoDB</code> table where
+<code>a</code> is an auto-increment column. With an auto-increment
+column, an <code>INSERT</code> statement increases the auto-increment
+value but <code>UPDATE</code> does not.)</p>
+<p>If column <code>b</code> is also unique, the <code>INSERT</code> is
+equivalent to this <code>UPDATE</code> statement instead:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE t1 SET c=c+1 WHERE a=1 OR b=2 LIMIT 1;</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="load-data-syntax">LOAD DATA Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">LOAD DATA</span><br><span class="line">    [LOW_PRIORITY | CONCURRENT] [LOCAL]</span><br><span class="line">    INFILE 'file_name'</span><br><span class="line">    [REPLACE | IGNORE]</span><br><span class="line">    INTO TABLE tbl_name</span><br><span class="line">    [PARTITION (partition_name [, partition_name] ...)]</span><br><span class="line">    [CHARACTER SET charset_name]</span><br><span class="line">    [{FIELDS | COLUMNS}</span><br><span class="line">        [TERMINATED BY 'string']</span><br><span class="line">        [[OPTIONALLY] ENCLOSED BY 'char']</span><br><span class="line">        [ESCAPED BY 'char']</span><br><span class="line">    ]</span><br><span class="line">    [LINES</span><br><span class="line">        [STARTING BY 'string']</span><br><span class="line">        [TERMINATED BY 'string']</span><br><span class="line">    ]</span><br><span class="line">    [IGNORE number {LINES | ROWS}]</span><br><span class="line">    [(col_name_or_user_var</span><br><span class="line">        [, col_name_or_user_var] ...)]</span><br><span class="line">    [SET col_name={expr | DEFAULT},</span><br><span class="line">        [, col_name={expr | DEFAULT}] ...]</span><br></pre></td></tr></tbody></table></figure>
+<p>The <code>LOAD DATA</code> statement reads rows from a text file into
+a table at a very high speed. <code>LOAD DATA</code> is the complement
+of <code>SELECT ... INTO OUTFILE</code>. To write data from a table to a
+file, use <code>SELECT ... INTO OUTFILE</code>. To read the file back
+into a table, use <code>LOAD DATA</code>. The syntax of the
+<code>FIELDS</code> and <code>LINES</code> clauses is the same for both
+statements.</p>
+<h2 id="replace-syntax">REPLACE Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">REPLACE [LOW_PRIORITY | DELAYED]</span><br><span class="line">    [INTO] tbl_name</span><br><span class="line">    [PARTITION (partition_name [, partition_name] ...)]</span><br><span class="line">    [(col_name [, col_name] ...)]</span><br><span class="line">    {VALUES | VALUE} (value_list) [, (value_list)] ...</span><br><span class="line"></span><br><span class="line">REPLACE [LOW_PRIORITY | DELAYED]</span><br><span class="line">    [INTO] tbl_name</span><br><span class="line">    [PARTITION (partition_name [, partition_name] ...)]</span><br><span class="line">    SET assignment_list</span><br><span class="line"></span><br><span class="line">REPLACE [LOW_PRIORITY | DELAYED]</span><br><span class="line">    [INTO] tbl_name</span><br><span class="line">    [PARTITION (partition_name [, partition_name] ...)]</span><br><span class="line">    [(col_name [, col_name] ...)]</span><br><span class="line">    SELECT ...</span><br><span class="line"></span><br><span class="line">value:</span><br><span class="line">    {expr | DEFAULT}</span><br><span class="line"></span><br><span class="line">value_list:</span><br><span class="line">    value [, value] ...</span><br><span class="line"></span><br><span class="line">assignment:</span><br><span class="line">    col_name = value</span><br><span class="line"></span><br><span class="line">assignment_list:</span><br><span class="line">    assignment [, assignment] ...</span><br></pre></td></tr></tbody></table></figure>
+<p><code>REPLACE</code> works exactly like <code>INSERT</code>, except
+that if an old row in the table has the same value as a new row for
+a<code>PRIMARY KEY</code> or a <code>UNIQUE</code> index, the old row is
+deleted before the new row is inserted.</p>
+<p>You can also load data files by using the
+<strong>mysqlimport</strong> utility; <strong>mysqlimport</strong>
+operates by sending a <code>LOAD DATA</code> statement to the
+server.</p>
+<h1 id="select-syntax">SELECT Syntax</h1>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">    [ALL | DISTINCT | DISTINCTROW ]</span><br><span class="line">      [HIGH_PRIORITY]</span><br><span class="line">      [STRAIGHT_JOIN]</span><br><span class="line">      [SQL_SMALL_RESULT] [SQL_BIG_RESULT] [SQL_BUFFER_RESULT]</span><br><span class="line">      [SQL_NO_CACHE] [SQL_CALC_FOUND_ROWS]</span><br><span class="line">    select_expr [, select_expr ...]</span><br><span class="line">    [FROM table_references</span><br><span class="line">      [PARTITION partition_list]</span><br><span class="line">    [WHERE where_condition]</span><br><span class="line">    [GROUP BY {col_name | expr | position}, ... [WITH ROLLUP]]</span><br><span class="line">    [HAVING where_condition]</span><br><span class="line">    [WINDOW window_name AS (window_spec)</span><br><span class="line">        [, window_name AS (window_spec)] ...]</span><br><span class="line">    [ORDER BY {col_name | expr | position}</span><br><span class="line">      [ASC | DESC], ... [WITH ROLLUP]]</span><br><span class="line">    [LIMIT {[offset,] row_count | row_count OFFSET offset}]</span><br><span class="line">    [INTO OUTFILE 'file_name'</span><br><span class="line">        [CHARACTER SET charset_name]</span><br><span class="line">        export_options</span><br><span class="line">      | INTO DUMPFILE 'file_name'</span><br><span class="line">      | INTO var_name [, var_name]]</span><br><span class="line">    [FOR {UPDATE | SHARE} [OF tbl_name [, tbl_name] ...] [NOWAIT | SKIP LOCKED] </span><br><span class="line">      | LOCK IN SHARE MODE]]</span><br></pre></td></tr></tbody></table></figure>
+<p><code>SELECT</code> is used to retrieve rows selected from one or
+more tables, and can include <code>UNION</code> statements and
+subqueries. A <code>SELECT</code> statement can start with a
+<code>WITH</code> clause to define common table expressions accessible
+within the <code>SELECT</code>.</p>
+<p>The most commonly used clauses of <code>SELECT</code> statements are
+these:</p>
+<ul>
+<li><p>Each <em><code>select_expr</code></em> indicates a column that
+you want to retrieve. There must be at least one
+<em><code>select_expr</code></em>.</p></li>
+<li><p><em><code>table_references</code></em> indicates the table or
+tables from which to retrieve rows.</p></li>
+<li><p><code>SELECT</code> supports explicit partition selection using
+the <code>PARTITION</code> with a list of partitions or subpartitions
+(or both) following the name of the table in a
+<em><code>table_reference</code></em>. In this case, rows are selected
+only from the partitions listed, and any other partitions of the table
+are ignored.</p>
+<p><code>SELECT ... PARTITION</code> from tables using storage engines
+such as <code>MyISAM</code> that perform table-level locks (and thus
+partition locks) lock only the partitions or subpartitions named by the
+<code>PARTITION</code> option.</p>
+<p>For more information, see Partitioning and Locking.</p></li>
+<li><p>The <code>WHERE</code> clause, if given, indicates the condition
+or conditions that rows must satisfy to be
+selected.<em><code>where_condition</code></em> is an expression that
+evaluates to true for each row to be selected. The statement selects all
+rows if there is no <code>WHERE</code> clause.</p>
+<p>In the <code>WHERE</code> expression, you can use any of the
+functions and operators that MySQL supports, except for aggregate
+(summary) functions.</p></li>
+</ul>
+<p><code>SELECT</code> can also be used to retrieve rows computed
+without reference to any table.</p>
+<p>For example:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT 1 + 1;</span><br><span class="line">        -&gt; 2</span><br></pre></td></tr></tbody></table></figure>
+<p>You are permitted to specify <code>DUAL</code> as a dummy table name
+in situations where no tables are referenced:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT 1 + 1 FROM DUAL;</span><br><span class="line">        -&gt; 2</span><br></pre></td></tr></tbody></table></figure>
+<p><code>DUAL</code> is purely for the convenience of people who require
+that all <code>SELECT</code> statements should have <code>FROM</code>
+and possibly other clauses. MySQL may ignore the clauses. MySQL does not
+require <code>FROM DUAL</code> if no tables are referenced.</p>
+<p>In general, clauses used must be given in exactly the order shown in
+the syntax description. For example, a <code>HAVING</code>clause must
+come after any <code>GROUP BY</code> clause and before any
+<code>ORDER BY</code> clause. The exception is that the
+<code>INTO</code>clause can appear either as shown in the syntax
+description or immediately following the
+<em><code>select_expr</code></em> list.</p>
+<h2 id="join-syntax">JOIN Syntax</h2>
+<p>MySQL supports the following <code>JOIN</code> syntax for the
+<em><code>table_references</code></em> part of <code>SELECT</code>
+statements and multiple-table <code>DELETE</code> and
+<code>UPDATE</code> statements:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">table_references:</span><br><span class="line">    escaped_table_reference [, escaped_table_reference] ...</span><br><span class="line"></span><br><span class="line">escaped_table_reference:</span><br><span class="line">    table_reference</span><br><span class="line">  | { OJ table_reference }</span><br><span class="line"></span><br><span class="line">table_reference:</span><br><span class="line">    table_factor</span><br><span class="line">  | joined_table</span><br><span class="line"></span><br><span class="line">table_factor:</span><br><span class="line">    tbl_name [PARTITION (partition_names)]</span><br><span class="line">        [[AS] alias] [index_hint_list]</span><br><span class="line">  | table_subquery [AS] alias [(col_list)]</span><br><span class="line">  | ( table_references )</span><br><span class="line"></span><br><span class="line">joined_table:</span><br><span class="line">    table_reference {[INNER | CROSS] JOIN | STRAIGHT_JOIN} table_factor [join_specification]</span><br><span class="line">  | table_reference {LEFT|RIGHT} [OUTER] JOIN table_reference join_specification</span><br><span class="line">  | table_reference NATURAL [INNER | {LEFT|RIGHT} [OUTER]] JOIN table_factor</span><br><span class="line"></span><br><span class="line">join_specification:</span><br><span class="line">    ON search_condition</span><br><span class="line">  | USING (join_column_list)</span><br><span class="line"></span><br><span class="line">join_column_list:</span><br><span class="line">    column_name [, column_name] ...</span><br><span class="line"></span><br><span class="line">index_hint_list:</span><br><span class="line">    index_hint [, index_hint] ...</span><br><span class="line"></span><br><span class="line">index_hint:</span><br><span class="line">    USE {INDEX|KEY}</span><br><span class="line">      [FOR {JOIN|ORDER BY|GROUP BY}] ([index_list])</span><br><span class="line">  | {IGNORE|FORCE} {INDEX|KEY}</span><br><span class="line">      [FOR {JOIN|ORDER BY|GROUP BY}] (index_list)</span><br><span class="line"></span><br><span class="line">index_list:</span><br><span class="line">    index_name [, index_name] ...</span><br></pre></td></tr></tbody></table></figure>
+<p>A table reference is also known as a join expression.</p>
+<p>A table reference (when it refers to a partitioned table) may contain
+a <code>PARTITION</code> option, including a list of comma-separated
+partitions, subpartitions, or both. This option follows the name of the
+table and precedes any alias declaration. The effect of this option is
+that rows are selected only from the listed partitions or subpartitions.
+Any partitions or subpartitions not named in the list are ignored.</p>
+<h2 id="union-syntax">UNION Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT ...</span><br><span class="line">UNION [ALL | DISTINCT] SELECT ...</span><br><span class="line">[UNION [ALL | DISTINCT] SELECT ...]</span><br></pre></td></tr></tbody></table></figure>
+<p><code>UNION</code> is used to combine the result from multiple
+<code>SELECT</code> statements into a single result set.</p>
+<p>The column names from the first <code>SELECT</code> statement are
+used as the column names for the results returned. Selected columns
+listed in corresponding positions of each <code>SELECT</code> statement
+should have the same data type. (For example, the first column selected
+by the first statement should have the same type as the first column
+selected by the other statements.)</p>
+<h1 id="update-syntax">UPDATE Syntax</h1>
+<p><code>UPDATE</code> is a DML statement that modifies rows in a
+table.</p>
+<p>An <code>UPDATE</code> statement can start with a <code>WITH</code>
+clause to define common table expressions accessible within
+the<code>UPDATE</code>. See Section 13.2.13, “WITH Syntax (Common Table
+Expressions)”.</p>
+<p>Single-table syntax:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">UPDATE [LOW_PRIORITY] [IGNORE] table_reference</span><br><span class="line">    SET assignment_list</span><br><span class="line">    [WHERE where_condition]</span><br><span class="line">    [ORDER BY ...]</span><br><span class="line">    [LIMIT row_count]</span><br><span class="line"></span><br><span class="line">value:</span><br><span class="line">    {expr | DEFAULT}</span><br><span class="line"></span><br><span class="line">assignment:</span><br><span class="line">    col_name = value</span><br><span class="line"></span><br><span class="line">assignment_list:</span><br><span class="line">    assignment [, assignment] ...</span><br></pre></td></tr></tbody></table></figure>
+<p>Multiple-table syntax:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPDATE [LOW_PRIORITY] [IGNORE] table_references</span><br><span class="line">    SET assignment_list</span><br><span class="line">    [WHERE where_condition]</span><br></pre></td></tr></tbody></table></figure>
+<p>For the single-table syntax, the <code>UPDATE</code> statement
+updates columns of existing rows in the named table with new values. The
+<code>SET</code> clause indicates which columns to modify and the values
+they should be given. Each value can be given as an expression, or the
+keyword <code>DEFAULT</code> to set a column explicitly to its default
+value. The <code>WHERE</code> clause, if given, specifies the conditions
+that identify which rows to update. With no <code>WHERE</code> clause,
+all rows are updated. If the<code>ORDER BY</code> clause is specified,
+the rows are updated in the order that is specified. The
+<code>LIMIT</code> clause places a limit on the number of rows that can
+be updated.</p>
+<p>For the multiple-table syntax, <code>UPDATE</code> updates rows in
+each table named in <em><code>table_references</code></em> that satisfy
+the conditions. Each matching row is updated once, even if it matches
+the conditions multiple times. For multiple-table syntax,
+<code>ORDER BY</code> and <code>LIMIT</code> cannot be used.</p>
+<p>For partitioned tables, both the single-single and multiple-table
+forms of this statement support the use of a<code>PARTITION</code>
+option as part of a table reference. This option takes a list of one or
+more partitions or subpartitions (or both). Only the partitions (or
+subpartitions) listed are checked for matches, and a row that is not in
+any of these partitions or subpartitions is not updated, whether it
+satisfies the <em><code>where_condition</code></em> or not.</p>
+<p>Note</p>
+<p>Unlike the case when using <code>PARTITION</code> with an
+<code>INSERT</code> or <code>REPLACE</code> statement, an otherwise
+valid <code>UPDATE ... PARTITION</code> statement is considered
+successful even if no rows in the listed partitions (or subpartitions)
+match the<em><code>where_condition</code></em>.</p>
+<h1 id="transactional-and-locking-statements">Transactional and Locking
+Statements</h1>
+<p>MySQL supports local transactions (within a given client session)
+through statements such as
+<code>SET autocommit</code>,<code>START TRANSACTION</code>,
+<code>COMMIT</code>, and <code>ROLLBACK</code>.</p>
+<h2 id="start-transaction-commit-and-rollback-syntax">START TRANSACTION,
+COMMIT, and ROLLBACK Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">START TRANSACTION</span><br><span class="line">    [transaction_characteristic [, transaction_characteristic] ...]</span><br><span class="line"></span><br><span class="line">transaction_characteristic: {</span><br><span class="line">    WITH CONSISTENT SNAPSHOT</span><br><span class="line">  | READ WRITE</span><br><span class="line">  | READ ONLY</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">BEGIN [WORK]</span><br><span class="line">COMMIT [WORK] [AND [NO] CHAIN] [[NO] RELEASE]</span><br><span class="line">ROLLBACK [WORK] [AND [NO] CHAIN] [[NO] RELEASE]</span><br><span class="line">SET autocommit = {0 | 1}</span><br></pre></td></tr></tbody></table></figure>
+<p>These statements provide control over use of transactions:</p>
+<ul>
+<li><code>START TRANSACTION</code> or <code>BEGIN</code> start a new
+transaction.</li>
+<li><code>COMMIT</code> commits the current transaction, making its
+changes permanent.</li>
+<li><code>ROLLBACK</code> rolls back the current transaction, canceling
+its changes.</li>
+<li><code>SET autocommit</code> disables or enables the default
+autocommit mode for the current session.</li>
+</ul>
+<p>By default, MySQL runs with autocommit mode enabled. This means that,
+when not otherwise inside a transaction, each statement is atomic, as if
+it were surrounded by <code>START TRANSACTION</code> and
+<code>COMMIT</code>. You cannot use <code>ROLLBACK</code>to undo the
+effect; however, if an error occurs during statement execution, the
+statement is rolled back.</p>
+<p>To disable autocommit mode implicitly for a single series of
+statements, use the <code>START TRANSACTION</code> statement:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">START TRANSACTION;</span><br><span class="line">SELECT @A:=SUM(salary) FROM table1 WHERE type=1;</span><br><span class="line">UPDATE table2 SET summary=@A WHERE type=1;</span><br><span class="line">COMMIT;</span><br></pre></td></tr></tbody></table></figure>
+<p>With <code>START TRANSACTION</code>, autocommit remains disabled
+until you end the transaction with <code>COMMIT</code> or
+<code>ROLLBACK</code>. The autocommit mode then reverts to its previous
+state.</p>
+<h2 id="statements-that-cannot-be-rolled-back">Statements That Cannot Be
+Rolled Back</h2>
+<p>Some statements cannot be rolled back. In general, these include data
+definition language (DDL) statements, such as those that create or drop
+databases, those that create, drop, or alter tables or stored
+routines.</p>
+<p>You should design your transactions not to include such statements.
+If you issue a statement early in a transaction that cannot be rolled
+back, and then another statement later fails, the full effect of the
+transaction cannot be rolled back in such cases by issuing a
+<code>ROLLBACK</code> statement.</p>
+<h2 id="statements-that-cause-an-implicit-commit">Statements That Cause
+an Implicit Commit</h2>
+<p>The statements listed in this section (and any synonyms for them)
+implicitly end any transaction active in the current session, as if you
+had done a <code>COMMIT</code> before executing the statement.</p>
+<p>Most of these statements also cause an implicit commit after
+executing. The intent is to handle each such statement in its own
+special transaction. Transaction-control and locking statements are
+exceptions: If an implicit commit occurs before execution, another does
+not occur after.</p>
+<ul>
+<li><p><strong>Data definition language (DDL) statements that define or
+modify database objects.</strong> <code>ALTER EVENT</code>,
+<code>ALTER FUNCTION</code>, <code>ALTER PROCEDURE</code>,
+<code>ALTER SERVER</code>, <code>ALTER TABLE</code>,
+<code>ALTER VIEW</code>, <code>CREATE DATABASE</code>,
+<code>CREATE EVENT</code>,<code>CREATE FUNCTION</code>,
+<code>CREATE INDEX</code>, <code>CREATE PROCEDURE</code>,
+<code>CREATE ROLE</code>, <code>CREATE SERVER</code>,
+<code>CREATE SPATIAL REFERENCE SYSTEM</code>, <code>CREATE TABLE</code>,
+<code>CREATE TRIGGER</code>, <code>CREATE VIEW</code>,
+<code>DROP DATABASE</code>, <code>DROP EVENT</code>,
+<code>DROP FUNCTION</code>, <code>DROP INDEX</code>,
+<code>DROP PROCEDURE</code>, <code>DROP ROLE</code>,
+<code>DROP SERVER</code>, <code>DROP SPATIAL REFERENCE SYSTEM</code>,
+<code>DROP TABLE</code>, <code>DROP TRIGGER</code>,
+<code>DROP VIEW</code>, <code>INSTALL PLUGIN</code>,
+<code>RENAME TABLE</code>, <code>TRUNCATE TABLE</code>,
+<code>UNINSTALL PLUGIN</code>.</p>
+<p><code>CREATE TABLE</code> and <code>DROP TABLE</code> statements do
+not commit a transaction if the <code>TEMPORARY</code> keyword is used.
+(This does not apply to other operations on temporary tables such as
+<code>ALTER TABLE</code> and <code>CREATE INDEX</code>, which do cause a
+commit.) However, although no implicit commit occurs, neither can the
+statement be rolled back, which means that the use of such statements
+causes transactional atomicity to be violated. For example, if you use
+<code>CREATE TEMPORARY TABLE</code> and then roll back the transaction,
+the table remains in existence.</p>
+<p>The <code>CREATE TABLE</code> statement in <code>InnoDB</code> is
+processed as a single transaction. This means that a
+<code>ROLLBACK</code> from the user does not undo
+<code>CREATE TABLE</code> statements the user made during that
+transaction.</p>
+<p><code>CREATE TABLE ... SELECT</code> causes an implicit commit before
+and after the statement is executed when you are creating nontemporary
+tables. (No commit occurs for
+<code>CREATE TEMPORARY TABLE ... SELECT</code>.)</p></li>
+<li><p><strong>Statements that implicitly use or modify tables in the
+<code>mysql</code> database.</strong> <code>ALTER USER</code>,
+<code>CREATE USER</code>, <code>DROP USER</code>,<code>GRANT</code>,
+<code>RENAME USER</code>, <code>REVOKE</code>,
+<code>SET PASSWORD</code>.</p></li>
+<li><p><strong>Transaction-control and locking statements.</strong>
+<code>BEGIN</code>, <code>LOCK TABLES</code>,
+<code>SET autocommit = 1</code> (if the value is not already 1),
+<code>START TRANSACTION</code>, <code>UNLOCK TABLES</code>.</p>
+<p><code>UNLOCK TABLES</code> commits a transaction only if any tables
+currently have been locked with <code>LOCK TABLES</code> to acquire
+nontransactional table locks. A commit does not occur for
+<code>UNLOCK TABLES</code> following
+<code>FLUSH TABLES WITH READ LOCK</code> because the latter statement
+does not acquire table-level locks.</p>
+<p>Transactions cannot be nested. This is a consequence of the implicit
+commit performed for any current transaction when you issue a
+<code>START TRANSACTION</code> statement or one of its synonyms.</p>
+<p>Statements that cause an implicit commit cannot be used in an XA
+transaction while the transaction is in an <code>ACTIVE</code>state.</p>
+<p>The <code>BEGIN</code> statement differs from the use of the
+<code>BEGIN</code> keyword that starts a <code>BEGIN ... END</code>
+compound statement. The latter does not cause an implicit commit. See
+Section 13.6.1, “BEGIN ... END Compound-Statement Syntax”.</p></li>
+<li><p><strong>Data loading statements.</strong> <code>LOAD DATA</code>.
+<code>LOAD DATA</code> causes an implicit commit only for tables using
+the <code>NDB</code> storage engine.</p></li>
+<li><p><strong>Administrative statements.</strong>
+<code>ANALYZE TABLE</code>, <code>CACHE INDEX</code>,
+<code>CHECK TABLE</code>, <code>FLUSH</code>,
+<code>LOAD INDEX INTO CACHE</code>, <code>OPTIMIZE TABLE</code>,
+<code>REPAIR TABLE</code>, <code>RESET</code> (but not
+<code>RESET PERSIST</code>).</p></li>
+<li><p><strong>Replication control statements</strong>.
+<code>START SLAVE</code>, <code>STOP SLAVE</code>,
+<code>RESET SLAVE</code>, <code>CHANGE MASTER TO</code>.</p></li>
+</ul>
+<h1 id="user">USER</h1>
+<h2 id="create-user-syntax">CREATE USER Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER [IF NOT EXISTS]</span><br><span class="line">    user [auth_option] [, user [auth_option]] ...</span><br><span class="line">    DEFAULT ROLE role [, role ] ...</span><br><span class="line">    [REQUIRE {NONE | tls_option [[AND] tls_option] ...}]</span><br><span class="line">    [WITH resource_option [resource_option] ...]</span><br><span class="line">    [password_option | lock_option] ...</span><br><span class="line"></span><br><span class="line">user:</span><br><span class="line">    (see Section 6.2.4, “Specifying Account Names”)</span><br><span class="line"></span><br><span class="line">auth_option: {</span><br><span class="line">    IDENTIFIED BY 'auth_string'</span><br><span class="line">  | IDENTIFIED WITH auth_plugin</span><br><span class="line">  | IDENTIFIED WITH auth_plugin BY 'auth_string'</span><br><span class="line">  | IDENTIFIED WITH auth_plugin AS 'auth_string'</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">tls_option: {</span><br><span class="line">   SSL</span><br><span class="line"> | X509</span><br><span class="line"> | CIPHER 'cipher'</span><br><span class="line"> | ISSUER 'issuer'</span><br><span class="line"> | SUBJECT 'subject'</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">resource_option: {</span><br><span class="line">    MAX_QUERIES_PER_HOUR count</span><br><span class="line">  | MAX_UPDATES_PER_HOUR count</span><br><span class="line">  | MAX_CONNECTIONS_PER_HOUR count</span><br><span class="line">  | MAX_USER_CONNECTIONS count</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">password_option: {</span><br><span class="line">    PASSWORD EXPIRE [DEFAULT | NEVER | INTERVAL N DAY]</span><br><span class="line">  | PASSWORD HISTORY {DEFAULT | N}</span><br><span class="line">  | PASSWORD REUSE INTERVAL {DEFAULT | N DAY}</span><br><span class="line">  | PASSWORD REQUIRE CURRENT [DEFAULT | OPTIONAL]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">lock_option: {</span><br><span class="line">    ACCOUNT LOCK</span><br><span class="line">  | ACCOUNT UNLOCK</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>The <code>CREATE USER</code> statement creates new MySQL accounts. It
+enables authentication, role, SSL/TLS, resource-limit, and
+password-management properties to be established for new accounts. It
+also controls whether accounts are initially locked or unlocked.</p>
+<p>To use <code>CREATE USER</code>, you must have the global
+<code>CREATE USER</code> privilege, or the <code>INSERT</code> privilege
+for the <code>mysql</code>system database. When the
+<code>read_only</code> system variable is enabled,
+<code>CREATE USER</code> additionally requires the
+<code>CONNECTION_ADMIN</code> or <code>SUPER</code> privilege.</p>
+<p><code>CREATE USER</code> either succeeds for all named users or rolls
+back and has no effect if any error occurs. By default, an error occurs
+if you try to create a user that already exists. If the
+<code>IF NOT EXISTS</code> clause is given, the statement produces a
+warning for each named user that already exists, rather than an
+error.</p>
+<p>Important</p>
+<p>Under some circumstances, <code>CREATE USER</code> may be recorded in
+server logs or on the client side in a history file such as
+<code>~/.mysql_history</code>, which means that cleartext passwords may
+be read by anyone having read access to that information. For
+information about the conditions under which this occurs for the server
+logs and how to control it. For similar information about client-side
+logging.</p>
+<h2 id="drop-user-syntax">DROP USER Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP USER [IF EXISTS] user [, user] ...</span><br></pre></td></tr></tbody></table></figure>
+<p>The <code>DROP USER</code> statement removes one or more MySQL
+accounts and their privileges. It removes privilege rows for the account
+from all grant tables.</p>
+<h2 id="grant-syntax">GRANT Syntax</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">GRANT</span><br><span class="line">    priv_type [(column_list)]</span><br><span class="line">      [, priv_type [(column_list)]] ...</span><br><span class="line">    ON [object_type] priv_level</span><br><span class="line">    TO user_or_role [, user_or_role] ...</span><br><span class="line">    [WITH GRANT OPTION]</span><br><span class="line">    [AS user</span><br><span class="line">        [WITH ROLE</span><br><span class="line">            DEFAULT</span><br><span class="line">          | NONE</span><br><span class="line">          | ALL</span><br><span class="line">          | ALL EXCEPT role [, role ] ...</span><br><span class="line">          | role [, role ] ...</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">GRANT PROXY ON user_or_role</span><br><span class="line">    TO user_or_role [, user_or_role] ...</span><br><span class="line">    [WITH GRANT OPTION]</span><br><span class="line"></span><br><span class="line">GRANT role [, role] ...</span><br><span class="line">    TO user_or_role [, user_or_role] ...</span><br><span class="line">    [WITH ADMIN OPTION]</span><br><span class="line"></span><br><span class="line">object_type: {</span><br><span class="line">    TABLE</span><br><span class="line">  | FUNCTION</span><br><span class="line">  | PROCEDURE</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">priv_level: {</span><br><span class="line">    *</span><br><span class="line">  | *.*</span><br><span class="line">  | db_name.*</span><br><span class="line">  | db_name.tbl_name</span><br><span class="line">  | tbl_name</span><br><span class="line">  | db_name.routine_name</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">user_or_role: {</span><br><span class="line">    user (see Section 6.2.4, “Specifying Account Names”)</span><br><span class="line">  | role (see Section 6.2.5, “Specifying Role Names”)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>The <code>GRANT</code> statement assigns privileges and roles to
+MySQL user accounts and roles. There are several aspects to the
+<code>GRANT</code> statement, described under the following topics:</p>
+<ul>
+<li>GRANT General Overview</li>
+<li>Object Quoting Guidelines</li>
+<li>Account Names</li>
+<li>Privileges Supported by MySQL</li>
+<li>Global Privileges</li>
+<li>Database Privileges</li>
+<li>Table Privileges</li>
+<li>Column Privileges</li>
+<li>Stored Routine Privileges</li>
+<li>Proxy User Privileges</li>
+<li>Granting Roles</li>
+<li>The <code>AS</code> Clause and Privilege Restrictions</li>
+<li>Other Account Characteristics</li>
+<li>MySQL and Standard SQL Versions of GRANT</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2019/12/28/mysql-show-syntax-and-performance-status-variable/" rel="bookmark">MySQL show syntax and server status variables</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/14/html-chars/" rel="bookmark">HTML 特殊符号编码对照表</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2019/12/26/mysql-replication-abc/" rel="bookmark">MySQL Replication 简介</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2019/12/16/mysql-support-storage-engine/" rel="bookmark">MySQL 8.0 Supported Storage Engines</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="仲夏叶 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="仲夏叶 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>仲夏叶
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://stornado.github.io/2019/12/27/usefull-mysql-sql-statement-syntax/" title="MySQL Statement Syntax">https://stornado.github.io/2019/12/27/usefull-mysql-sql-statement-syntax/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/syntax/" rel="tag"><i class="fa fa-tag"></i> syntax</a>
+              <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/26/mysql-replication-abc/" rel="prev" title="MySQL Replication 简介">
+      <i class="fa fa-chevron-left"></i> MySQL Replication 简介
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/28/mysql-show-syntax-and-performance-status-variable/" rel="next" title="MySQL show syntax and server status variables">
+      MySQL show syntax and server status variables <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#database"><span class="nav-number">1.</span> <span class="nav-text">DATABASE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#alter-database-syntax"><span class="nav-number">1.1.</span> <span class="nav-text">ALTER DATABASE Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create-database-syntax"><span class="nav-number">1.2.</span> <span class="nav-text">CREATE DATABASE Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drop-database-syntax"><span class="nav-number">1.3.</span> <span class="nav-text">DROP DATABASE Syntax</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#table"><span class="nav-number">2.</span> <span class="nav-text">TABLE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#alter-table-syntax"><span class="nav-number">2.1.</span> <span class="nav-text">ALTER TABLE Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create-table-syntax"><span class="nav-number">2.2.</span> <span class="nav-text">CREATE TABLE Syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#table-options"><span class="nav-number">2.2.1.</span> <span class="nav-text">Table Options</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drop-table-syntax"><span class="nav-number">2.3.</span> <span class="nav-text">DROP TABLE Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rename-table-syntax"><span class="nav-number">2.4.</span> <span class="nav-text">RENAME TABLE Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#truncate-table-syntax"><span class="nav-number">2.5.</span> <span class="nav-text">TRUNCATE TABLE Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create-index-syntax"><span class="nav-number">2.6.</span> <span class="nav-text">CREATE INDEX Syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#innodb-storage-engine-index-characteristics"><span class="nav-number">2.6.1.</span> <span class="nav-text">InnoDB Storage
+Engine Index Characteristics**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#myisam-storage-engine-index-characteristics"><span class="nav-number">2.6.2.</span> <span class="nav-text">MyISAM
+Storage Engine Index Characteristics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#memory-storage-engine-index-characteristics"><span class="nav-number">2.6.3.</span> <span class="nav-text">MEMORY
+Storage Engine Index Characteristics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ndb-storage-engine-index-characteristics"><span class="nav-number">2.6.4.</span> <span class="nav-text">NDB Storage
+Engine Index Characteristics</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drop-index-syntax"><span class="nav-number">2.7.</span> <span class="nav-text">DROP INDEX Syntax</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#delete-syntax"><span class="nav-number">3.</span> <span class="nav-text">DELETE Syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#single-table-syntax"><span class="nav-number">3.1.</span> <span class="nav-text">Single-Table Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-clauses"><span class="nav-number">3.2.</span> <span class="nav-text">Main Clauses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multiple-table-syntax"><span class="nav-number">3.3.</span> <span class="nav-text">Multiple-Table Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#privileges"><span class="nav-number">3.4.</span> <span class="nav-text">Privileges</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#performance"><span class="nav-number">3.5.</span> <span class="nav-text">Performance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subqueries"><span class="nav-number">3.6.</span> <span class="nav-text">Subqueries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partitioned-table-support"><span class="nav-number">3.7.</span> <span class="nav-text">Partitioned Table Support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#auto-increment-columns"><span class="nav-number">3.8.</span> <span class="nav-text">Auto-Increment Columns</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modifiers"><span class="nav-number">3.9.</span> <span class="nav-text">Modifiers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#order-of-deletion"><span class="nav-number">3.10.</span> <span class="nav-text">Order of Deletion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#innodb-tables"><span class="nav-number">3.11.</span> <span class="nav-text">InnoDB Tables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#myisam-tables"><span class="nav-number">3.12.</span> <span class="nav-text">MyISAM Tables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multi-table-deletes"><span class="nav-number">3.13.</span> <span class="nav-text">Multi-Table Deletes</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#insert-syntax"><span class="nav-number">4.</span> <span class="nav-text">INSERT Syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-...-select-syntax"><span class="nav-number">4.1.</span> <span class="nav-text">INSERT ... SELECT Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-...-on-duplicate-key-update-syntax"><span class="nav-number">4.2.</span> <span class="nav-text">INSERT ... ON
+DUPLICATE KEY UPDATE Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#load-data-syntax"><span class="nav-number">4.3.</span> <span class="nav-text">LOAD DATA Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace-syntax"><span class="nav-number">4.4.</span> <span class="nav-text">REPLACE Syntax</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#select-syntax"><span class="nav-number">5.</span> <span class="nav-text">SELECT Syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#join-syntax"><span class="nav-number">5.1.</span> <span class="nav-text">JOIN Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#union-syntax"><span class="nav-number">5.2.</span> <span class="nav-text">UNION Syntax</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#update-syntax"><span class="nav-number">6.</span> <span class="nav-text">UPDATE Syntax</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#transactional-and-locking-statements"><span class="nav-number">7.</span> <span class="nav-text">Transactional and Locking
+Statements</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#start-transaction-commit-and-rollback-syntax"><span class="nav-number">7.1.</span> <span class="nav-text">START TRANSACTION,
+COMMIT, and ROLLBACK Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statements-that-cannot-be-rolled-back"><span class="nav-number">7.2.</span> <span class="nav-text">Statements That Cannot Be
+Rolled Back</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statements-that-cause-an-implicit-commit"><span class="nav-number">7.3.</span> <span class="nav-text">Statements That Cause
+an Implicit Commit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#user"><span class="nav-number">8.</span> <span class="nav-text">USER</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#create-user-syntax"><span class="nav-number">8.1.</span> <span class="nav-text">CREATE USER Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drop-user-syntax"><span class="nav-number">8.2.</span> <span class="nav-text">DROP USER Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grant-syntax"><span class="nav-number">8.3.</span> <span class="nav-text">GRANT Syntax</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="仲夏叶" src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">仲夏叶</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/stornado" title="GitHub → https://github.com/stornado" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ryan@zxytech.com" title="E-Mail → mailto:ryan@zxytech.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/ryanstornado" title="Twitter → https://twitter.com/ryanstornado" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">仲夏叶</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">254k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:51</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+  <div style="display: none;">
+    <script data-pjax="" src="//s95.cnzz.com/z_stat.php?id=1254452804&amp;web_id=1254452804"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="https://unpkg.com/mermaid@/dist/mermaid.min.js"></script>
+  
+  <style>
+    .mermaid {
+      background: var(--body-bg-color);
+    }
+  </style>
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+    </div>
+
+
+<script src="/bundle.js"></script><script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+;
+
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+;
+
+    if (window.mermaid) {
+      mermaid.initialize({'theme': 'forest'});
+    }
+  ;
+
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+;
+
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'debe3bf900ab05b9ae3b',
+      clientSecret: '3593904f48e12175e52c39855bcc80018f0831f8',
+      repo        : 'stornado.github.io',
+      owner       : 'stornado',
+      admin       : ['stornado'],
+      id          : '5b4d9ee194cdd5527bb04e18ba6ed2f5',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script></body></html>
