@@ -1209,7 +1209,7 @@ Bob--&gt;Alice: I am good thanks!</textarea><textarea id="sequence-0-options" st
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-04 14:23:25" itemprop="dateModified" datetime="2022-08-04T14:23:25+08:00">2022-08-04</time>
+                <time title="修改时间：2023-02-27 23:47:53" itemprop="dateModified" datetime="2023-02-27T23:47:53+08:00">2023-02-27</time>
               </span>
 
           <br>
@@ -1218,7 +1218,7 @@ Bob--&gt;Alice: I am good thanks!</textarea><textarea id="sequence-0-options" st
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1239,7 +1239,7 @@ Bob--&gt;Alice: I am good thanks!</textarea><textarea id="sequence-0-options" st
       
           <h1 id="homebrew-更改国内源">homebrew 更改国内源</h1>
 <h2 id="修改为国内源加速">修改为国内源加速</h2>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd "$(brew --repo)"</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/brew.git</span><br><span class="line">cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git</span><br><span class="line">brew update</span><br><span class="line">cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git</span><br><span class="line">echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' &gt;&gt; ~/.zshrc</span><br><span class="line">source ~/.zshrc</span><br><span class="line">brew update</span><br><span class="line">brew doctor</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cd "$(brew --repo)"</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/brew.git</span><br><span class="line">cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git</span><br><span class="line">brew update</span><br><span class="line">cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git</span><br><span class="line">echo 'export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"' &gt;&gt; ~/.zshrc</span><br><span class="line">echo 'export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"' &gt;&gt; ~/.zshrc</span><br><span class="line"></span><br><span class="line">source ~/.zshrc</span><br><span class="line">brew update</span><br><span class="line">brew doctor</span><br></pre></td></tr></tbody></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/01/10/homebrew-speed-up-in-china/#more" rel="contents">
@@ -1475,7 +1475,7 @@ Bob--&gt;Alice: I am good thanks!</textarea><textarea id="sequence-0-options" st
 <div class="copyright">
   
   © 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
