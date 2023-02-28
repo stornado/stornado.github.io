@@ -19,7 +19,9 @@ git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
 brew update
 cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
 git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
-echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.zshrc
+echo 'export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"' >> ~/.zshrc
+echo 'export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"' >> ~/.zshrc
+
 source ~/.zshrc
 brew update
 brew doctor
@@ -42,6 +44,7 @@ git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git
 brew update
 # 替换homebrew-bottles:
 echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles' >> ~/.bash_profile
+echo 'export HOMEBREW_API_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles/api' >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
@@ -57,7 +60,8 @@ git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git
 # 应用生效
 brew update
 # 替换homebrew-bottles:
-echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles' >> ~/.zshrc
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"
+export HOMEBREW_API_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles/api"
 source ~/.zshrc
 ```
 
@@ -76,3 +80,4 @@ source ~/.zshrc
 
 > **参考**
 > [阿里云](https://developer.aliyun.com/mirror/homebrew)
+> [USTC](https://mirrors.ustc.edu.cn/help/homebrew-bottles.html#id4)
